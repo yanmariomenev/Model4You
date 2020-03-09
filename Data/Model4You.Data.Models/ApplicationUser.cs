@@ -1,11 +1,12 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
+
 namespace Model4You.Data.Models
 {
     using System;
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations;
+    using Model4You.Data.Models.Enums;
     using Model4You.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
@@ -17,6 +18,23 @@ namespace Model4You.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
+
+        // My properties
+        [MaxLength(50)]
+        public string FirstName { get; set; }
+
+        [MaxLength(50)]
+        public string LastName { get; set; }
+
+        public ModelRole ModelRole { get; set; }
+
+        public Location Location { get; set; }
+
+        public bool Gender { get; set; }
+
+        public ModelInformation ModelInformation { get; set; }
+
+        public ProfessionalInformation ProfessionalInformation { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

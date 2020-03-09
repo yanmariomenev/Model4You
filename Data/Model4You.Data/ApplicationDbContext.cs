@@ -25,6 +25,11 @@
         }
 
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<Location> Locations { get; set; }
+
+        public DbSet<ModelInformation> ModelsInformation { get; set; }
+
+        public DbSet<ProfessionalInformation> ProfessionalsInformation { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
