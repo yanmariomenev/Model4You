@@ -5,9 +5,10 @@ namespace Model4You.Data.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Model4You.Data.Models.Enums;
-    using Model4You.Data.Common.Models;
+
     using Microsoft.AspNetCore.Identity;
+    using Model4You.Data.Common.Models;
+    using Model4You.Data.Models.Enums;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -17,6 +18,7 @@ namespace Model4You.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.UserImages = new HashSet<UserImage>();
         }
 
         // My properties
@@ -35,6 +37,8 @@ namespace Model4You.Data.Models
         public ModelInformation ModelInformation { get; set; }
 
         public ProfessionalInformation ProfessionalInformation { get; set; }
+
+        public ICollection<UserImage> UserImages { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

@@ -369,6 +369,40 @@ namespace Model4You.Data.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("Model4You.Data.Models.UserImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("UserImages");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Model4You.Data.Models.ApplicationRole", null)
@@ -433,6 +467,13 @@ namespace Model4You.Data.Migrations
                     b.HasOne("Model4You.Data.Models.ProfessionalInformation", "ProfessionalInformation")
                         .WithMany()
                         .HasForeignKey("ProfessionalInformationId");
+                });
+
+            modelBuilder.Entity("Model4You.Data.Models.UserImage", b =>
+                {
+                    b.HasOne("Model4You.Data.Models.ApplicationUser", null)
+                        .WithMany("UserImages")
+                        .HasForeignKey("ApplicationUserId");
                 });
 #pragma warning restore 612, 618
         }
