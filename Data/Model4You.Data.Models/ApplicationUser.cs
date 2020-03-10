@@ -19,6 +19,7 @@ namespace Model4You.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.UserImages = new HashSet<UserImage>();
+            this.Blogs = new HashSet<Blog>();
         }
 
         // My properties
@@ -39,6 +40,8 @@ namespace Model4You.Data.Models
         public ProfessionalInformation ProfessionalInformation { get; set; }
 
         public ICollection<UserImage> UserImages { get; set; }
+
+        public ICollection<Blog> Blogs { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

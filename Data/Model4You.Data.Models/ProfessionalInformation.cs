@@ -6,6 +6,10 @@
     {
         public int Id { get; set; }
 
+        public string UserId { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+
         [MaxLength(50)]
         public string Profession { get; set; }
 
