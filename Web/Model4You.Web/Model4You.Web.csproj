@@ -43,4 +43,10 @@
     <ProjectReference Include="..\Model4You.Web.Infrastructure\Model4You.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Model4You.Web.ViewModels\Model4You.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\images\bg_1.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
