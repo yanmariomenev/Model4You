@@ -45,12 +45,9 @@
                         options.CheckConsentNeeded = context => true;
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
-
             services.AddControllersWithViews();
             services.AddRazorPages();
-
             services.AddSingleton(this.configuration);
-
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -59,6 +56,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
