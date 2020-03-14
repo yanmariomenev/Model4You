@@ -1,4 +1,6 @@
-﻿namespace Model4You.Web
+﻿using Model4You.Services.Data.ModelService;
+
+namespace Model4You.Web
 {
     using System.Reflection;
 
@@ -56,6 +58,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+
+            services.AddTransient<IModelService, ModelService>();
 
         }
 

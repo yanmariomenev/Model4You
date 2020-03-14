@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model4You.Data;
 
 namespace Model4You.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200311160332_UpdateModel")]
+    partial class UpdateModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,6 +195,9 @@ namespace Model4You.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<bool>("Gender")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -228,9 +233,6 @@ namespace Model4You.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -371,26 +373,11 @@ namespace Model4You.Data.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("BodyType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Ethnicity")
                         .HasColumnType("int");
 
-                    b.Property<string>("FacebookUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Gender")
-                        .HasColumnType("bit");
-
                     b.Property<double>("Height")
                         .HasColumnType("float");
-
-                    b.Property<string>("InstagramUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModelType")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nationality")
                         .IsRequired()

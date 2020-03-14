@@ -33,7 +33,7 @@ namespace Model4You.Data.Models
 
         public Location Location { get; set; }
 
-        public bool Gender { get; set; }
+        public string ProfilePicture { get; set; }
 
         public ModelInformation ModelInformation { get; set; }
 

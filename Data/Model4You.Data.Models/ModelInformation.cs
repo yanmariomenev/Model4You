@@ -15,7 +15,17 @@
         [Range(2, 110)]
         public int Age { get; set; }
 
+        public bool Gender { get; set; }
+
         public double Height { get; set; }
+
+        public string ModelType { get; set; }
+
+        public string BodyType { get; set; }
+
+        public string InstagramUrl { get; set; }
+
+        public string FacebookUrl { get; set; }
 
         [Required]
         public string Nationality { get; set; }

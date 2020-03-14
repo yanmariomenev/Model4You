@@ -8,7 +8,7 @@
     {
         public BlogContent()
         {
-            this.Images = new HashSet<UserImage>();
+            //this.Images = new HashSet<UserImage>();
         }
 
         public int BlogId { get; set; }
@@ -17,6 +17,7 @@
 
         public string Content { get; set; }
 
-        public ICollection<UserImage> Images { get; set; }
+        public string ImageUrl { get; set; }
+        //public ICollection<UserImage> Images { get; set; }
     }
 }

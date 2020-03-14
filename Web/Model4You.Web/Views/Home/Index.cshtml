@@ -1,4 +1,5 @@
-﻿@*@using Model4You.Common
+﻿@model Model4You.Web.ViewModels.ModelViews.IndexProfileViewModel
+@*@using Model4You.Common
     @{
         this.ViewData["Title"] = "Home Page";
     }
@@ -7,23 +8,19 @@
         <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>*@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-
 <body>
-
     <section class="hero-wrap d-flex js-fullheight">
         <div class="overlay"></div>
         <div class="forth js-fullheight d-flex align-items-center" style="background-image: url(images/bg_1.jpg);">
             <div class="text text-center">
                 <span class="subheading">Top Model</span>
-                <h1>Your Career of A Model</h1>
+                <h1>Career of A Model</h1>
                 <h2 class="mb-5">We Are Professional Model Agency Based in London</h2>
                 <p><a href="#" class="btn-custom py-3 pr-2">Contact Us</a></p>
             </div>
@@ -281,128 +278,34 @@
                 </div>
             </div>
         </div>
+
         <div class="container-fluid px-md-0">
             <div class="row no-gutters">
+                @foreach (var modelInfo in Model.ModelProfile)
+                {
                 <div class="col-md-4">
-                    <div class="model img d-flex align-items-end" style="background-image: url(images/model-1.jpg);">
-                        <div class="desc w-100 px-4">
-                            <div class="info w-100 mb-4">
-                                <ul>
-                                    <li><span>Age:</span><span>18</span></li>
-                                    <li><span>Height:</span><span>179</span></li>
-                                    <li><span>Bust:</span><span>85</span></li>
-                                    <li><span>Waist:</span><span>65</span></li>
-                                    <li><span>Hips:</span><span>90</span></li>
-                                    <li><span>Shoes:</span><span>39</span></li>
-                                    <li><span>Eyes:</span><span>Blue</span></li>
-                                </ul>
-                            </div>
-                            <div class="text w-100 mb-3">
-                                <h2><a href="model-single.html">Patricia <br>Becket</a></h2>
+                    <div class="model img d-flex align-items-end" style="background-image: url(@modelInfo.ProfilePicture);">
+                            <div class="desc w-100 px-4">
+                                <div class="info w-100 mb-4">
+                                    <ul>
+                                        <li><span>Age:</span><span>@modelInfo.ModelInformation.Age</span></li>
+                                        <li><span>Location:</span><span>@modelInfo.Location.Town</span></li>
+                                        <li><span>Height:</span><span>@modelInfo.ModelInformation.Height</span></li>
+                                        <li><span>Model Type:</span><span>@modelInfo.ModelInformation.ModelType</span></li>
+                                        <li><span>Body Type:</span><span>@modelInfo.ModelInformation.BodyType</span></li>
+                                        @*<li><span>Hips:</span><span>90</span></li>
+                                        <li><span>Shoes:</span><span>39</span></li>
+                                        <li><span>Eyes:</span><span>Blue</span></li>*@
+                                    </ul>
+                                </div>
+                                <div class="text w-100 mb-3">
+                                    @*TODO LINK TO MODEL PROFILE PAGE*@
+                                    <h2><a href="model-single.html">@modelInfo.FirstName <br>@modelInfo.LastName</a></h2>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="model img d-flex align-items-end" style="background-image: url(https://i.ebayimg.com/images/g/5hcAAOSwSStdkBh5/s-l300.jpg);">
-                        <div class="desc w-100 px-4">
-                            <div class="info w-100 mb-4">
-                                <ul>
-                                    <li><span>Age:</span><span>18</span></li>
-                                    <li><span>Height:</span><span>179</span></li>
-                                    <li><span>Bust:</span><span>85</span></li>
-                                    <li><span>Waist:</span><span>65</span></li>
-                                    <li><span>Hips:</span><span>90</span></li>
-                                    <li><span>Shoes:</span><span>39</span></li>
-                                    <li><span>Eyes:</span><span>Blue</span></li>
-                                </ul>
-                            </div>
-                            <div class="text w-100 mb-3">
-                                <h2><a href="model-single.html">Emily <br>Stewart</a></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="model img d-flex align-items-end" style="background-image: url(images/model-3.jpg);">
-                        <div class="desc w-100 px-4">
-                            <div class="info w-100 mb-4">
-                                <ul>
-                                    <li><span>Age:</span><span>18</span></li>
-                                    <li><span>Height:</span><span>179</span></li>
-                                    <li><span>Bust:</span><span>85</span></li>
-                                    <li><span>Waist:</span><span>65</span></li>
-                                    <li><span>Hips:</span><span>90</span></li>
-                                    <li><span>Shoes:</span><span>39</span></li>
-                                    <li><span>Eyes:</span><span>Blue</span></li>
-                                </ul>
-                            </div>
-                            <div class="text w-100 mb-3">
-                                <h2><a href="model-single.html">Sofia <br>Scott</a></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="model img d-flex align-items-end" style="background-image: url(images/model-4.jpg);">
-                        <div class="desc w-100 px-4">
-                            <div class="info w-100 mb-4">
-                                <ul>
-                                    <li><span>Age:</span><span>18</span></li>
-                                    <li><span>Height:</span><span>179</span></li>
-                                    <li><span>Bust:</span><span>85</span></li>
-                                    <li><span>Waist:</span><span>65</span></li>
-                                    <li><span>Hips:</span><span>90</span></li>
-                                    <li><span>Shoes:</span><span>39</span></li>
-                                    <li><span>Eyes:</span><span>Blue</span></li>
-                                </ul>
-                            </div>
-                            <div class="text w-100 mb-3">
-                                <h2><a href="model-single.html">Chloe <br>Johnson</a></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="model img d-flex align-items-end" style="background-image: url(images/model-5.jpg);">
-                        <div class="desc w-100 px-4">
-                            <div class="info w-100 mb-4">
-                                <ul>
-                                    <li><span>Age:</span><span>18</span></li>
-                                    <li><span>Height:</span><span>179</span></li>
-                                    <li><span>Bust:</span><span>85</span></li>
-                                    <li><span>Waist:</span><span>65</span></li>
-                                    <li><span>Hips:</span><span>90</span></li>
-                                    <li><span>Shoes:</span><span>39</span></li>
-                                    <li><span>Eyes:</span><span>Blue</span></li>
-                                </ul>
-                            </div>
-                            <div class="text w-100 mb-3">
-                                <h2><a href="model-single.html">Victoria <br>Henderson</a></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="model img d-flex align-items-end" style="background-image: url(images/model-6.jpg);">
-                        <div class="desc w-100 px-4">
-                            <div class="info w-100 mb-4">
-                                <ul>
-                                    <li><span>Age:</span><span>18</span></li>
-                                    <li><span>Height:</span><span>179</span></li>
-                                    <li><span>Bust:</span><span>85</span></li>
-                                    <li><span>Waist:</span><span>65</span></li>
-                                    <li><span>Hips:</span><span>90</span></li>
-                                    <li><span>Shoes:</span><span>39</span></li>
-                                    <li><span>Eyes:</span><span>Blue</span></li>
-                                </ul>
-                            </div>
-                            <div class="text w-100 mb-3">
-                                <h2><a href="model-single.html">Ella <br>Turner</a></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </section>
