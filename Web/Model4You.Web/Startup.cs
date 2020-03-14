@@ -1,4 +1,6 @@
-﻿using Model4You.Services.Data.ModelService;
+﻿using Microsoft.AspNetCore.Mvc;
+using Model4You.Services.Data.ContactFormService;
+using Model4You.Services.Data.ModelService;
 
 namespace Model4You.Web
 {
@@ -47,7 +49,10 @@ namespace Model4You.Web
                         options.CheckConsentNeeded = context => true;
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(configure =>
+                {
+                    configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                });
             services.AddRazorPages();
             services.AddSingleton(this.configuration);
             // Data repositories
@@ -58,7 +63,7 @@ namespace Model4You.Web
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
-
+            services.AddTransient<IContactFormService, ContactFormService>();
             services.AddTransient<IModelService, ModelService>();
 
         }

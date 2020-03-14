@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace Model4You.Services.Data.ModelService
+﻿namespace Model4You.Services.Data.ModelService
 {
     using System.Collections.Generic;
     using System.Linq;

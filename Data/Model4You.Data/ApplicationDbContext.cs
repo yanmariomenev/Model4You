@@ -38,6 +38,8 @@
 
         public DbSet<BlogContent> BlogContents { get; set; }
 
+        public DbSet<ContractFormData> ContactFormDatas { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

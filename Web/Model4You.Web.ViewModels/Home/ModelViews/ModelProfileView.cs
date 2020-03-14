@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using AutoMapper;
-using Model4You.Data.Models;
-using Model4You.Data.Models.Enums;
-using Model4You.Services.Mapping;
-
-namespace Model4You.Web.ViewModels.ModelViews
+﻿namespace Model4You.Web.ViewModels.ModelViews
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+
+    using AutoMapper;
+    using Model4You.Data.Models;
+    using Model4You.Data.Models.Enums;
+    using Model4You.Services.Mapping;
+
     public class ModelProfileView : IMapFrom<ApplicationUser> /*IHaveCustomMappings*/
     {
         public string FirstName { get; set; }
