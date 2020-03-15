@@ -96,11 +96,11 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
-                    <li class="nav-item"><a asp-controller="Models" asp-action="Model" class="nav-link">Models</a></li>
-                    <li class="nav-item"><a asp-controller="Blog" asp-action="Blog" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item active"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="Model" class="nav-link">Models</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Blog" asp-action="Blog" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <partial name="_LoginPartial" />
                     </div>
@@ -136,9 +136,8 @@
                         <h2 class="ftco-heading-2">About Me</h2>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.facebook.com/Model4YouBG"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.instagram.com/model4youbulgaria/"><span class="icon-instagram"></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -157,9 +156,9 @@
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Quick Links</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Models</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="About">About Us</a></li>
+                            <li><a asp-area="" asp-controller="Models" asp-action="Model">Models</a></li>
+                            <li><a asp-area="" asp-controller="Blog" asp-action="Blog">Blog</a></li>
                             <li><a href="#">Terms &amp; Conditions</a></li>
                             <li><a href="#">FAQ</a></li>
                         </ul>

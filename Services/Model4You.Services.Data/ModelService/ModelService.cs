@@ -23,11 +23,19 @@
         //        .Where(x => x.ModelInformation != null).Take(6);
         //    return user.To<T>().ToList();
         //}
-
+        //Todo make services async!
         public IEnumerable<T> TakeSixModels<T>()
         {
             var user = this.appRepository.All()
                 .Where(x => x.ModelInformation != null).Take(6);
+            return user.To<T>().ToList();
+        }
+
+        public IEnumerable<T> TakeAllModels<T>()
+        {
+            //TODO to add take only Model Role when implemented.
+            var user = this.appRepository.All()
+                .Where(x => x.ModelInformation != null);
             return user.To<T>().ToList();
         }
     }

@@ -7,5 +7,7 @@
     public interface IModelService
     {
         IEnumerable<T> TakeSixModels<T>();
+
+        IEnumerable<T> TakeAllModels<T>();
     }
 }
