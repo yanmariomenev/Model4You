@@ -92,6 +92,9 @@ namespace Model4You.Web.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
+                    //Adding model role to new registered user.
+                    await this._userManager.AddToRoleAsync(user, "Model");
+
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
@@ -101,6 +104,7 @@ namespace Model4You.Web.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
+
                 }
                 foreach (var error in result.Errors)
                 {

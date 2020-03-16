@@ -5,5 +5,6 @@
         public const string SystemName = "Model4You";
 
         public const string AdministratorRoleName = "Administrator";
+        public const string ModelRoleName = "Model";
     }
 }
