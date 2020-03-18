@@ -1,4 +1,7 @@
-﻿namespace Model4You.Web.Areas.Administration.Controllers
+﻿using System.Threading.Tasks;
+using Model4You.Services.Data.AdminServices;
+
+namespace Model4You.Web.Areas.Administration.Controllers
 {
     using Model4You.Services.Data;
     using Model4You.Web.ViewModels.Administration.Dashboard;
@@ -7,16 +10,20 @@
 
     public class DashboardController : AdministrationController
     {
-        private readonly ISettingsService settingsService;
+        private readonly IContactDataService contactServices;
 
-        public DashboardController(ISettingsService settingsService)
+        public DashboardController(IContactDataService contactServices)
         {
-            this.settingsService = settingsService;
+            this.contactServices = contactServices;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var viewModel = new IndexViewModel { SettingsCount = this.settingsService.GetCount(), };
+            var viewModel = new IndexViewModel
+            {
+                AnsweredQuestions = await contactServices.TakeAllAnswered<ContactFormDataView>(),
+                UnAnsweredQuestions = await contactServices.TakeAllUnAnswered<ContactFormDataView>(),
+            };
             return this.View(viewModel);
         }
     }

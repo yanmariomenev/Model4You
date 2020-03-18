@@ -1,4 +1,6 @@
-﻿namespace Model4You.Services.Data.ModelService
+﻿using System.Threading.Tasks;
+
+namespace Model4You.Services.Data.ModelService
 {
     using System.Collections.Generic;
 
@@ -6,8 +8,8 @@
 
     public interface IModelService
     {
-        IEnumerable<T> TakeSixModels<T>();
+        Task<IEnumerable<T>> TakeSixModels<T>();
 
-        IEnumerable<T> TakeAllModels<T>();
+        Task<IEnumerable<T>> TakeAllModels<T>();
     }
 }

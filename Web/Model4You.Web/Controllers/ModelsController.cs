@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Model4You.Services.Data.ModelService;
-using Model4You.Web.ViewModels.ModelViews;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Model4You.Services.Data.ModelService;
+    using Model4You.Web.ViewModels.ModelViews;
+
     public class ModelsController : Controller
     {
         private readonly IModelService modelService;
@@ -12,13 +14,14 @@ namespace Model4You.Web.Controllers
         {
             this.modelService = modelService;
         }
+
         // GET
-        public IActionResult Model()
+        public async Task<IActionResult> Model()
         {
             var viewModel = new IndexProfileViewModel
             {
                 ModelProfile =
-                    this.modelService.TakeAllModels<ModelProfileView>(),
+                   await this.modelService.TakeAllModels<ModelProfileView>(),
             };
             return View(viewModel);
         }

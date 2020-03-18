@@ -7,16 +7,16 @@ namespace Model4You.Services.Data.ContactFormService
 {
     public class ContactFormService : IContactFormService
     {
-        private readonly IDeletableEntityRepository<ContractFormData> contactRepository;
+        private readonly IDeletableEntityRepository<ContactFormData> contactRepository;
 
-        public ContactFormService(IDeletableEntityRepository<ContractFormData> contactRepository)
+        public ContactFormService(IDeletableEntityRepository<ContactFormData> contactRepository)
         {
             this.contactRepository = contactRepository;
         }
 
         public async Task Create(string name, string email, string subject, string message)
         {
-            var contactForm = new ContractFormData
+            var contactForm = new ContactFormData
             {
                 Name = name,
                 Email = email,

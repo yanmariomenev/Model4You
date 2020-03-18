@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
     using Model4You.Data.Common.Repositories;
@@ -17,26 +18,23 @@
             this.appRepository = appRepository;
         }
 
-        //public IEnumerable<T> GetAll<T>()
-        //{
-        //    var user = this.appRepository.All()
-        //        .Where(x => x.ModelInformation != null).Take(6);
-        //    return user.To<T>().ToList();
-        //}
-        //Todo make services async!
-        public IEnumerable<T> TakeSixModels<T>()
+        public async Task<IEnumerable<T>> TakeSixModels<T>()
         {
+            // If you have modelInformation then take the model and display her/him.
+            // Admins and Moderators will be not displayed.
             var user = this.appRepository.All()
                 .Where(x => x.ModelInformation != null).Take(6);
-            return user.To<T>().ToList();
+            return await user.To<T>().ToListAsync();
         }
 
-        public IEnumerable<T> TakeAllModels<T>()
+        public async Task<IEnumerable<T>> TakeAllModels<T>()
         {
-            //TODO to add take only Model Role when implemented.
+            // If you have modelInformation then take the model and display her/him.
+            // Admins and Moderators will be not displayed.
             var user = this.appRepository.All()
                 .Where(x => x.ModelInformation != null);
-            return user.To<T>().ToList();
+            return await user.To<T>().ToListAsync();
         }
+
     }
 }

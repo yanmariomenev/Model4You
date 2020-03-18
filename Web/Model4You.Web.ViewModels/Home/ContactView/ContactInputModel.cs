@@ -1,8 +1,6 @@
-﻿using Model4You.Data.Common.Models;
-
-namespace Model4You.Data.Models
+﻿namespace Model4You.Web.ViewModels.Home.ContactView
 {
-    public class ContractFormData : BaseDeletableModel<int>
+    public class ContactInputModel
     {
         public string Name { get; set; }
 
@@ -11,7 +9,5 @@ namespace Model4You.Data.Models
         public string Subject { get; set; }
 
         public string Message { get; set; }
-
-        public bool Answered { get; set; }
     }
 }

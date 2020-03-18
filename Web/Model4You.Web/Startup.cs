@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Model4You.Services.Data.AdminServices;
 using Model4You.Services.Data.ContactFormService;
 using Model4You.Services.Data.ModelService;
 
@@ -65,7 +66,7 @@ namespace Model4You.Web
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IContactFormService, ContactFormService>();
             services.AddTransient<IModelService, ModelService>();
-
+            services.AddTransient<IContactDataService, ContactDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -109,6 +110,7 @@ namespace Model4You.Web
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        //endpoints.MapControllerRoute("Administration", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
