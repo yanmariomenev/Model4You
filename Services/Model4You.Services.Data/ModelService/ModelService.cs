@@ -36,5 +36,14 @@
             return await user.To<T>().ToListAsync();
         }
 
+        public async Task<T> GetModelById<T>(string modelId)
+        {
+            var model = await this.appRepository.All()
+                .Where(u => u.Id == modelId)
+                .To<T>().
+                FirstOrDefaultAsync();
+
+            return model;
+        }
     }
 }

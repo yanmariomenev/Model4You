@@ -11,5 +11,7 @@ namespace Model4You.Services.Data.ModelService
         Task<IEnumerable<T>> TakeSixModels<T>();
 
         Task<IEnumerable<T>> TakeAllModels<T>();
+
+        Task<T> GetModelById<T>(string modelId);
     }
 }

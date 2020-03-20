@@ -11,6 +11,8 @@
 
     public class ModelProfileView : IMapFrom<ApplicationUser> /*IHaveCustomMappings*/
     {
+        public string Id { get; set; }
+
         public string FirstName { get; set; }
 
         [MaxLength(50)]
@@ -24,6 +26,7 @@
 
         public ModelInformation ModelInformation { get; set; }
 
+        public string Url => $"/Models/Profile/{this.Id}";
         //public ProfessionalInformation ProfessionalInformation { get; set; }
 
         //public ICollection<Blog> Blogs { get; set; }

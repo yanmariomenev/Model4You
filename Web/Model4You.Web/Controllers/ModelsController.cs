@@ -1,4 +1,6 @@
-﻿namespace Model4You.Web.Controllers
+﻿using Model4You.Web.ViewModels.Model;
+
+namespace Model4You.Web.Controllers
 {
     using System.Threading.Tasks;
 
@@ -24,6 +26,14 @@
                    await this.modelService.TakeAllModels<ModelProfileView>(),
             };
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> Profile(string id)
+        {
+            var viewModel = await this.modelService
+                .GetModelById<ProfileViewModel>(id);
+
+            return this.View(viewModel);
         }
     }
 }
