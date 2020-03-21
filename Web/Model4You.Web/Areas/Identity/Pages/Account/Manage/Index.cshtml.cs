@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Model4You.Data.Models;
+using Model4You.Services.Data.ModelService;
+using Model4You.Web.ViewModels.Model;
 
 namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
 {
@@ -14,13 +16,16 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IModelService _modelService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IModelService modelService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _modelService = modelService;
         }
 
         public string Username { get; set; }
@@ -36,18 +41,60 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+            [Display(Name = "Age")]
+            public int Age { get; set; }
+
+            [Display(Name = "Gender")]
+            public bool Gender { get; set; }
+
+            [Display(Name = "Your Height")]
+            public double Height { get; set; }
+
+            [Display(Name = "Type of modeling commercial, Swimsuit, fit and etc.")]
+            public string ModelType { get; set; }
+
+            [Display(Name = "Body type")]
+            public string BodyType { get; set; }
+
+            [Display(Name = "Link your Instagram")]
+            public string InstagramUrl { get; set; }
+
+            [Display(Name = "Link your Facebook")]
+            public string FacebookUrl { get; set; }
+
+            [Display(Name = "Nationality")]
+            public string Nationality { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            string userId = await _userManager.GetUserIdAsync(user);
+            var model = await _modelService.GetModelById<ProfileViewModel>(userId);
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Age = model.ModelInformation.Age,
+                Gender = model.ModelInformation.Gender,
+                Height = model.ModelInformation.Height,
+                ModelType = model.ModelInformation.ModelType,
+                BodyType = model.ModelInformation.BodyType,
+                Nationality = model.ModelInformation.Nationality,
+                FacebookUrl = model.ModelInformation.FacebookUrl,
+                InstagramUrl = model.ModelInformation.InstagramUrl,
             };
         }
 
@@ -86,6 +133,28 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
                     var userId = await _userManager.GetUserIdAsync(user);
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
+            }
+
+            if (Input.FirstName != user.FirstName)
+            {
+               await _modelService.ChangeUserFirstName(user, Input.FirstName);
+            }
+
+            if (Input.LastName != user.LastName)
+            {
+                await _modelService.ChangeUserLastName(user, Input.LastName);
+            }
+            string currentUserId = await _userManager.GetUserIdAsync(user);
+            var modelInformation = await _modelService.GetModelById<ChangeUserInformationInputModel>(currentUserId);
+
+            if (Input.BodyType != modelInformation.ModelInformation.BodyType)
+            {
+                await _modelService.ChangeUserBodyType(user, Input.BodyType);
+            }
+
+            if (Input.Age != user.ModelInformation.Age)
+            {
+                await _modelService.ChangeUserAge(user, Input.Age);
             }
 
             await _signInManager.RefreshSignInAsync(user);

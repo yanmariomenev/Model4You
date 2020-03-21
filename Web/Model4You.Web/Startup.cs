@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Model4You.Services.Data.AdminServices;
-using Model4You.Services.Data.ContactFormService;
-using Model4You.Services.Data.ModelService;
-
-namespace Model4You.Web
+﻿namespace Model4You.Web
 {
     using System.Reflection;
 
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Model4You.Data;
     using Model4You.Data.Common;
     using Model4You.Data.Common.Repositories;
@@ -14,17 +17,12 @@ namespace Model4You.Web
     using Model4You.Data.Repositories;
     using Model4You.Data.Seeding;
     using Model4You.Services.Data;
+    using Model4You.Services.Data.AdminServices;
+    using Model4You.Services.Data.ContactFormService;
+    using Model4You.Services.Data.ModelService;
     using Model4You.Services.Mapping;
     using Model4You.Services.Messaging;
     using Model4You.Web.ViewModels;
-
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
 
     public class Startup
     {

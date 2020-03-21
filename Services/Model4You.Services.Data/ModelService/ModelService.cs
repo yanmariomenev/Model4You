@@ -45,5 +45,53 @@
 
             return model;
         }
+
+        public async Task<string> ChangeUserFirstName(ApplicationUser user, string firstName)
+        {
+            if (user == null)
+            {
+                return "Invalid user";
+            }
+
+            user.FirstName = firstName;
+            await this.appRepository.SaveChangesAsync();
+            return "Success";
+        }
+
+        public async Task<string> ChangeUserLastName(ApplicationUser user, string lastName)
+        {
+            if (user == null)
+            {
+                return "Invalid user";
+            }
+
+            user.LastName = lastName;
+            await this.appRepository.SaveChangesAsync();
+            return "Success";
+        }
+
+        public async Task<string> ChangeUserAge(ApplicationUser user, int age)
+        {
+            if (user == null)
+            {
+                return "Invalid user";
+            }
+
+            user.ModelInformation.Age = age;
+            await this.appRepository.SaveChangesAsync();
+            return "Success";
+        }
+
+        public async Task<string> ChangeUserBodyType(ApplicationUser user, string bodyType)
+        {
+            if (user == null)
+            {
+                return "Invalid user";
+            }
+
+            user.ModelInformation.BodyType = bodyType;
+            await this.appRepository.SaveChangesAsync();
+            return "Success";
+        }
     }
 }

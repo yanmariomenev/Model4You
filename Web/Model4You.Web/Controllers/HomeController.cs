@@ -22,6 +22,7 @@
             this.contactService = contactService;
         }
 
+        // TODO DISPLAY RANDOM 6 MODELS OR TOP MODELS
         public async Task<IActionResult> Index()
         {
             var viewModel = new IndexProfileViewModel
