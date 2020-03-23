@@ -1,11 +1,10 @@
-﻿using Model4You.Web.ViewModels.Model;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
     using Model4You.Services.Data.ModelService;
+    using Model4You.Web.ViewModels.Model;
     using Model4You.Web.ViewModels.ModelViews;
 
     public class ModelsController : Controller
@@ -33,7 +32,14 @@ namespace Model4You.Web.Controllers
             var viewModel = await this.modelService
                 .GetModelById<ProfileViewModel>(id);
 
+            // Get the display name of the enum. TODO Try find a better way
+            var displayName = viewModel.ModelInformation.Ethnicity.GetDisplayName();
+
+            // Using viewData so i don't use the service in the html file.
+            this.ViewData["Ethnicity"] = displayName;
+
             return this.View(viewModel);
         }
+
     }
 }
