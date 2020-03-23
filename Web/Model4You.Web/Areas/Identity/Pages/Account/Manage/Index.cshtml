@@ -1,9 +1,18 @@
 ﻿@page
+@using Model4You.Data.Models.Enums
 @model IndexModel
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
+@*@Html.DropDownList("Gender",
+    new SelectList(Enum.GetValues(typeof(Gender))),
+    "Select Gender",
+    new { @class = "form-group" })
+@Html.DropDownList("Ethnicity",
+    new SelectList(Enum.GetValues(typeof(Ethnicity))),
+    "Select Ethnicity",
+    new { @class = "form-group" })*@
 
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -13,64 +22,89 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+                <input asp-for="Username" class="form-control" disabled/>
             </div>
             <div class="form-group">
                 <label asp-for="Input.FirstName"></label>
-                <input asp-for="Input.FirstName" class="form-control" />
+                <input asp-for="Input.FirstName" class="form-control"/>
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.LastName"></label>
-                <input asp-for="Input.LastName" class="form-control" />
+                <input asp-for="Input.LastName" class="form-control"/>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Input.Age"></label>
-                <input asp-for="Input.Age" class="form-control" />
+                <input asp-for="Input.Age" class="form-control"/>
                 <span asp-validation-for="Input.Age" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Gender"></label>
-                <input asp-for="Input.Gender" class="form-control" />
-                <span asp-validation-for="Input.Gender" class="text-danger"></span>
-            </div>
+            @*<div class="form-group">
+            <label asp-for="Input.Gender"></label>
+            <input asp-for="Input.Gender" class="dropdown" />
+            <span asp-validation-for="Input.Gender" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="Input.Height"></label>
-                <input asp-for="Input.Height" class="form-control" />
+                <input asp-for="Input.Height" class="form-control"/>
                 <span asp-validation-for="Input.Height" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.BodyType"></label>
-                <input asp-for="Input.BodyType" class="form-control" />
-                <span asp-validation-for="Input.BodyType" class="text-danger"></span>
+                <label asp-for="Input.Waist"></label>
+                <input asp-for="Input.Waist" class="form-control"/>
+                <span asp-validation-for="Input.Waist" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Bust"></label>
+                <input asp-for="Input.Bust" class="form-control"/>
+                <span asp-validation-for="Input.Bust" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Hips"></label>
+                <input asp-for="Input.Hips" class="form-control"/>
+                <span asp-validation-for="Input.Hips" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Gender"></label>
+                <select asp-for="Input.Gender" class="form-control" id="Gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Ethnicity"></label>
+                <select asp-for="Input.Ethnicity"
+                        asp-items="Html.GetEnumSelectList<Ethnicity>()" class="form-control" id="Ethnicity">
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Input.ModelType"></label>
-                <input asp-for="Input.ModelType" class="form-control" />
+                <input asp-for="Input.ModelType" class="form-control"/>
                 <span asp-validation-for="Input.ModelType" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Input.Nationality"></label>
-                <input asp-for="Input.Nationality" class="form-control" />
+                <input asp-for="Input.Nationality" class="form-control"/>
                 <span asp-validation-for="Input.Nationality" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.InstagramUrl"></label>
-                <input asp-for="Input.InstagramUrl" class="form-control" />
+                <input asp-for="Input.InstagramUrl" class="form-control"/>
                 <span asp-validation-for="Input.InstagramUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.FacebookUrl"></label>
-                <input asp-for="Input.FacebookUrl" class="form-control" />
+                <input asp-for="Input.FacebookUrl" class="form-control"/>
                 <span asp-validation-for="Input.FacebookUrl" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <input asp-for="Input.PhoneNumber" class="form-control"/>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>

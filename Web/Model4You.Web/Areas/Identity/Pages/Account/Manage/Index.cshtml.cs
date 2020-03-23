@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Model4You.Data.Models;
+using Model4You.Data.Models.Enums;
 using Model4You.Services.Data.ModelService;
 using Model4You.Web.ViewModels.Model;
 
@@ -51,17 +52,26 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Age")]
             public int Age { get; set; }
 
-            [Display(Name = "Gender")]
-            public bool Gender { get; set; }
+            [Display(Name = "Select Gender")]
+            public Gender Gender { get; set; }
+
+            [Display(Name = "Select Ethnicity")]
+            public Ethnicity Ethnicity { get; set; }
 
             [Display(Name = "Your Height")]
             public double Height { get; set; }
 
+            [Display(Name = "Bust size")]
+            public double Bust { get; set; }
+
+            [Display(Name = "Waist size")]
+            public double Waist { get; set; }
+
+            [Display(Name = "Hips size")]
+            public double Hips { get; set; }
+
             [Display(Name = "Type of modeling commercial, Swimsuit, fit and etc.")]
             public string ModelType { get; set; }
-
-            [Display(Name = "Body type")]
-            public string BodyType { get; set; }
 
             [Display(Name = "Link your Instagram")]
             public string InstagramUrl { get; set; }
@@ -90,12 +100,17 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
                 Age = model.ModelInformation.Age,
                 Gender = model.ModelInformation.Gender,
                 Height = model.ModelInformation.Height,
+                Bust = model.ModelInformation.Bust,
+                Hips = model.ModelInformation.Hips,
+                Waist = model.ModelInformation.Waist,
+                Ethnicity = model.ModelInformation.Ethnicity,
                 ModelType = model.ModelInformation.ModelType,
-                BodyType = model.ModelInformation.BodyType,
                 Nationality = model.ModelInformation.Nationality,
                 FacebookUrl = model.ModelInformation.FacebookUrl,
                 InstagramUrl = model.ModelInformation.InstagramUrl,
             };
+
+            var test = new InputModel();
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -147,18 +162,63 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             string currentUserId = await _userManager.GetUserIdAsync(user);
             var modelInformation = await _modelService.GetModelById<ChangeUserInformationInputModel>(currentUserId);
 
-            if (Input.BodyType != modelInformation.ModelInformation.BodyType)
-            {
-                await _modelService.ChangeUserBodyType(user, Input.BodyType);
-            }
-
             if (Input.Age != user.ModelInformation.Age)
             {
                 await _modelService.ChangeUserAge(user, Input.Age);
             }
 
+            if (Input.Gender != user.ModelInformation.Gender)
+            {
+                await _modelService.ChangeUserGender(user, Input.Gender);
+            }
+
+            if (Input.Ethnicity != user.ModelInformation.Ethnicity)
+            {
+                await _modelService.ChangeUserEthnicity(user, Input.Ethnicity);
+            }
+
+            if (Input.Height != user.ModelInformation.Height)
+            {
+                await _modelService.ChangeUserValues(user, Input.Height, "height");
+            }
+
+            if (Input.Height != user.ModelInformation.Waist)
+            {
+                await _modelService.ChangeUserValues(user, Input.Waist, "waist");
+            }
+
+            if (Input.Height != user.ModelInformation.Bust)
+            {
+                await _modelService.ChangeUserValues(user, Input.Bust, "bust");
+            }
+
+            if (Input.Height != user.ModelInformation.Hips)
+            {
+                await _modelService.ChangeUserValues(user, Input.Hips, "hips");
+            }
+
+            if (Input.ModelType != user.ModelInformation.ModelType)
+            {
+                await _modelService.ChangeUserStringValues(user,Input.ModelType, "modelType");
+            }
+
+            if (Input.Nationality != user.ModelInformation.Nationality)
+            {
+                await _modelService.ChangeUserStringValues(user, Input.Nationality, "nationality");
+            }
+
+            if (Input.InstagramUrl != user.ModelInformation.InstagramUrl)
+            {
+                await _modelService.ChangeUserStringValues(user, Input.InstagramUrl, "instagramUrl");
+            }
+
+            if (Input.FacebookUrl != user.ModelInformation.FacebookUrl)
+            {
+                await _modelService.ChangeUserStringValues(user, Input.FacebookUrl, "facebookUrl");
+            }
+
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            this.StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
     }

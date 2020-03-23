@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Model4You.Data.Models.Enums;
 
 namespace Model4You.Services.Data.ModelService
 {
@@ -21,6 +22,12 @@ namespace Model4You.Services.Data.ModelService
 
         Task<string> ChangeUserAge(ApplicationUser user, int age);
 
-        Task<string> ChangeUserBodyType(ApplicationUser user, string bodyType);
+        Task<string> ChangeUserGender(ApplicationUser user, Gender gender);
+
+        Task<string> ChangeUserEthnicity(ApplicationUser user, Ethnicity ethnicity);
+
+        Task<string> ChangeUserValues(ApplicationUser user, double value, string property);
+
+        Task<string> ChangeUserStringValues(ApplicationUser user, string value, string property);
     }
 }

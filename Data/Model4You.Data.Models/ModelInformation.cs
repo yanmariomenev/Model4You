@@ -15,13 +15,17 @@ namespace Model4You.Data.Models
         [Range(2, 110)]
         public int Age { get; set; }
 
-        public bool Gender { get; set; }
+        public Gender Gender { get; set; }
 
         public double Height { get; set; }
 
         public string ModelType { get; set; }
 
-        public string BodyType { get; set; }
+        public double Bust { get; set; }
+
+        public double Waist { get; set; }
+
+        public double Hips { get; set; }
 
         public string InstagramUrl { get; set; }
 
