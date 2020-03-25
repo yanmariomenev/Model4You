@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.10.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -22,6 +23,7 @@
     <ProjectReference Include="..\..\Data\Model4You.Data.Common\Model4You.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Model4You.Data.Models\Model4You.Data.Models.csproj" />
     <ProjectReference Include="..\Model4You.Services.Mapping\Model4You.Services.Mapping.csproj" />
+    <ProjectReference Include="..\Model4You.Services\Model4You.Services.csproj" />
   </ItemGroup>
 
 </Project>

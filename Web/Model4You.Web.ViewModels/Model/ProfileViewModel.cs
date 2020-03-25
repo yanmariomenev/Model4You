@@ -21,6 +21,8 @@
 
         public ModelInformation ModelInformation { get; set; }
 
+        public ICollection<UserImage> UserImages { get; set; }
+
         //public ICollection<UserImage> UserImages { get; set; }
 
     }

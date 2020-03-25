@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using Model4You.Data.Models.Enums;
+using Model4You.Services.Cloudinary;
 
 namespace Model4You.Services.Data.ModelService
 {
@@ -16,10 +17,35 @@ namespace Model4You.Services.Data.ModelService
     public class ModelService : IModelService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> appRepository;
+        private readonly ICloudinaryService cloudinaryService;
+        private readonly IDeletableEntityRepository<UserImage> imageRepository;
 
-        public ModelService(IDeletableEntityRepository<ApplicationUser> appRepository)
+        public ModelService(
+            IDeletableEntityRepository<ApplicationUser> appRepository,
+            ICloudinaryService cloudinaryService,
+            IDeletableEntityRepository<UserImage> imageRepository)
         {
             this.appRepository = appRepository;
+            this.cloudinaryService = cloudinaryService;
+            this.imageRepository = imageRepository;
+        }
+
+        public async Task UploadAlbum(List<string> imageUrl, string userId)
+        {
+            var images = new UserImage();
+            foreach (var image in imageUrl)
+            {
+                //var album = new UserImage
+                //{
+                //    UserId = userId,
+                //    ImageUrl = image,
+                //};
+                images.UserId = userId;
+                images.ImageUrl = image;
+            }
+
+            await this.imageRepository.AddAsync(images);
+            await this.imageRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> TakeSixModels<T>()

@@ -31,7 +31,7 @@
                         <h2><a>@Model.FirstName @Model.LastName</a></h2>
                         <a href="@Model.ModelInformation.FacebookUrl"><span class="icon-facebook"></span> </a>
                         <a href="@Model.ModelInformation.InstagramUrl"><span class="icon-instagram"></span></a>
-    
+
                         <ul class="info w-100">
                             <li><span>Age:</span><span>@Model.ModelInformation.Age</span></li>
                             <li><span>Gender:</span><span>@Model.ModelInformation.Gender</span></li>
@@ -47,18 +47,13 @@
                         </ul>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="model model-2 img d-flex align-items-end" style="background-image: url(images/model-1.jpg);">
+                        @foreach (var image in Model.UserImages)
+                        {
+                            <div class="col-md-4">
+                                <div class="model model-2 img d-flex align-items-end" style="background-image: url(@image.ImageUrl);">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="model model-2 img d-flex align-items-end" style="background-image: url(images/model-2.jpg);">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="model model-2 img d-flex align-items-end" style="background-image: url(images/model-3.jpg);">
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>

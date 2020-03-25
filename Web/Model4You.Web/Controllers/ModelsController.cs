@@ -1,4 +1,11 @@
-﻿namespace Model4You.Web.Controllers
+﻿using System.Linq;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Model4You.Data.Models;
+using Model4You.Services.Cloudinary;
+
+namespace Model4You.Web.Controllers
 {
     using System.Threading.Tasks;
 
@@ -10,10 +17,16 @@
     public class ModelsController : Controller
     {
         private readonly IModelService modelService;
+        private readonly ICloudinaryService cloudinaryService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public ModelsController(IModelService modelService)
+        public ModelsController(IModelService modelService,
+            ICloudinaryService cloudinaryService,
+            UserManager<ApplicationUser> userManager)
         {
             this.modelService = modelService;
+            this.cloudinaryService = cloudinaryService;
+            this.userManager = userManager;
         }
 
         // GET
@@ -41,5 +54,31 @@
             return this.View(viewModel);
         }
 
+        public async Task<IActionResult> Album()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Album(AlbumInputViewModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            var imageUrls = input.UserImages
+                .Select(async x =>
+                    await cloudinaryService.UploadPictureAsync(x, x.FileName))
+                .Select(x => x.Result)
+                .ToList();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            await this.modelService.UploadAlbum(imageUrls, userId);
+
+            // TODO redirect to user profile.
+            return this.Redirect("/Models/Profile/" + userId);
+        }
     }
 }

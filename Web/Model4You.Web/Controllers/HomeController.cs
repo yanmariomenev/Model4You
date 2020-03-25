@@ -46,8 +46,13 @@
         [HttpPost]
         public async Task<IActionResult> Contact(ContactInputModel model)
         {
-           await this.contactService.Create(model.Name, model.Email, model.Subject, model.Message);
-           return this.RedirectToAction(nameof(Index));
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await this.contactService.Create(model.Name, model.Email, model.Subject, model.Message);
+            return this.RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

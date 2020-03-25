@@ -10,6 +10,8 @@ namespace Model4You.Services.Data.ModelService
 
     public interface IModelService
     {
+        Task UploadAlbum(List<string> imageUrl,string userId);
+
         Task<IEnumerable<T>> TakeSixModels<T>();
 
         Task<IEnumerable<T>> TakeAllModels<T>();

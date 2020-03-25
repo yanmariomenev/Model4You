@@ -1,4 +1,7 @@
-﻿namespace Model4You.Web
+﻿using CloudinaryDotNet;
+using Model4You.Services.Cloudinary;
+
+namespace Model4You.Web
 {
     using System.Reflection;
 
@@ -52,6 +55,16 @@
                 {
                     configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 });
+
+            var cloudinaryCredentials = new Account(
+                this.configuration["Cloudinary:CloudName"],
+                this.configuration["Cloudinary:ApiKey"],
+                this.configuration["Cloudinary:ApiSecret"]);
+
+            var cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
+
             services.AddRazorPages();
             services.AddSingleton(this.configuration);
             // Data repositories
@@ -65,6 +78,7 @@
             services.AddTransient<IContactFormService, ContactFormService>();
             services.AddTransient<IModelService, ModelService>();
             services.AddTransient<IContactDataService, ContactDataService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
