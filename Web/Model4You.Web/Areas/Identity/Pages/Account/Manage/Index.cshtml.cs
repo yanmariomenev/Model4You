@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -92,24 +93,27 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
 
             Username = userName;
 
-            Input = new InputModel
+            //TODO FIX THIS
+            if (model.ModelInformation != null)
             {
-                PhoneNumber = phoneNumber,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Age = model.ModelInformation.Age,
-                Gender = model.ModelInformation.Gender,
-                Height = model.ModelInformation.Height,
-                Bust = model.ModelInformation.Bust,
-                Hips = model.ModelInformation.Hips,
-                Waist = model.ModelInformation.Waist,
-                Ethnicity = model.ModelInformation.Ethnicity,
-                ModelType = model.ModelInformation.ModelType,
-                Nationality = model.ModelInformation.Nationality,
-                FacebookUrl = model.ModelInformation.FacebookUrl,
-                InstagramUrl = model.ModelInformation.InstagramUrl,
-            };
-
+                Input = new InputModel
+                {
+                    PhoneNumber = phoneNumber,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Age = model.ModelInformation.Age,
+                    Gender = model.ModelInformation.Gender,
+                    Height = model.ModelInformation.Height,
+                    Bust = model.ModelInformation.Bust,
+                    Hips = model.ModelInformation.Hips,
+                    Waist = model.ModelInformation.Waist,
+                    Ethnicity = model.ModelInformation.Ethnicity,
+                    ModelType = model.ModelInformation.ModelType,
+                    Nationality = model.ModelInformation.Nationality,
+                    FacebookUrl = model.ModelInformation.FacebookUrl,
+                    InstagramUrl = model.ModelInformation.InstagramUrl,
+                };
+            }
             var test = new InputModel();
         }
 
@@ -160,8 +164,10 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
                 await _modelService.ChangeUserLastName(user, Input.LastName);
             }
             string currentUserId = await _userManager.GetUserIdAsync(user);
-            var modelInformation = await _modelService.GetModelById<ChangeUserInformationInputModel>(currentUserId);
+            await _modelService.InsertModelInformation(currentUserId);
 
+            var modelInformation = await _modelService.GetModelById<ChangeUserInformationInputModel>(currentUserId);
+            
             if (Input.Age != user.ModelInformation.Age)
             {
                 await _modelService.ChangeUserAge(user, Input.Age);

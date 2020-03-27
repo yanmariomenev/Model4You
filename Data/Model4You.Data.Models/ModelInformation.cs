@@ -6,7 +6,7 @@ namespace Model4You.Data.Models
 
     using Model4You.Data.Models.Enums;
 
-    public class ModelInformation : BaseModel<int>
+    public class ModelInformation : BaseDeletableModel<int>
     {
         public string UserId { get; set; }
 

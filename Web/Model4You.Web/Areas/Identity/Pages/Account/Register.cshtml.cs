@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -75,7 +76,7 @@ namespace Model4You.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -94,7 +95,13 @@ namespace Model4You.Web.Areas.Identity.Pages.Account
 
                     //Adding model role to new registered user.
                     await this._userManager.AddToRoleAsync(user, "Model");
-
+                    //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    //var modelInformation = new ModelInformation
+                    //{
+                    //    UserId = userId,
+                    //    Age = 0,
+                    //    Bust = 0,
+                    //};
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email });

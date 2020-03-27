@@ -1,15 +1,16 @@
-﻿using System.Linq;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Model4You.Data.Models;
-using Model4You.Services.Cloudinary;
+﻿using Model4You.Web.ViewModels.BindingModels;
 
 namespace Model4You.Web.Controllers
 {
+    using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Model4You.Data.Models;
+    using Model4You.Services.Cloudinary;
     using Model4You.Services.Data.ModelService;
     using Model4You.Web.ViewModels.Model;
     using Model4You.Web.ViewModels.ModelViews;
@@ -20,7 +21,8 @@ namespace Model4You.Web.Controllers
         private readonly ICloudinaryService cloudinaryService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ModelsController(IModelService modelService,
+        public ModelsController(
+            IModelService modelService,
             ICloudinaryService cloudinaryService,
             UserManager<ApplicationUser> userManager)
         {
@@ -56,19 +58,25 @@ namespace Model4You.Web.Controllers
 
         public async Task<IActionResult> Album()
         {
-            return this.View();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var pictures = await this.modelService.TakeAllPictures<AlbumViewModel>(userId);
+            var viewModel = new AlbumBindingViewModel
+            {
+                AlbumViewModel = pictures,
+            };
+            return this.View(viewModel);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Album(AlbumInputViewModel input)
+        public async Task<IActionResult> Album(AlbumBindingViewModel input)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);
             }
 
-            var imageUrls = input.UserImages
+            var imageUrls = input.AlbumInputViewModel.UserImages
                 .Select(async x =>
                     await cloudinaryService.UploadPictureAsync(x, x.FileName))
                 .Select(x => x.Result)

@@ -1,5 +1,5 @@
-﻿@model Model4You.Web.ViewModels.ModelViews.AlbumInputViewModel
-
+﻿@*@model Model4You.Web.ViewModels.ModelViews.AlbumInputViewModel*@
+@model Model4You.Web.ViewModels.BindingModels.AlbumBindingViewModel
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,26 +11,26 @@
 
 <body>
 
-<section class="hero-wrap hero-wrap-2" style="background-image:url(https://localhost:5001/images/bg_1.jpg);">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row slider-text justify-content-center align-items-center">
-            <div class="col-md-7 col-sm-12 text-center ftco-animate">
-                <h1 class="mb-3 mt-5 bread">Model Single</h1>
+    <section class="hero-wrap hero-wrap-2" style="background-image:url(https://localhost:5001/images/bg_1.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Model Single</h1>
+                </div>
+
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-<form  asp-controller="Models" asp-action="Album" enctype="multipart/form-data" method="post">
+<form asp-controller="Models" asp-action="Album" enctype="multipart/form-data" method="post">
     <div class="form-group">
         <div class="row justify-content-lg-between">
             @for (int i = 0; i < 6; i++)
             {
-                
-                    <input type="file" asp-for="@Model.UserImages" />
-                
+
+                <input type="file" asp-for="@Model.AlbumInputViewModel.UserImages" />
+
             }
         </div>
         <div class="row d-flex justify-content-around">
@@ -38,28 +38,44 @@
         </div>
     </div>
 </form>
+<div class="row">
+    @foreach (var image in Model.AlbumViewModel)
+    {
+        <div class="col-md-4">
+            <div class="model model-2 img d-flex align-items-end" style="background-image: url(@image.ProfilePicture);">
+            </div>
+        </div>
+        @foreach (var album in image.UserImages)
+        {
+            <div class="col-md-4">
+                <div class="model model-2 img d-flex align-items-end" style="background-image: url(@album.ImageUrl);">
+                </div>
+            </div>
+        }
+    }
+</div>
     @*<section class="ftco-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 model-single">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="model model-2 img d-flex align-items-end" style="background-image: url(images/model-1.jpg);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 model-single">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="model model-2 img d-flex align-items-end" style="background-image: url(images/model-1.jpg);">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="model model-2 img d-flex align-items-end" style="background-image: url(images/model-2.jpg);">
+                            <div class="col-md-4">
+                                <div class="model model-2 img d-flex align-items-end" style="background-image: url(images/model-2.jpg);">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="model model-2 img d-flex align-items-end" style="background-image: url(images/model-3.jpg);">
+                            <div class="col-md-4">
+                                <div class="model model-2 img d-flex align-items-end" style="background-image: url(images/model-3.jpg);">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>*@
+        </section>*@
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen">

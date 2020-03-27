@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using Model4You.Data.Common.Models;
 using Model4You.Data.Models.Enums;
 using Model4You.Services.Cloudinary;
 
@@ -19,15 +20,26 @@ namespace Model4You.Services.Data.ModelService
         private readonly IDeletableEntityRepository<ApplicationUser> appRepository;
         private readonly ICloudinaryService cloudinaryService;
         private readonly IDeletableEntityRepository<UserImage> imageRepository;
+        private readonly IDeletableEntityRepository<ModelInformation> modelInformationRepository;
 
         public ModelService(
             IDeletableEntityRepository<ApplicationUser> appRepository,
             ICloudinaryService cloudinaryService,
-            IDeletableEntityRepository<UserImage> imageRepository)
+            IDeletableEntityRepository<UserImage> imageRepository,
+            IDeletableEntityRepository<ModelInformation> modelInformationRepository)
         {
             this.appRepository = appRepository;
             this.cloudinaryService = cloudinaryService;
             this.imageRepository = imageRepository;
+            this.modelInformationRepository = modelInformationRepository;
+        }
+
+        public async Task<IEnumerable<T>> TakeAllPictures<T>(string userId)
+        {
+            var pictures = appRepository.All()
+                .Where(x => x.Id == userId && x.UserImages.Any());
+
+            return await pictures.To<T>().ToListAsync();
         }
 
         public async Task UploadAlbum(List<string> imageUrl, string userId)
@@ -53,7 +65,7 @@ namespace Model4You.Services.Data.ModelService
             // If you have modelInformation then take the model and display her/him.
             // Admins and Moderators will be not displayed.
             var user = this.appRepository.All()
-                .Where(x => x.ModelInformation != null).Take(6);
+                .Where(x => x.ModelInformation != null && x.Location != null).Take(6);
             return await user.To<T>().ToListAsync();
         }
 
@@ -74,6 +86,22 @@ namespace Model4You.Services.Data.ModelService
                 FirstOrDefaultAsync();
 
             return model;
+        }
+
+        public async Task InsertModelInformation(string id)
+        {
+            var modelInformation = new ModelInformation
+            {
+                UserId = id,
+                Age = 16,
+                Bust = 0,
+                Hips = 0,
+                Height = 0,
+                Ethnicity = Enum.Parse<Ethnicity>("Other"),
+                Gender = Enum.Parse<Gender>("Other"),
+                Nationality = "Please enter your nationality",
+            };
+            await this.modelInformationRepository.AddAsync(modelInformation);
         }
 
         public async Task<string> ChangeUserFirstName(ApplicationUser user, string firstName)
