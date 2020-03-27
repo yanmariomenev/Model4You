@@ -31,7 +31,6 @@ namespace Model4You.Data.Models
 
         public string FacebookUrl { get; set; }
 
-        [Required]
         public string Nationality { get; set; }
 
         public Ethnicity Ethnicity { get; set; }

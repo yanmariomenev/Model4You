@@ -164,7 +164,11 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
                 await _modelService.ChangeUserLastName(user, Input.LastName);
             }
             string currentUserId = await _userManager.GetUserIdAsync(user);
-            await _modelService.InsertModelInformation(currentUserId);
+
+            if (user.ModelInformation == null)
+            {
+                await _modelService.InsertModelInformation(currentUserId);
+            }
 
             var modelInformation = await _modelService.GetModelById<ChangeUserInformationInputModel>(currentUserId);
             

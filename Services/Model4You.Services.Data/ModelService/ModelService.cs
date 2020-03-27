@@ -99,7 +99,7 @@ namespace Model4You.Services.Data.ModelService
                 Height = 0,
                 Ethnicity = Enum.Parse<Ethnicity>("Other"),
                 Gender = Enum.Parse<Gender>("Other"),
-                Nationality = "Please enter your nationality",
+                Nationality = "Bulgarian",
             };
             await this.modelInformationRepository.AddAsync(modelInformation);
         }
