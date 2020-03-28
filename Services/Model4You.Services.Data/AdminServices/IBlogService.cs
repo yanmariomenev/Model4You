@@ -10,5 +10,7 @@ namespace Model4You.Services.Data.AdminServices
         Task CreateBlogContent(string title, string content);
 
         Task<IEnumerable<T>> TakeAllBlogs<T>();
+
+        Task<T> GetBlogContent<T>(int id);
     }
 }

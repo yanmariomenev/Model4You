@@ -57,5 +57,16 @@ namespace Model4You.Services.Data.AdminServices
 
             return await blogs.To<T>().ToListAsync();
         }
+
+        public async Task<T> GetBlogContent<T>(int id)
+        {
+            var content = await this.blogContentRepository
+                .All()
+                .Where(x => x.BlogId == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return content;
+        }
     }
 }

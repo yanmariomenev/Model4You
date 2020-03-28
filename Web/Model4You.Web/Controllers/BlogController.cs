@@ -21,7 +21,13 @@ namespace Model4You.Web.Controllers
                BlogViewModels = await this.blogService.TakeAllBlogs<BlogViewModel>(),
             };
 
-            return View(viewModel);
+            return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> BlogArticle(int id)
+        {
+            var viewModel = await this.blogService.GetBlogContent<BlogContentView>(id);
+            return this.View(viewModel);
         }
     }
 }
