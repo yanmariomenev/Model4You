@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Model4You.Services.Data.AdminServices
 {
@@ -7,5 +8,7 @@ namespace Model4You.Services.Data.AdminServices
         Task CreateBlog(string title, string imageUrl, string userId);
 
         Task CreateBlogContent(string title, string content);
+
+        Task<IEnumerable<T>> TakeAllBlogs<T>();
     }
 }

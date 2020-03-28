@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Model4You.Data.Common.Repositories;
 using Model4You.Data.Models;
+using Model4You.Services.Mapping;
 
 namespace Model4You.Services.Data.AdminServices
 {
@@ -47,6 +49,13 @@ namespace Model4You.Services.Data.AdminServices
 
             await this.blogContentRepository.AddAsync(blogContent);
             await this.blogContentRepository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<T>> TakeAllBlogs<T>()
+        {
+            var blogs = this.blogRepository.All().OrderByDescending(x => x.CreatedOn);
+
+            return await blogs.To<T>().ToListAsync();
         }
     }
 }
