@@ -74,7 +74,7 @@ namespace Model4You.Services.Data.ModelService
             // If you have modelInformation then take the model and display her/him.
             // Admins and Moderators will be not displayed.
             var user = this.appRepository.All()
-                .Where(x => x.ModelInformation != null);
+                .Where(x => x.ModelInformation != null && x.Location != null);
             return await user.To<T>().ToListAsync();
         }
 

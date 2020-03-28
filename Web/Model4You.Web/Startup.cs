@@ -67,6 +67,9 @@ namespace Model4You.Web
 
             services.AddRazorPages();
             services.AddSingleton(this.configuration);
+            // Data transfer Compression
+            services.AddResponseCompression(options => { options.EnableForHttps = true; });
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -79,6 +82,7 @@ namespace Model4You.Web
             services.AddTransient<IModelService, ModelService>();
             services.AddTransient<IContactDataService, ContactDataService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IBlogService, BlogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,6 +116,9 @@ namespace Model4You.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            // Data transfer Compression
+            app.UseResponseCompression();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
