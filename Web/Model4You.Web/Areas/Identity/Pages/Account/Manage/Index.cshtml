@@ -41,11 +41,21 @@
                 <input asp-for="Input.Age" class="form-control" />
                 <span asp-validation-for="Input.Age" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Input.Country"></label>
+                <input asp-for="Input.Country" class="form-control" />
+                <span asp-validation-for="Input.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Town"></label>
+                <input asp-for="Input.Town" class="form-control" />
+                <span asp-validation-for="Input.Town" class="text-danger"></span>
+            </div>
             @*<div class="form-group">
-                <label asp-for="Input.Gender"></label>
-                <input asp-for="Input.Gender" class="dropdown" />
-                <span asp-validation-for="Input.Gender" class="text-danger"></span>
-            </div>*@
+            <label asp-for="Input.Gender"></label>
+            <input asp-for="Input.Gender" class="dropdown" />
+            <span asp-validation-for="Input.Gender" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="Input.Height"></label>
                 <input asp-for="Input.Height" class="form-control" />

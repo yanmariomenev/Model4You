@@ -10,13 +10,15 @@ namespace Model4You.Services.Data.ModelService
 
     public interface IModelService
     {
+        Task<int> GetPagesCount(int perPage);
+
         Task<IEnumerable<T>> TakeAllPictures<T>(string userId);
 
         Task UploadAlbum(List<string> imageUrl,string userId);
 
         Task<IEnumerable<T>> TakeSixModels<T>();
 
-        Task<IEnumerable<T>> TakeAllModels<T>();
+        Task<IEnumerable<T>> TakeAllModels<T>(int page, int perPage);
 
         Task<T> GetModelById<T>(string modelId);
 

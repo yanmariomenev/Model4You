@@ -34,5 +34,11 @@ namespace Model4You.Data.Models
         public string Nationality { get; set; }
 
         public Ethnicity Ethnicity { get; set; }
+
+        [MaxLength(30)]
+        public string Country { get; set; }
+
+        [MaxLength(30)]
+        public string Town { get; set; }
     }
 }

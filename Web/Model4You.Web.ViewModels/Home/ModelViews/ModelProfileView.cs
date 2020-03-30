@@ -20,8 +20,6 @@
 
         //public ModelRole ModelRole { get; set; }
 
-        public Location Location { get; set; }
-
         public string ProfilePicture { get; set; }
 
         public ModelInformation ModelInformation { get; set; }

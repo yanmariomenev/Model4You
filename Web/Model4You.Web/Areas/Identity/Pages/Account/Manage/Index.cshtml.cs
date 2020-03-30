@@ -50,6 +50,12 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Last name")]
             public string LastName { get; set; }
 
+            [Display(Name = "Country")]
+            public string Country { get; set; }
+
+            [Display(Name = "Town")]
+            public string Town { get; set; }
+
             [Display(Name = "Age")]
             public int Age { get; set; }
 
@@ -91,7 +97,7 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             string userId = await _userManager.GetUserIdAsync(user);
             var model = await _modelService.GetModelById<ProfileViewModel>(userId);
 
-            Username = userName;
+            this.Username = userName;
 
             //TODO FIX THIS
             if (model.ModelInformation != null)
@@ -112,6 +118,8 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
                     Nationality = model.ModelInformation.Nationality,
                     FacebookUrl = model.ModelInformation.FacebookUrl,
                     InstagramUrl = model.ModelInformation.InstagramUrl,
+                    Country = model.ModelInformation.Country,
+                    Town = model.ModelInformation.Town,
                 };
             }
             var test = new InputModel();
@@ -210,6 +218,16 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             if (Input.ModelType != user.ModelInformation.ModelType)
             {
                 await _modelService.ChangeUserStringValues(user,Input.ModelType, "modelType");
+            }
+
+            if (Input.Country != user.ModelInformation.Country)
+            {
+                await _modelService.ChangeUserStringValues(user, Input.Country, "country");
+            }
+
+            if (Input.Town != user.ModelInformation.Town)
+            {
+                await _modelService.ChangeUserStringValues(user, Input.Town, "town");
             }
 
             if (Input.Nationality != user.ModelInformation.Nationality)

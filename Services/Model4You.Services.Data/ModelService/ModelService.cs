@@ -34,6 +34,19 @@ namespace Model4You.Services.Data.ModelService
             this.modelInformationRepository = modelInformationRepository;
         }
 
+
+        public async Task<int> GetPagesCount(int perPage)
+        {
+            var profiles =
+               await this.appRepository
+                .All()
+                .Where(x => x.ModelInformation != null && !x.IsDeleted && x.ProfilePicture != null)
+                .CountAsync();
+            var count = (int)Math.Ceiling(profiles / (decimal)perPage);
+
+            return count;
+        }
+
         public async Task<IEnumerable<T>> TakeAllPictures<T>(string userId)
         {
             var pictures = appRepository.All()
@@ -65,16 +78,19 @@ namespace Model4You.Services.Data.ModelService
             // If you have modelInformation then take the model and display her/him.
             // Admins and Moderators will be not displayed.
             var user = this.appRepository.All()
-                .Where(x => x.ModelInformation != null && x.Location != null).Take(6);
+                .Where(x => x.ModelInformation != null && !x.IsDeleted && x.ProfilePicture != null).Take(6);
             return await user.To<T>().ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> TakeAllModels<T>()
+        public async Task<IEnumerable<T>> TakeAllModels<T>(int page, int perPage)
         {
             // If you have modelInformation then take the model and display her/him.
             // Admins and Moderators will be not displayed.
             var user = this.appRepository.All()
-                .Where(x => x.ModelInformation != null && x.Location != null);
+                .Where(x => x.ModelInformation != null && !x.IsDeleted && x.ProfilePicture != null)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(perPage * (page - 1))
+                .Take(perPage);
             return await user.To<T>().ToListAsync();
         }
 
@@ -93,6 +109,8 @@ namespace Model4You.Services.Data.ModelService
             var modelInformation = new ModelInformation
             {
                 UserId = id,
+                Country = "None",
+                Town = "None",
                 Age = 16,
                 Bust = 0,
                 Hips = 0,
@@ -194,6 +212,8 @@ namespace Model4You.Services.Data.ModelService
                 "nationality" => user.ModelInformation.Nationality = value,
                 "instagramUrl" => user.ModelInformation.InstagramUrl = value,
                 "facebookUrl" => user.ModelInformation.FacebookUrl = value,
+                "town" => user.ModelInformation.Town = value,
+                "country" => user.ModelInformation.Country = value,
             };
 
             await this.appRepository.SaveChangesAsync();

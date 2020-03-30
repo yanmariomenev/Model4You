@@ -1,4 +1,5 @@
-﻿using Model4You.Web.ViewModels.BindingModels;
+﻿using System;
+using Model4You.Web.ViewModels.BindingModels;
 
 namespace Model4You.Web.Controllers
 {
@@ -17,6 +18,7 @@ namespace Model4You.Web.Controllers
 
     public class ModelsController : Controller
     {
+        public const int ProfilesPerPage = 6;
         private readonly IModelService modelService;
         private readonly ICloudinaryService cloudinaryService;
         private readonly UserManager<ApplicationUser> userManager;
@@ -32,14 +34,17 @@ namespace Model4You.Web.Controllers
         }
 
         // GET
-        public async Task<IActionResult> Model()
+        public async Task<IActionResult> Model(int page = 1, int perPage = ProfilesPerPage)
         {
+            var pagesCount = await this.modelService.GetPagesCount(perPage);
             var viewModel = new IndexProfileViewModel
             {
                 ModelProfile =
-                   await this.modelService.TakeAllModels<ModelProfileView>(),
+                   await this.modelService.TakeAllModels<ModelProfileView>(page, perPage),
+                CurrentPage = page,
+                PagesCount = pagesCount,
             };
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Profile(string id)
