@@ -7,6 +7,7 @@ namespace Model4You.Web.Controllers
 {
     public class BlogController : Controller
     {
+        public const int BlogPerPage = 6;
         private readonly IBlogService blogService;
 
         public BlogController(IBlogService blogService)
@@ -14,11 +15,15 @@ namespace Model4You.Web.Controllers
             this.blogService = blogService;
         }
 
-        public async Task<IActionResult> Blog()
+        public async Task<IActionResult> Blog(int page = 1, int perPage = BlogPerPage)
         {
+            var pagesCount = await this.blogService.GetPagesCount(perPage);
+
             var viewModel = new BlogIndexViewModel
             {
-               BlogViewModels = await this.blogService.TakeAllBlogs<BlogViewModel>(),
+               BlogViewModels = await this.blogService.TakeAllBlogs<BlogViewModel>(page, perPage),
+               CurrentPage = page,
+               PagesCount = pagesCount,
             };
 
             return this.View(viewModel);

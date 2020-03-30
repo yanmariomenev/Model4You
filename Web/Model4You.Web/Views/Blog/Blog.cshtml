@@ -68,15 +68,24 @@
                     <div class="row mt-5">
                         <div class="col text-center">
                             <div class="block-27">
-                                <ul>
-                                    <li><a href="#">&lt;</a></li>
-                                    <li class="active"><span>1</span></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">&gt;</a></li>
-                                </ul>
+                                @if (Model.PagesCount > 0)
+                                {
+                                    <ul class="pagination">
+                                        <li><a href="/Blog/Blog?page=@Model.PreviousPage"></a></li>
+                                        @for (int i = 1; i <= Model.PagesCount; i++)
+                                        {
+                                            if (i == Model.CurrentPage)
+                                            {
+                                                <li class="active"><a href="/Blog/Blog?page=@i">@i</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/Blog/Blog?page=@i">@i</a></li>
+                                            }
+                                        }
+                                        <li><a href="/Blog/Blog?page=@Model.NextPage"></a></li>
+                                    </ul>
+                                }
                             </div>
                         </div>
                     </div>

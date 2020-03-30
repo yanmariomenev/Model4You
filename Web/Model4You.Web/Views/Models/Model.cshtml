@@ -65,7 +65,7 @@
                         @if (Model.PagesCount > 0)
                         {
                             <ul class="pagination">
-                                <li><a href="/?page=@Model.PreviousPage"></a></li>
+                                <li><a href="/Models/Model?page=@Model.PreviousPage"></a></li>
                                 @for (int i = 1; i <= Model.PagesCount; i++)
                                 {
                                     if (i == Model.CurrentPage)
@@ -77,7 +77,7 @@
                                         <li><a href="/Models/Model?page=@i">@i</a></li>
                                     }
                                 }
-                                <li><a href="/?page=@Model.NextPage"></a></li>
+                                <li><a href="/Models/Model?page=@Model.NextPage"></a></li>
                             </ul>
                         }
                     </div>

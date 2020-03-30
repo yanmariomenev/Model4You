@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,18 @@ namespace Model4You.Services.Data.AdminServices
         {
             this.blogRepository = blogRepository;
             this.blogContentRepository = blogContentRepository;
+        }
+
+        public async Task<int> GetPagesCount(int perPage)
+        {
+            var blogs =
+                await this.blogRepository
+                    .All()
+                    .Where(x => !x.IsDeleted)
+                    .CountAsync();
+            var count = (int)Math.Ceiling(blogs / (decimal)perPage);
+
+            return count;
         }
 
         public async Task CreateBlog(string title, string imageUrl, string userId)
@@ -51,9 +64,12 @@ namespace Model4You.Services.Data.AdminServices
             await this.blogContentRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> TakeAllBlogs<T>()
+        public async Task<IEnumerable<T>> TakeAllBlogs<T>(int page, int perPage)
         {
-            var blogs = this.blogRepository.All().OrderByDescending(x => x.CreatedOn);
+            var blogs = this.blogRepository.All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(perPage * (page - 1))
+                .Take(perPage);
 
             return await blogs.To<T>().ToListAsync();
         }

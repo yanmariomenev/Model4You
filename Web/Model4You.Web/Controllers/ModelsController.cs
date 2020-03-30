@@ -81,6 +81,7 @@ namespace Model4You.Web.Controllers
                 return this.View(input);
             }
 
+            // TODO Limit users to upload only 6-8 pictures
             var imageUrls = input.AlbumInputViewModel.UserImages
                 .Select(async x =>
                     await cloudinaryService.UploadPictureAsync(x, x.FileName))
