@@ -1,8 +1,6 @@
-﻿using System;
-using Model4You.Web.ViewModels.BindingModels;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -11,8 +9,10 @@ namespace Model4You.Web.Controllers
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Model4You.Data.Models;
+    using Model4You.Services;
     using Model4You.Services.Cloudinary;
     using Model4You.Services.Data.ModelService;
+    using Model4You.Web.ViewModels.BindingModels;
     using Model4You.Web.ViewModels.Model;
     using Model4You.Web.ViewModels.ModelViews;
 
@@ -61,6 +61,7 @@ namespace Model4You.Web.Controllers
             return this.View(viewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> Album()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

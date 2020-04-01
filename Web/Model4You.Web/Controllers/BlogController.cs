@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Model4You.Services.Data.AdminServices;
-using Model4You.Web.ViewModels.Blog;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Model4You.Services.Data.AdminServices;
+    using Model4You.Web.ViewModels.Blog;
+
     public class BlogController : Controller
     {
         public const int BlogPerPage = 6;

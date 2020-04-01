@@ -1,4 +1,4 @@
-﻿namespace Model4You.Services.Data.ModelService
+﻿namespace Model4You.Services
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -7,6 +7,7 @@
 
     public static class GetEnumDisplayName
     {
+        // TODO move this service to model4you.services
         public static string GetDisplayName(this Enum enumValue)
         {
             return enumValue.GetType()
