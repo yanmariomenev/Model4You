@@ -15,6 +15,8 @@
     <Compile Remove="Migrations\20200318150433_SpellingFix.Designer.cs" />
     <Compile Remove="Migrations\20200327163306_Pending.cs" />
     <Compile Remove="Migrations\20200327163306_Pending.Designer.cs" />
+    <Compile Remove="Migrations\20200401155401_ChangeToGender.cs" />
+    <Compile Remove="Migrations\20200401155401_ChangeToGender.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

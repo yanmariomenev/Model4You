@@ -1,11 +1,6 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using Model4You.Data.Common.Models;
-using Model4You.Data.Models.Enums;
-using Model4You.Services.Cloudinary;
-
-namespace Model4You.Services.Data.ModelService
+﻿namespace Model4You.Services.Data.ModelService
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,6 +8,8 @@ namespace Model4You.Services.Data.ModelService
     using Microsoft.EntityFrameworkCore;
     using Model4You.Data.Common.Repositories;
     using Model4You.Data.Models;
+    using Model4You.Data.Models.Enums;
+    using Model4You.Services.Cloudinary;
     using Model4You.Services.Mapping;
 
     public class ModelService : IModelService
@@ -106,6 +103,15 @@ namespace Model4You.Services.Data.ModelService
 
         public async Task InsertModelInformation(string id)
         {
+            var checkUser = await this.modelInformationRepository
+                .All()
+                .Where(x => x.UserId == id).FirstOrDefaultAsync();
+
+            if (checkUser != null)
+            {
+                return;
+            }
+
             var modelInformation = new ModelInformation
             {
                 UserId = id,
@@ -120,6 +126,7 @@ namespace Model4You.Services.Data.ModelService
                 Nationality = "Bulgarian",
             };
             await this.modelInformationRepository.AddAsync(modelInformation);
+            await this.modelInformationRepository.SaveChangesAsync();
         }
 
         public async Task<string> ChangeUserFirstName(ApplicationUser user, string firstName)
@@ -219,6 +226,5 @@ namespace Model4You.Services.Data.ModelService
             await this.appRepository.SaveChangesAsync();
             return "Success";
         }
-
     }
 }

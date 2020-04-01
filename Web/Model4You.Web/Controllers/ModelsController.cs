@@ -1,4 +1,5 @@
 ﻿using Model4You.Services.Data.ImageService;
+using Model4You.Web.Areas.Identity.Pages.Account.Manage;
 
 namespace Model4You.Web.Controllers
 {
@@ -57,19 +58,33 @@ namespace Model4You.Web.Controllers
             var viewModel = await this.modelService
                 .GetModelById<ProfileViewModel>(id);
 
-            // Get the display name of the enum. TODO Try find a better way
+                // Get the display name of the enum. TODO Try find a better way
             var displayName = viewModel.ModelInformation.Ethnicity.GetDisplayName();
 
-            // Using viewData so i don't use the service in the html file.
+                // Using viewData so i don't use the service in the html file.
             this.ViewData["Ethnicity"] = displayName;
-
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyProfile()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var viewModel = await this.modelService.GetModelById<ProfileViewModel>(userId);
+            var modelInformation = viewModel.ModelInformation;
+            if (modelInformation == null)
+            {
+                return this.Redirect("/Identity/Account/Manage");
+            }
+
+            return this.RedirectToAction("Profile", "Models", new { @id = userId });
         }
 
         [Authorize]
         public async Task<IActionResult> Album()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var pictures = await this.modelService.TakeAllPictures<AlbumViewModel>(userId);
             var viewModel = new AlbumBindingViewModel
             {
@@ -98,7 +113,7 @@ namespace Model4You.Web.Controllers
             await this.modelService.UploadAlbum(imageUrls, userId);
 
             // TODO redirect to user profile.
-            return this.Redirect("/Models/Profile/" + userId);
+            return this.RedirectToAction(nameof(this.MyProfile));
         }
 
         [Authorize]
@@ -116,6 +131,7 @@ namespace Model4You.Web.Controllers
             return this.RedirectToAction(nameof(this.Album));
         }
 
+        [Authorize]
         public async Task<IActionResult> ChangeProfilePicture(string imageUrl, string userId , int imageId)
         {
             var changeProfilePicture = await this.imageService

@@ -100,6 +100,10 @@
                     <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="Model" class="nav-link">Models</a></li>
                     <li class="nav-item"><a asp-area="" asp-controller="Blog" asp-action="Blog" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
+                    @if (User.IsInRole("Model"))
+                    {
+                        <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="MyProfile" class="nav-link">My Profile</a></li>
+                    }
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <partial name="_LoginPartial" />
                     </div>

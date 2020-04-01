@@ -4,6 +4,8 @@ namespace Model4You.Data.Models.Enums
 {
     public enum Ethnicity
     {
+        //[Display(Name = "None")]
+        //None = 0,
         [Display(Name = "White")]
         White = 1,
         [Display(Name = "Black African Roots")]

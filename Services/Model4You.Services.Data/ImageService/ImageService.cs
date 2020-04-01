@@ -1,17 +1,21 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Model4You.Data.Common.Repositories;
-using Model4You.Data.Models;
-
-namespace Model4You.Services.Data.ImageService
+﻿namespace Model4You.Services.Data.ImageService
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using Model4You.Data.Common.Repositories;
+    using Model4You.Data.Models;
+
     public class ImageService : IImageService
     {
+        private const string DefaultProfilePicture = "https://res.cloudinary.com/dpp9tqhjn/image/upload/v1585748850/images/no-avatar-png-8_rbh1ni.png";
+        private const string DeletedPicture = "Deleted";
         private readonly IDeletableEntityRepository<UserImage> imagesRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
 
-        public ImageService(IDeletableEntityRepository<UserImage> imagesRepository,
+        public ImageService(
+            IDeletableEntityRepository<UserImage> imagesRepository,
             IDeletableEntityRepository<ApplicationUser> userRepository)
         {
             this.imagesRepository = imagesRepository;
@@ -27,7 +31,7 @@ namespace Model4You.Services.Data.ImageService
 
             this.imagesRepository.Delete(imageToRemove);
             await this.imagesRepository.SaveChangesAsync();
-            return "Deleted";
+            return DeletedPicture;
         }
 
         public async Task<string> DeleteProfilePicture(string userId)
@@ -41,11 +45,11 @@ namespace Model4You.Services.Data.ImageService
                 .All()
                 .Where(x => x.Id == userId)
                 .FirstOrDefaultAsync();
-            imageToRemove.ProfilePicture =
-                "https://res.cloudinary.com/dpp9tqhjn/image/upload/v1585748850/images/no-avatar-png-8_rbh1ni.png";
+            imageToRemove.ProfilePicture = DefaultProfilePicture;
+
             await this.userRepository.SaveChangesAsync();
 
-            return "Deleted";
+            return DeletedPicture;
         }
 
         public async Task<string> ChangeProfilePicture(string imageUrl, string userId, int imageId)

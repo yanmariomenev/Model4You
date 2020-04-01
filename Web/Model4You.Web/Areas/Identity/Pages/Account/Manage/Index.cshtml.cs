@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -161,6 +162,13 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
+            string currentUserId = await _userManager.GetUserIdAsync(user);
+
+            // TODO Find a better way to implement this.
+            if (user.ModelInformation == null)
+            {
+                await _modelService.InsertModelInformation(currentUserId);
+            }
 
             if (Input.FirstName != user.FirstName)
             {
@@ -171,13 +179,7 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             {
                 await _modelService.ChangeUserLastName(user, Input.LastName);
             }
-            string currentUserId = await _userManager.GetUserIdAsync(user);
-
-            if (user.ModelInformation == null)
-            {
-                await _modelService.InsertModelInformation(currentUserId);
-            }
-
+            
             var modelInformation = await _modelService.GetModelById<ChangeUserInformationInputModel>(currentUserId);
             
             if (Input.Age != user.ModelInformation.Age)

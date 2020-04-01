@@ -6,15 +6,16 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 @*@Html.DropDownList("Gender",
-    new SelectList(Enum.GetValues(typeof(Gender))),
-    "Select Gender",
-    new { @class = "form-group" })
-@Html.DropDownList("Ethnicity",
-    new SelectList(Enum.GetValues(typeof(Ethnicity))),
-    "Select Ethnicity",
-    new { @class = "form-group" })*@
+        new SelectList(Enum.GetValues(typeof(Gender))),
+        "Select Gender",
+        new { @class = "form-group" })
+    @Html.DropDownList("Ethnicity",
+        new SelectList(Enum.GetValues(typeof(Ethnicity))),
+        "Select Ethnicity",
+        new { @class = "form-group" })*@
 
 <h4>@ViewData["Title"]</h4>
+
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
     <div class="col-md-6">
@@ -52,10 +53,10 @@
                 <span asp-validation-for="Input.Town" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-            <label asp-for="Input.Gender"></label>
-            <input asp-for="Input.Gender" class="dropdown" />
-            <span asp-validation-for="Input.Gender" class="text-danger"></span>
-        </div>*@
+                    <label asp-for="Input.Gender"></label>
+                    <input asp-for="Input.Gender" class="dropdown" />
+                    <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="Input.Height"></label>
                 <input asp-for="Input.Height" class="form-control" />
@@ -80,8 +81,8 @@
             <div class="form-group">
                 <label asp-for="Input.Gender"></label>
                 <select asp-for="Input.Gender" class="form-control" id="Gender">
-                    <option>Male</option>
                     <option>Female</option>
+                    <option>Male</option>
                     <option>Other</option>
                 </select>
             </div>
