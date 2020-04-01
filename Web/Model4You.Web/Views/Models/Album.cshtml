@@ -41,16 +41,25 @@
 <div class="row">
     @foreach (var image in Model.AlbumViewModel)
     {
-        <div class="col-md-4">
-            <div class="model model-2 img d-flex align-items-end" style="background-image: url(@image.ProfilePicture);">
-            </div>
+    <div class="col-md-4">
+        <div class="model model-2 img d-flex align-items-end" style="background-image: url(@image.ProfilePicture);">
         </div>
+        <a href="@Url.Action("DeleteProfilePicture", "Models",new { id = image.Id })" class="btn btn-default btn-block">
+            <span class="btn btn-danger" aria-hidden="true">Delete profile picture</span>
+        </a>
+    </div>
         @foreach (var album in image.UserImages)
         {
-            <div class="col-md-4">
-                <div class="model model-2 img d-flex align-items-end" style="background-image: url(@album.ImageUrl);">
-                </div>
-            </div>
+<div class="col-md-4">
+    <div class="model model-2 img d-flex align-items-end" style="background-image: url(@album.ImageUrl);">
+    </div>
+    <a href="@Url.Action("ChangeProfilePicture", "Models",new { imageUrl = album.ImageUrl, userId = album.UserId, imageId = album.Id })" class="btn btn-default btn-block">
+        <span class="btn btn-success" aria-hidden="true">Set as profile picture</span>
+    </a>
+    <a href="@Url.Action("DeleteImage", "Models",new { id = album.Id })" class="btn btn-default btn-block">
+        <span class="btn btn-danger" aria-hidden="true">Delete this picture</span>
+    </a>
+</div>
         }
     }
 </div>

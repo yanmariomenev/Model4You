@@ -1,4 +1,6 @@
-﻿namespace Model4You.Web.Controllers
+﻿using Model4You.Services.Data.ImageService;
+
+namespace Model4You.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -22,15 +24,18 @@
         private readonly IModelService modelService;
         private readonly ICloudinaryService cloudinaryService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IImageService imageService;
 
         public ModelsController(
             IModelService modelService,
             ICloudinaryService cloudinaryService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IImageService imageService)
         {
             this.modelService = modelService;
             this.cloudinaryService = cloudinaryService;
             this.userManager = userManager;
+            this.imageService = imageService;
         }
 
         // GET
@@ -95,5 +100,29 @@
             // TODO redirect to user profile.
             return this.Redirect("/Models/Profile/" + userId);
         }
+
+        [Authorize]
+        public async Task<IActionResult> DeleteImage(int id)
+        {
+            var imageToDelete = await this.imageService.DeleteImage(id);
+            return this.RedirectToAction(nameof(this.Album));
+        }
+
+        [Authorize]
+        public async Task<IActionResult> DeleteProfilePicture(string id)
+        {
+            var imageToDelete = await this.imageService.DeleteProfilePicture(id);
+
+            return this.RedirectToAction(nameof(this.Album));
+        }
+
+        public async Task<IActionResult> ChangeProfilePicture(string imageUrl, string userId , int imageId)
+        {
+            var changeProfilePicture = await this.imageService
+                .ChangeProfilePicture(imageUrl, userId, imageId);
+
+            return this.RedirectToAction(nameof(this.Album));
+        }
+
     }
 }

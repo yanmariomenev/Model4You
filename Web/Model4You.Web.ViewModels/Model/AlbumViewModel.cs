@@ -9,6 +9,7 @@ namespace Model4You.Web.ViewModels.Model
     public class AlbumViewModel : IMapFrom<ApplicationUser>
     {
         // TODO Take only image urls;
+        public string Id { get; set; }
         public string ProfilePicture { get; set; }
 
         public ICollection<UserImage> UserImages { get; set; }
