@@ -39,26 +39,40 @@ namespace Model4You.Web.Controllers
 
         public async Task<IActionResult> BlogArticle(int id)
         {
-            var viewModel = await this.blogService.GetBlogContent<BlogContentView>(id);
-            var v = new BlogArticleBindingViewModel
+            var content = await this.blogService.GetBlogContent<BlogContentView>(id);
+            if (content == null)
             {
-                BlogContentView = viewModel,
+                return this.NotFound();
+            }
+
+            var viewModel = new BlogArticleBindingViewModel
+            {
+                BlogContentView = content,
             };
-            return this.View(v);
+            return this.View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> PostComment(BlogArticleBindingViewModel input)
         {
-           await this.commentService.Create(
-               input.CommentInputModel.BlogContentId,
-               input.CommentInputModel.Name,
-               input.CommentInputModel.Email,
-               input.CommentInputModel.Content);
-           return this.RedirectToAction(
-               "BlogArticle",
-               "Blog",
-               new { id = input.CommentInputModel.BlogId });
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction(
+                    "BlogArticle",
+                    "Blog",
+                    new { id = input.CommentInputModel.BlogId });
+            }
+
+            await this.commentService.Create(
+                input.CommentInputModel.BlogContentId,
+                input.CommentInputModel.Name,
+                input.CommentInputModel.Email,
+                input.CommentInputModel.Content);
+
+            return this.RedirectToAction(
+                "BlogArticle",
+                "Blog",
+                new { id = input.CommentInputModel.BlogId });
         }
     }
 }

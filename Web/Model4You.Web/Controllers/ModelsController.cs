@@ -58,7 +58,11 @@ namespace Model4You.Web.Controllers
             var viewModel = await this.modelService
                 .GetModelById<ProfileViewModel>(id);
 
-                // Get the display name of the enum. TODO Try find a better way
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+            // Get the display name of the enum. TODO Try find a better way
             var displayName = viewModel.ModelInformation.Ethnicity.GetDisplayName();
 
                 // Using viewData so i don't use the service in the html file.
