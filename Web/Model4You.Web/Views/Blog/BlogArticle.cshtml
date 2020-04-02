@@ -1,4 +1,4 @@
-﻿@model Model4You.Web.ViewModels.Blog.BlogContentView
+﻿@model Model4You.Web.ViewModels.BindingModels.BlogArticleBindingViewModel
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +26,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 ftco-animate">
-                    <h2 class="mb-3">@Model.Title</h2>
-                    @Html.Raw(Model.SanitizedContent)
+                    <h2 class="mb-3">@Model.BlogContentView.Title</h2>
+                    <p>@Html.Raw(Model.BlogContentView.SanitizedContent)</p>
 
                     <div class="tag-widget post-tag-container mb-5 mt-5">
                         <div class="tagcloud">
@@ -50,108 +50,42 @@
 
 
                     <div class="pt-5 mt-5">
-                        <h3 class="mb-5">6 Comments</h3>
+                        <h3 class="mb-5">@Model.BlogContentView.BlogComments.Count Comments</h3>
                         <ul class="comment-list">
-                            <li class="comment">
-                                <div class="vcard bio">
+                            
+                                @*<div class="vcard bio">
                                     <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                            </li>
-
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-
-                                <ul class="children">
+                                </div>*@
+                                
+                                @foreach (var comment in Model.BlogContentView.BlogComments)
+                                {
                                     <li class="comment">
-                                        <div class="vcard bio">
-                                            <img src="images/person_1.jpg" alt="Image placeholder">
-                                        </div>
                                         <div class="comment-body">
-                                            <h3>John Doe</h3>
-                                            <div class="meta">October 03, 2018 at 2:21pm</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                            <p><a href="#" class="reply">Reply</a></p>
+                                            <h3>@comment.Name</h3>
+                                            <div class="meta">@comment.CreatedOn</div>
+                                            <p>@comment.Content</p>
                                         </div>
-
-
-                                        <ul class="children">
-                                            <li class="comment">
-                                                <div class="vcard bio">
-                                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                                </div>
-                                                <div class="comment-body">
-                                                    <h3>John Doe</h3>
-                                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                    <p><a href="#" class="reply">Reply</a></p>
-                                                </div>
-
-                                                <ul class="children">
-                                                    <li class="comment">
-                                                        <div class="vcard bio">
-                                                            <img src="images/person_1.jpg" alt="Image placeholder">
-                                                        </div>
-                                                        <div class="comment-body">
-                                                            <h3>John Doe</h3>
-                                                            <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                            <p><a href="#" class="reply">Reply</a></p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                            @*<p><a href="#" class="reply">Reply</a></p>*@
                                     </li>
-                                </ul>
-                            </li>
-
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                            </li>
+                                }
                         </ul>
                         <!-- END comment-list -->
 
                         <div class="comment-form-wrap pt-5">
                             <h3 class="mb-5">Leave a comment</h3>
-                            <form action="#" class="p-5 bg-light">
+                            <form asp-controller="Blog" asp-action="PostComment" method="post" class="p-5 bg-light">
+                                <input type="hidden" asp-for="CommentInputModel.BlogContentId" value="@this.Model.BlogContentView.Id" />
+                                <input type="hidden" asp-for="CommentInputModel.BlogId" value="@this.Model.BlogContentView.BlogId" />
                                 <div class="form-group">
-                                    <label for="name">Name *</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <input asp-for="CommentInputModel.Name" class="form-control" placeholder="Your Name">
+                                    <span asp-validation-for="CommentInputModel.Name" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email *</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <input asp-for="CommentInputModel.Email" class="form-control" placeholder="Your Email">
+                                    <span asp-validation-for="CommentInputModel.Email" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="website">Website</label>
-                                    <input type="url" class="form-control" id="website">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea name="CommentInputModel.Content" id="" cols="30" rows="7" asp-for="CommentInputModel.Content" class="form-control" placeholder="Your Comment"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">

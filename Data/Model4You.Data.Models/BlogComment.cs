@@ -6,11 +6,11 @@
     {
         public int BlogContentId { get; set; }
 
-        public BlogContent BlogContent { get; set; }
+        public virtual BlogContent BlogContent { get; set; }
 
-        public string UserId { get; set; }
+        public string Name { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public string Email { get; set; }
 
         public string Content { get; set; }
     }
