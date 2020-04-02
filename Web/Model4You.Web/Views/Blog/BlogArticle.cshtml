@@ -62,11 +62,14 @@
                                     <li class="comment">
                                         <div class="comment-body">
                                             <h3>@comment.Name</h3>
-                                            <div class="meta">@comment.CreatedOn</div>
-                                            <p>@comment.Content</p>
+                                            @*<div class="meta">@comment.CreatedOn</div>*@
+                                        <div class="meta">
+                                            <time datetime="@comment.CreatedOn.ToString("O")"></time>
                                         </div>
+                                                <p>@comment.Content</p>
+                                            </div>
                                             @*<p><a href="#" class="reply">Reply</a></p>*@
-                                    </li>
+</li>
                                 }
                         </ul>
                         <!-- END comment-list -->
