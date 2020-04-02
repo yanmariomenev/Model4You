@@ -8,6 +8,13 @@
         <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>*@
+@*TODO fix temp data not displaying*@
+@if (this.TempData["ContactForm"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["ContactForm"]
+    </div>
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -283,8 +290,8 @@
             <div class="row no-gutters">
                 @foreach (var modelInfo in Model.ModelProfile)
                 {
-                <div class="col-md-4">
-                    <div class="model img d-flex align-items-end" style="background-image: url(@modelInfo.ProfilePicture);">
+                    <div class="col-md-4">
+                        <div class="model img d-flex align-items-end" style="background-image: url(@modelInfo.ProfilePicture);">
                             <div class="desc w-100 px-4">
                                 <div class="info w-100 mb-4">
                                     <ul>
@@ -294,8 +301,8 @@
                                         <li><span>Model Type:</span><span>@modelInfo.ModelInformation.ModelType</span></li>
                                         @*<li><span>Body Type:</span><span></span></li>*@
                                         @*<li><span>Hips:</span><span>90</span></li>
-                                        <li><span>Shoes:</span><span>39</span></li>
-                                        <li><span>Eyes:</span><span>Blue</span></li>*@
+                                            <li><span>Shoes:</span><span>39</span></li>
+                                            <li><span>Eyes:</span><span>Blue</span></li>*@
                                     </ul>
                                 </div>
                                 <div class="text w-100 mb-3">

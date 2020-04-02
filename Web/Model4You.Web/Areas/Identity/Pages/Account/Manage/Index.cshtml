@@ -15,7 +15,12 @@
         new { @class = "form-group" })*@
 
 <h4>@ViewData["Title"]</h4>
-
+@if (this.TempData["StatusMessage"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["StatusMessage"]
+    </div>
+}
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
     <div class="col-md-6">

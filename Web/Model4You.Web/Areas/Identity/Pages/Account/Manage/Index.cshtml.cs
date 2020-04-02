@@ -46,18 +46,23 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
 
             [Display(Name = "First name")]
+            [MaxLength(60)]
             public string FirstName { get; set; }
 
             [Display(Name = "Last name")]
+            [MaxLength(60)]
             public string LastName { get; set; }
 
             [Display(Name = "Country")]
+            [MaxLength(60)]
             public string Country { get; set; }
 
             [Display(Name = "Town")]
+            [MaxLength(60)]
             public string Town { get; set; }
 
             [Display(Name = "Age")]
+            [Range(12, 80)]
             public int Age { get; set; }
 
             [Display(Name = "Select Gender")]
@@ -79,15 +84,19 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             public double Hips { get; set; }
 
             [Display(Name = "Type of modeling commercial, Swimsuit, fit and etc.")]
+            [MaxLength(150)]
             public string ModelType { get; set; }
 
             [Display(Name = "Link your Instagram")]
+            [MaxLength(250)]
             public string InstagramUrl { get; set; }
 
             [Display(Name = "Link your Facebook")]
+            [MaxLength(250)]
             public string FacebookUrl { get; set; }
 
             [Display(Name = "Nationality")]
+            [MaxLength(30)]
             public string Nationality { get; set; }
         }
 

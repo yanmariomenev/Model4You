@@ -52,7 +52,9 @@
             }
 
             await this.contactService.Create(model.Name, model.Email, model.Subject, model.Message);
-            return this.RedirectToAction(nameof(Index));
+            // TODO fix temp data not displaying
+            this.TempData["ContactForm"] = "Your request has been sent to the owner";
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         public IActionResult Privacy()
