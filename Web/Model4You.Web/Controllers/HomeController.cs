@@ -1,4 +1,6 @@
-﻿namespace Model4You.Web.Controllers
+﻿using Model4You.Web.ViewModels.Home.AboutView;
+
+namespace Model4You.Web.Controllers
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
@@ -33,9 +35,13 @@
             return this.View(viewModel);
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> About()
         {
-            return this.View();
+            var viewModel = new AboutViewModel
+            {
+                Count = await this.modelService.GetModelCount(),
+            };
+            return this.View(viewModel);
         }
 
         public IActionResult Contact()

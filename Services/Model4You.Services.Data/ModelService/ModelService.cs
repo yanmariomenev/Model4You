@@ -44,6 +44,16 @@
             return count;
         }
 
+        public async Task<int> GetModelCount()
+        {
+            var modelCount = await this.appRepository
+                .All()
+                .Where(x => x.ModelInformation != null && !x.IsDeleted)
+                .CountAsync();
+
+            return modelCount;
+        }
+
         public async Task<IEnumerable<T>> TakeAllPictures<T>(string userId)
         {
             var pictures = appRepository.All()

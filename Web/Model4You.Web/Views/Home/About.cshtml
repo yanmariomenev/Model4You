@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@model Model4You.Web.ViewModels.Home.AboutView.AboutViewModel
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>Topmodel - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
- 
+
 </head>
 
 <body>
@@ -25,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/bg_2.jpg);">
-                    <a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
+                    <a href="https://vimeo.com/372600700" class="icon popup-vimeo d-flex justify-content-center align-items-center">
                         <span class="icon-play"></span>
                     </a>
                 </div>
@@ -35,8 +36,10 @@
                         <h2 class="mb-4">We Are Model Agency</h2>
                     </div>
                     <div class="pb-md-5">
-                        <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                        <p>model4you is the world’s modeling community, leading the way internationally in connecting new faces (aspiring models) and professional models with reputable agencies, photographers, stylists and other industry clients.</p>
+                        <p>We pride ourselves on delivering a service that is not only desired, but also innovative and highly effective. After a lengthy process of research and development including consultation with top modeling agencies, model4you has been created to make a fast, streamlined and efficient service that gets proven results and is an essential tool for the modeling community.</p>
+                        <p>Our dedicated team of professionals has a combined 30 years of experience in the modeling industry, from the catwalks of Milan, to designing IT systems for some of the premier model agencies in Europe.</p>
+                        <p>We are passionate about providing a professional online platform, which benefits all new and professional participants in the modeling industry.</p>
                     </div>
                 </div>
             </div>
@@ -54,7 +57,7 @@
                         </div>
                         <div class="media-body">
                             <h3 class="heading">Finding Agency</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                            <p>Agencies, you are given access to a vast array of models ranging from fresh new talent to proven professionals. With our photo sessions we are able to show you previously undiscovered models and present them in a fresh, high quality yet realistic, light. We show our new faces without complicated hair and makeup, which allows you to see the model and all their potential.</p>
                         </div>
                     </div>
                 </div>
@@ -65,7 +68,7 @@
                         </div>
                         <div class="media-body">
                             <h3 class="heading">Types of Modeling</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                            <p>Whether you are a Aspiring model or Amateur or a professional model, create your model4you profile and photobooks and instantly increase your international exposure. Be seen on a scale that has previously only been realized by a privileged few. This is your chance to get listed with the most in-demand international agencies and to be selected by the best photographers worldwide. The worlds leading players are watching, so let them see you!</p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +79,7 @@
                         </div>
                         <div class="media-body">
                             <h3 class="heading">Freelance</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                            <p>If you’re a freelance model, then you’re representing yourself and you are fully responsible for finding and booking your own work. One major advantage of securing your own work is not having to divide your earnings with your agency so you will take home the full amount of the job. Generally speaking though, freelance modelling gigs tend to pay less than fashion and commercial jobs, as clients that hire freelance models generally have a tighter budget.</p>
                         </div>
                     </div>
                 </div>
@@ -87,7 +90,7 @@
                         </div>
                         <div class="media-body">
                             <h3 class="heading">Search Models</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                            <p>Alternatively search through the selection of professional models, view their profile and previous work to see if it is a fit for your agency or up and coming campaigns. We categorise the models and list their vital statistics to help you find exactly what you are looking for fast!</p>
                         </div>
                     </div>
                 </div>
@@ -95,14 +98,14 @@
         </div>
     </section>
 
-
+    @*TODO Fit other information count if any*@
     <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_3.jpg);" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row d-md-flex align-items-center">
                 <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                     <div class="block-18 text-center">
                         <div class="text">
-                            <strong class="number" data-number="1000">0</strong>
+                            <strong class="number" data-number="@Model.Count">0</strong>
                             <span>Models</span>
                         </div>
                     </div>
@@ -135,7 +138,7 @@
         </div>
     </section>
 
-    <section class="ftco-section testimony-section">
+    @*<section class="ftco-section testimony-section">
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 heading-section ftco-animate text-center">
@@ -221,9 +224,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>*@
 
-  
+
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen">
         <svg class="circular" width="48px" height="48px">

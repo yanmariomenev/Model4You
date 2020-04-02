@@ -12,6 +12,8 @@ namespace Model4You.Services.Data.ModelService
     {
         Task<int> GetPagesCount(int perPage);
 
+        Task<int> GetModelCount();
+
         Task<IEnumerable<T>> TakeAllPictures<T>(string userId);
 
         Task UploadAlbum(List<string> imageUrl,string userId);

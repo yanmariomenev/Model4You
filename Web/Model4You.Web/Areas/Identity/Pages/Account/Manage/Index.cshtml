@@ -15,13 +15,9 @@
         new { @class = "form-group" })*@
 
 <h4>@ViewData["Title"]</h4>
-@if (this.TempData["StatusMessage"] != null)
-{
-    <div class="alert alert-success">
-        @this.TempData["StatusMessage"]
-    </div>
-}
+@*TODO Make the statusMessege work*@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
+
 <div class="row">
     <div class="col-md-6">
         <a href="/Models/album" class="btn btn-primary">Go to image upload</a>
