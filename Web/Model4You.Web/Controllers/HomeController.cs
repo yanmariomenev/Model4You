@@ -31,6 +31,7 @@ namespace Model4You.Web.Controllers
             {
                 ModelProfile =
                    await this.modelService.TakeSixModels<ModelProfileView>(),
+                Count = await this.modelService.GetModelCount(),
             };
             return this.View(viewModel);
         }

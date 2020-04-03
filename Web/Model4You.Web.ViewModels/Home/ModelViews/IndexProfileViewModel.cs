@@ -6,6 +6,8 @@
     {
         public IEnumerable<ModelProfileView> ModelProfile { get; set; }
 
+        public int Count { get; set; }
+
         public int PagesCount { get; set; }
 
         public int CurrentPage { get; set; }

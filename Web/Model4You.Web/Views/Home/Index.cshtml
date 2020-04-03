@@ -45,18 +45,27 @@
                 <div class="col-lg-10">
                     <form action="#" class="consult-form">
                         <div class="d-lg-flex align-items-md-end">
+                            <div class="form-field">
+                            </div>
                             <div class="form-group mb-3 mb-lg-0 mr-4">
                                 <div class="form-field">
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Height</option>
-                                            <option value="">5.5</option>
-                                            <option value="">5.6</option>
-                                            <option value="">5.7</option>
-                                            <option value="">5.8</option>
-                                            <option value="">5.9</option>
-                                            <option value="">6</option>
+                                        <select name="Country" id="1" class="form-control">
+                                            <option value="">Country</option>
+                                            <option value="Bulgaria">Bulgaria</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 mb-lg-0 mr-4">
+                                <div class="form-field">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="Gender" id="2" class="form-control">
+                                            <option value="">Gender</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Male">Male</option>
                                         </select>
                                     </div>
                                 </div>
@@ -66,71 +75,21 @@
                                 <div class="form-field">
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Bust</option>
-                                            <option value="">85cm</option>
-                                            <option value="">90cm</option>
-                                            <option value="">95cm</option>
-                                            <option value="">100cm</option>
-                                            <option value="">105cm</option>
-                                            <option value="">110cm</option>
+                                        <select name="Age" id="3" class="form-control">
+                                            <option value="">Age</option>
+                                            @for (int i = 12; i < 75; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group mb-3 mb-lg-0 mr-4">
-                                <!-- <label for="#">Weist</label> -->
-                                <div class="form-field">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Weist</option>
-                                            <option value="">65</option>
-                                            <option value="">70</option>
-                                            <option value="">75</option>
-                                            <option value="">80</option>
-                                            <option value="">85</option>
-                                            <option value="">90</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="form-group mb-3 mb-lg-0 mr-4">
-                                <!-- <label for="#">Hips</label> -->
-                                <div class="form-field">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Hips</option>
-                                            <option value="">90</option>
-                                            <option value="">95</option>
-                                            <option value="">100</option>
-                                            <option value="">105</option>
-                                            <option value="">110</option>
-                                            <option value="">115</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mb-3 mb-lg-0 mr-4">
-                                <!-- <label for="#">Eye</label> -->
-                                <div class="form-field">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Eye</option>
-                                            <option value="">Amber</option>
-                                            <option value="">Blue</option>
-                                            <option value="">Brown</option>
-                                            <option value="">Gray</option>
-                                            <option value="">Green</option>
-                                            <option value="">Black</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="form-group">
-                                <input type="submit" value="Search" class="btn btn-primary py-3 px-4">
+                                <input  type="submit" value="Search" class="btn btn-primary py-3 px-4">
                             </div>
                         </div>
                     </form>
@@ -149,7 +108,7 @@
                         </div>
                         <div class="media-body">
                             <h3 class="heading">Finding Agency</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                            <p>Agencies, you are given access to a vast array of models ranging from fresh new talent to proven professionals. With our photo sessions we are able to show you previously undiscovered models and present them in a fresh, high quality yet realistic, light. We show our new faces without complicated hair and makeup, which allows you to see the model and all their potential.</p>
                         </div>
                     </div>
                 </div>
@@ -160,7 +119,7 @@
                         </div>
                         <div class="media-body">
                             <h3 class="heading">Types of Modeling</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                            <p>Whether you are a Aspiring model or Amateur or a professional model, create your model4you profile and photobooks and instantly increase your international exposure. Be seen on a scale that has previously only been realized by a privileged few. This is your chance to get listed with the most in-demand international agencies and to be selected by the best photographers worldwide. The worlds leading players are watching, so let them see you!</p>
                         </div>
                     </div>
                 </div>
@@ -171,7 +130,7 @@
                         </div>
                         <div class="media-body">
                             <h3 class="heading">Freelance</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                            <p>If you’re a freelance model, then you’re representing yourself and you are fully responsible for finding and booking your own work. One major advantage of securing your own work is not having to divide your earnings with your agency so you will take home the full amount of the job. Generally speaking though, freelance modelling gigs tend to pay less than fashion and commercial jobs, as clients that hire freelance models generally have a tighter budget.</p>
                         </div>
                     </div>
                 </div>
@@ -182,7 +141,7 @@
                         </div>
                         <div class="media-body">
                             <h3 class="heading">Search Models</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                            <p>Alternatively search through the selection of professional models, view their profile and previous work to see if it is a fit for your agency or up and coming campaigns. We categorise the models and list their vital statistics to help you find exactly what you are looking for fast!</p>
                         </div>
                     </div>
                 </div>
@@ -198,7 +157,7 @@
                 <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                     <div class="block-18 text-center">
                         <div class="text">
-                            <strong class="number" data-number="1000">0</strong>
+                            <strong class="number" data-number="@Model.Count">0</strong>
                             <span>Models</span>
                         </div>
                     </div>

@@ -48,7 +48,10 @@
         {
             var modelCount = await this.appRepository
                 .All()
-                .Where(x => x.ModelInformation != null && !x.IsDeleted)
+                .Where(x =>
+                    x.ModelInformation != null &&
+                    !x.IsDeleted &&
+                    x.ProfilePicture != null)
                 .CountAsync();
 
             return modelCount;

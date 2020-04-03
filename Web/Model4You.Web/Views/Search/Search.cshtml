@@ -1,0 +1,99 @@
+﻿@model Model4You.Web.ViewModels.ModelViews.IndexProfileViewModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url(https://localhost:5001/images/bg_1.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Our Models</h1>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row">
+                @foreach (var modelInfo in Model.ModelProfile)
+                {
+                    <div class="col-md-4">
+                        <div class="model img d-flex align-items-end" style="background-image: url(@modelInfo.ProfilePicture);">
+                            <div class="desc w-100 px-4">
+                                <div class="info w-100 mb-4">
+                                    <ul>
+                                        <li><span>Age:</span><span>@modelInfo.ModelInformation.Age</span></li>
+                                        <li><span>Location:</span><span>@modelInfo.ModelInformation.Town</span></li>
+                                        <li><span>Height:</span><span>@modelInfo.ModelInformation.Height</span></li>
+                                        <li><span>Model Type:</span><span>@modelInfo.ModelInformation.ModelType</span></li>
+                                        @*<li><span>Body Type:</span><span></span></li>*@
+                                        @*<li><span>Hips:</span><span>90</span></li>
+                                            <li><span>Shoes:</span><span>39</span></li>
+                                            <li><span>Eyes:</span><span>Blue</span></li>*@
+                                    </ul>
+                                </div>
+                                <div class="text w-100 mb-3">
+                                    @*TODO LINK TO MODEL PROFILE PAGE*@
+                                    <h2><a href="@modelInfo.Url">@modelInfo.FirstName <br>@modelInfo.LastName</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <div class="block-27">
+                        @*<ul>
+                                <li><a href="#">&lt;</a></li>
+                                <li class="active"><span>1</span></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&gt;</a></li>
+                            </ul>*@
+                        @if (Model.PagesCount > 0)
+                        {
+                            <ul class="pagination">
+                                <li><a href="/Models/Model?page=@Model.PreviousPage"></a></li>
+                                @for (int i = 1; i <= Model.PagesCount; i++)
+                                {
+                                    if (i == Model.CurrentPage)
+                                    {
+                                        <li class="active"><a href="/Models/Model?page=@i">@i</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/Models/Model?page=@i">@i</a></li>
+                                    }
+                                }
+                                <li><a href="/Models/Model?page=@Model.NextPage"></a></li>
+                            </ul>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+        </svg>
+    </div>
+
+</body>
+
+</html>

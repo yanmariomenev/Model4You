@@ -71,16 +71,16 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Select Ethnicity")]
             public Ethnicity Ethnicity { get; set; }
 
-            [Display(Name = "Your Height")]
+            [Display(Name = "Your height in centimeters.")]
             public double Height { get; set; }
 
-            [Display(Name = "Bust size")]
+            [Display(Name = "Bust size in centimeters.")]
             public double Bust { get; set; }
 
-            [Display(Name = "Waist size")]
+            [Display(Name = "Waist size in centimeters.")]
             public double Waist { get; set; }
 
-            [Display(Name = "Hips size")]
+            [Display(Name = "Hips size in centimeters.")]
             public double Hips { get; set; }
 
             [Display(Name = "Type of modeling commercial, Swimsuit, fit and etc.")]
@@ -231,6 +231,9 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
                 await _modelService.ChangeUserStringValues(user,Input.ModelType, "modelType");
             }
 
+            //int val = int.TryParse(Input.Country, out var tempVal) ? tempVal : (int) 0;
+            
+            //var countryToString = ((Country)tempVal).ToString();
             if (Input.Country != user.ModelInformation.Country)
             {
                 await _modelService.ChangeUserStringValues(user, Input.Country, "country");
