@@ -129,7 +129,7 @@
             {
                 UserId = id,
                 Country = "None",
-                Town = "None",
+                City = "None",
                 Age = 16,
                 Bust = 0,
                 Hips = 0,
@@ -232,7 +232,7 @@
                 "nationality" => user.ModelInformation.Nationality = value,
                 "instagramUrl" => user.ModelInformation.InstagramUrl = value,
                 "facebookUrl" => user.ModelInformation.FacebookUrl = value,
-                "town" => user.ModelInformation.Town = value,
+                "city" => user.ModelInformation.City = value,
                 "country" => user.ModelInformation.Country = value,
             };
 

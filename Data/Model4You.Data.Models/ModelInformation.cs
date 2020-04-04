@@ -39,6 +39,6 @@ namespace Model4You.Data.Models
         public string Country { get; set; }
 
         [MaxLength(30)]
-        public string Town { get; set; }
+        public string City { get; set; }
     }
 }

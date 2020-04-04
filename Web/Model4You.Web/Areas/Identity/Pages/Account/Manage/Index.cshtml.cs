@@ -57,9 +57,9 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             [MaxLength(60)]
             public string Country { get; set; }
 
-            [Display(Name = "Town")]
+            [Display(Name = "City")]
             [MaxLength(60)]
-            public string Town { get; set; }
+            public string City { get; set; }
 
             [Display(Name = "Age")]
             [Range(12, 80)]
@@ -129,7 +129,7 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
                     FacebookUrl = model.ModelInformation.FacebookUrl,
                     InstagramUrl = model.ModelInformation.InstagramUrl,
                     Country = model.ModelInformation.Country,
-                    Town = model.ModelInformation.Town,
+                    City = model.ModelInformation.City,
                 };
             }
             var test = new InputModel();
@@ -239,9 +239,9 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
                 await _modelService.ChangeUserStringValues(user, Input.Country, "country");
             }
 
-            if (Input.Town != user.ModelInformation.Town)
+            if (Input.City != user.ModelInformation.City)
             {
-                await _modelService.ChangeUserStringValues(user, Input.Town, "town");
+                await _modelService.ChangeUserStringValues(user, Input.City, "city");
             }
 
             if (Input.Nationality != user.ModelInformation.Nationality)
