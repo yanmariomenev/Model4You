@@ -1,4 +1,5 @@
 ﻿using Model4You.Web.ViewModels.Home.AboutView;
+using Model4You.Web.ViewModels.Search;
 
 namespace Model4You.Web.Controllers
 {

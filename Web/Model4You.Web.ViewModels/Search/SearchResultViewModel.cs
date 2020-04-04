@@ -6,6 +6,8 @@ namespace Model4You.Web.ViewModels.Search
     {
         public ICollection<SearchViewModel> SearchViewModels { get; set; }
 
+        public SearchInputModel SearchInputModel { get; set; }
+
         public string EmptyResult { get; set; }
     }
 }

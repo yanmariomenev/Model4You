@@ -19,6 +19,11 @@ namespace Model4You.Web.Controllers
 
         public async Task<IActionResult> Search(SearchInputModel input)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.Redirect("/");
+            }
+
             var search = await
                 this.searchService.SearchResult<SearchViewModel>(
                     input.Country,
@@ -36,6 +41,14 @@ namespace Model4You.Web.Controllers
             {
                 SearchViewModels = search,
                 EmptyResult = status,
+                SearchInputModel = new SearchInputModel
+                {
+                    Country = input.Country,
+                    City = input.City,
+                    Gender = input.Gender,
+                    Age = input.Age,
+                    To = input.To,
+                },
             };
             return this.View(viewModel);
         }
