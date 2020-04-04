@@ -74,6 +74,14 @@ namespace Model4You.Services.Data.AdminServices
             return await blogs.To<T>().ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> TakeThreeBlogs<T>()
+        {
+            var blogs = this.blogRepository.All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Take(3);
+            return await blogs.To<T>().ToListAsync();
+        }
+
         public async Task<T> GetBlogContent<T>(int id)
         {
             var content = await this.blogContentRepository

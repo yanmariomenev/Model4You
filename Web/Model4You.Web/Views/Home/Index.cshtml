@@ -26,9 +26,9 @@
         <div class="overlay"></div>
         <div class="forth js-fullheight d-flex align-items-center" style="background-image: url(images/bg_1.jpg);">
             <div class="text text-center">
-                <span class="subheading">Top Model</span>
+                <span class="subheading">Model4You</span>
                 <h1>Career of A Model</h1>
-                <h2 class="mb-5">We Are Professional Model Agency Based in London</h2>
+                <h2 class="mb-5">We Are Professional Model Agency Based in Bulgaria</h2>
                 <p><a asp-area="" asp-controller="Home" asp-action="Contact" class="btn-custom py-3 pr-2">Contact Us</a></p>
             </div>
         </div>
@@ -255,7 +255,7 @@
                 </div>
                 <div class="col-md-7 wrap-about pt-md-5 ftco-animate">
                     <div class="heading-section mb-5 pt-5 pl-md-5">
-                        <span class="subheading">Welcome to Top Model</span>
+                        <span class="subheading">Welcome to Model4You</span>
                         <h2 class="mb-4">We Are Model Agency</h2>
                     </div>
                     <div class="pr-md-3 pr-lg-5 pl-md-5 mr-md-5 mb-5">
@@ -265,7 +265,7 @@
                             </div>
                             <div class="media-body pl-4">
                                 <h3 class="heading">Fashion Shows</h3>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                                <p>We do professional and amature fashion shows in Bulgaria.</p>
                             </div>
                         </div>
                         <div class="services-wrap d-flex">
@@ -274,7 +274,7 @@
                             </div>
                             <div class="media-body pl-4">
                                 <h3 class="heading">Photosessions</h3>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                                <p>We have our own professional photographer and studio to shoot your photos.</p>
                             </div>
                         </div>
                         <div class="services-wrap d-flex">
@@ -283,7 +283,7 @@
                             </div>
                             <div class="media-body pl-4">
                                 <h3 class="heading">Model Video</h3>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                                <p>We do our own videos in our professional studios.</p>
                             </div>
                         </div>
                     </div>
@@ -297,8 +297,8 @@
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 heading-section ftco-animate text-center">
                     <span class="subheading">Models</span>
-                    <h2 class="mb-4">Popular Model</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+                    <h2 class="mb-4">Sneak peek at our models</h2>
+                    <p>Our models</p>
                 </div>
             </div>
         </div>
@@ -333,7 +333,7 @@
         </div>
     </section>
 
-    <section class="ftco-section testimony-section">
+    @*<section class="ftco-section testimony-section">
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 heading-section ftco-animate text-center">
@@ -419,9 +419,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>*@
 
-    <section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
+    @*<section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/bg_2.jpg);">
@@ -441,66 +441,36 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>*@
 
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-3">
                 <div class="col-md-7 heading-section ftco-animate text-center">
                     <span class="subheading">Our latest update</span>
-                    <h2 class="mb-4">Case Study</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+                    <h2 class="mb-4">Blog</h2>
+                    <p>Check on our blog posts</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 ftco-animate">
-                    <div class="blog-entry">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
-                        </a>
-                        <div class="text py-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">sept. 17, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                            </div>
-                            <div class="desc">
-                                <h3 class="heading"><a href="#">The Most Attractive Persons of the Hollywood</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 ftco-animate">
-                    <div class="blog-entry" data-aos-delay="100">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-                        </a>
-                        <div class="text py-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">sept. 17, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                            </div>
-                            <div class="desc">
-                                <h3 class="heading"><a href="#">The Most Attractive Persons of the Hollywood</a></h3>
+                @foreach (var blog in Model.BlogViewModels)
+                {
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry">
+                            <a href="@blog.Url" class="block-20" style="background-image: url('@blog.ImageUrl');">
+                            </a>
+                            <div class="text py-4">
+                                <div class="meta mb-3">
+                                    <div><a href="@blog.Url">@blog.CreatedOn</a></div>
+                                    <div><a href="@blog.Url">Admin</a></div>
+                                </div>
+                                <div class="desc">
+                                    <h3 class="heading"><a href="@blog.Url">@blog.Title</a></h3>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 ftco-animate">
-                    <div class="blog-entry" data-aos-delay="200">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-                        </a>
-                        <div class="text py-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">sept. 17, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                            </div>
-                            <div class="desc">
-                                <h3 class="heading"><a href="#">The Most Attractive Persons of the Hollywood</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </section>

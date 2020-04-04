@@ -1,4 +1,5 @@
-﻿using Model4You.Web.ViewModels.Search;
+﻿using Model4You.Web.ViewModels.Blog;
+using Model4You.Web.ViewModels.Search;
 
 namespace Model4You.Web.ViewModels.ModelViews
 {
@@ -7,6 +8,8 @@ namespace Model4You.Web.ViewModels.ModelViews
     public class IndexProfileViewModel
     {
         public IEnumerable<ModelProfileView> ModelProfile { get; set; }
+
+        public IEnumerable<BlogViewModel> BlogViewModels { get; set; }
 
         public int Count { get; set; }
 

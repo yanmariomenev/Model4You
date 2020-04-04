@@ -1,4 +1,6 @@
-﻿using Model4You.Web.ViewModels.Home.AboutView;
+﻿using Model4You.Services.Data.AdminServices;
+using Model4You.Web.ViewModels.Blog;
+using Model4You.Web.ViewModels.Home.AboutView;
 using Model4You.Web.ViewModels.Search;
 
 namespace Model4You.Web.Controllers
@@ -18,11 +20,16 @@ namespace Model4You.Web.Controllers
     {
         private readonly IModelService modelService;
         private readonly IContactFormService contactService;
+        private readonly IBlogService blogService;
 
-        public HomeController(IModelService modelService, IContactFormService contactService)
+        public HomeController(
+            IModelService modelService,
+            IContactFormService contactService,
+            IBlogService blogService)
         {
             this.modelService = modelService;
             this.contactService = contactService;
+            this.blogService = blogService;
         }
 
         // TODO DISPLAY RANDOM 6 MODELS OR TOP MODELS
@@ -32,6 +39,7 @@ namespace Model4You.Web.Controllers
             {
                 ModelProfile =
                    await this.modelService.TakeSixModels<ModelProfileView>(),
+                BlogViewModels = await this.blogService.TakeThreeBlogs<BlogViewModel>(),
                 Count = await this.modelService.GetModelCount(),
             };
             return this.View(viewModel);
