@@ -1,4 +1,6 @@
-﻿namespace Model4You.Web.ViewModels.ModelViews
+﻿using Model4You.Web.ViewModels.Search;
+
+namespace Model4You.Web.ViewModels.ModelViews
 {
     using System.Collections.Generic;
 
@@ -11,6 +13,8 @@
         public int PagesCount { get; set; }
 
         public int CurrentPage { get; set; }
+
+        public SearchInputModel SearchInputModel { get; set; }
 
         public int NextPage
         {

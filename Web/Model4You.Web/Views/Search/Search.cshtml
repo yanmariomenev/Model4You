@@ -1,4 +1,5 @@
-﻿@model Model4You.Web.ViewModels.ModelViews.IndexProfileViewModel
+﻿@using CloudinaryDotNet.Actions
+@model Model4You.Web.ViewModels.Search.SearchResultViewModel
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +25,8 @@
     <section class="ftco-section">
         <div class="container">
             <div class="row">
-                @foreach (var modelInfo in Model.ModelProfile)
+                <h1>@Model.EmptyResult</h1>
+                @foreach (var modelInfo in Model.SearchViewModels)
                 {
                     <div class="col-md-4">
                         <div class="model img d-flex align-items-end" style="background-image: url(@modelInfo.ProfilePicture);">
@@ -62,7 +64,7 @@
                                 <li><a href="#">5</a></li>
                                 <li><a href="#">&gt;</a></li>
                             </ul>*@
-                        @if (Model.PagesCount > 0)
+                        @*@if (Model.PagesCount > 0)
                         {
                             <ul class="pagination">
                                 <li><a href="/Models/Model?page=@Model.PreviousPage"></a></li>
@@ -79,7 +81,7 @@
                                 }
                                 <li><a href="/Models/Model?page=@Model.NextPage"></a></li>
                             </ul>
-                        }
+                        }*@
                     </div>
                 </div>
             </div>
