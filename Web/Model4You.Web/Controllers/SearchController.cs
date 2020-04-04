@@ -1,13 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Model4You.Data.Models.Enums;
-using Model4You.Services.Data.SearchService;
-using Model4You.Web.ViewModels.Search;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Model4You.Data.Models.Enums;
+    using Model4You.Services.Data.SearchService;
+    using Model4You.Web.ViewModels.Search;
+
     public class SearchController : Controller
     {
         private readonly ISearchService searchService;
@@ -21,8 +22,8 @@ namespace Model4You.Web.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                //TODO send them to redo the search
-                return Redirect("/");
+                // TODO send them to redo the search
+                return this.Redirect("/");
             }
 
             var search = await

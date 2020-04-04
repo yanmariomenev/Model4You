@@ -1,9 +1,5 @@
-﻿using Model4You.Services.Data.ImageService;
-using Model4You.Web.Areas.Identity.Pages.Account.Manage;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
-    using System;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -14,6 +10,7 @@ namespace Model4You.Web.Controllers
     using Model4You.Data.Models;
     using Model4You.Services;
     using Model4You.Services.Cloudinary;
+    using Model4You.Services.Data.ImageService;
     using Model4You.Services.Data.ModelService;
     using Model4You.Web.ViewModels.BindingModels;
     using Model4You.Web.ViewModels.Model;
@@ -107,12 +104,13 @@ namespace Model4You.Web.Controllers
             }
 
             // TODO Limit users to upload only 6-8 pictures
+            // TODO Check if the user has 7 images before uploading them to the cloud
             var imageUrls = input.AlbumInputViewModel.UserImages
                 .Select(async x =>
-                    await cloudinaryService.UploadPictureAsync(x, x.FileName))
+                    await this.cloudinaryService.UploadPictureAsync(x, x.FileName))
                 .Select(x => x.Result)
                 .ToList();
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             await this.modelService.UploadAlbum(imageUrls, userId);
 

@@ -1,9 +1,9 @@
-﻿using Model4You.Web.ViewModels.Blog;
-using Model4You.Web.ViewModels.Search;
-
-namespace Model4You.Web.ViewModels.ModelViews
+﻿namespace Model4You.Web.ViewModels.ModelViews
 {
     using System.Collections.Generic;
+
+    using Model4You.Web.ViewModels.Blog;
+    using Model4You.Web.ViewModels.Search;
 
     public class IndexProfileViewModel
     {

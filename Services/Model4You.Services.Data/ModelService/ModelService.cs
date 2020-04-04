@@ -67,20 +67,12 @@
 
         public async Task UploadAlbum(List<string> imageUrl, string userId)
         {
-            var images = new UserImage();
-            foreach (var image in imageUrl)
+            foreach (var images in imageUrl
+                .Select(image => new UserImage { UserId = userId, ImageUrl = image }))
             {
-                //var album = new UserImage
-                //{
-                //    UserId = userId,
-                //    ImageUrl = image,
-                //};
-                images.UserId = userId;
-                images.ImageUrl = image;
+                await this.imageRepository.AddAsync(images);
+                await this.imageRepository.SaveChangesAsync();
             }
-
-            await this.imageRepository.AddAsync(images);
-            await this.imageRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> TakeSixModels<T>()
