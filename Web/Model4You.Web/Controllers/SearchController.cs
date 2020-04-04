@@ -19,9 +19,10 @@ namespace Model4You.Web.Controllers
 
         public async Task<IActionResult> Search(SearchInputModel input)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return this.Redirect("/");
+                //TODO send them to redo the search
+                return Redirect("/");
             }
 
             var search = await

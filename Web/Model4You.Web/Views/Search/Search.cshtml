@@ -1,4 +1,5 @@
 ﻿@using CloudinaryDotNet.Actions
+@using Microsoft.CodeAnalysis.CSharp.Syntax
 @model Model4You.Web.ViewModels.Search.SearchResultViewModel
 <!DOCTYPE html>
 <html lang="en">
@@ -119,7 +120,7 @@
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                         <select name="To" id="4" class="form-control">
                                             <option value="@Model.SearchInputModel.To">@Model.SearchInputModel.To</option>
-                                            @for (int i = 12; i < 75; i++)
+                                            @for (int i = 13; i < 76; i++)
                                             {
                                                 <option value="@i">@i</option>
                                             }
@@ -149,65 +150,35 @@
                         <h1 class="mb-3 mt-5 bread">@Model.EmptyResult</h1>
                     </div>
                 }
-
-                @foreach (var modelInfo in Model.SearchViewModels)
+                else
                 {
-                    <div class="col-md-4">
-                        <div class="model img d-flex align-items-end" style="background-image: url(@modelInfo.ProfilePicture);">
-                            <div class="desc w-100 px-4">
-                                <div class="info w-100 mb-4">
-                                    <ul>
-                                        <li><span>Age:</span><span>@modelInfo.ModelInformation.Age</span></li>
-                                        <li><span>Location:</span><span>@modelInfo.ModelInformation.City</span></li>
-                                        <li><span>Height:</span><span>@modelInfo.ModelInformation.Height</span></li>
-                                        <li><span>Model Type:</span><span>@modelInfo.ModelInformation.ModelType</span></li>
-                                        @*<li><span>Body Type:</span><span></span></li>*@
-                                        @*<li><span>Hips:</span><span>90</span></li>
-                                <li><span>Shoes:</span><span>39</span></li>
-                                <li><span>Eyes:</span><span>Blue</span></li>*@
-                                    </ul>
-                                </div>
-                                <div class="text w-100 mb-3">
-                                    @*TODO LINK TO MODEL PROFILE PAGE*@
-                                    <h2><a href="@modelInfo.Url">@modelInfo.FirstName <br>@modelInfo.LastName</a></h2>
+                    @foreach (var modelInfo in Model.SearchViewModels)
+                    {
+                        <div class="col-md-4">
+                            <div class="model img d-flex align-items-end" style="background-image: url(@modelInfo.ProfilePicture);">
+                                <div class="desc w-100 px-4">
+                                    <div class="info w-100 mb-4">
+                                        <ul>
+                                            <li><span>Age:</span><span>@modelInfo.ModelInformation.Age</span></li>
+                                            <li><span>Location:</span><span>@modelInfo.ModelInformation.City</span></li>
+                                            <li><span>Height:</span><span>@modelInfo.ModelInformation.Height</span></li>
+                                            <li><span>Model Type:</span><span>@modelInfo.ModelInformation.ModelType</span></li>
+                                            @*<li><span>Body Type:</span><span></span></li>*@
+                                            @*<li><span>Hips:</span><span>90</span></li>
+                                    <li><span>Shoes:</span><span>39</span></li>
+                                    <li><span>Eyes:</span><span>Blue</span></li>*@
+                                        </ul>
+                                    </div>
+                                    <div class="text w-100 mb-3">
+                                        @*TODO LINK TO MODEL PROFILE PAGE*@
+                                        <h2><a href="@modelInfo.Url">@modelInfo.FirstName <br>@modelInfo.LastName</a></h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 }
-            </div>
-            <div class="row mt-5">
-                <div class="col text-center">
-                    <div class="block-27">
-                        @*<ul>
-                                <li><a href="#">&lt;</a></li>
-                                <li class="active"><span>1</span></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&gt;</a></li>
-                            </ul>*@
-                        @*@if (Model.PagesCount > 0)
-                        {
-                            <ul class="pagination">
-                                <li><a href="/Models/Model?page=@Model.PreviousPage"></a></li>
-                                @for (int i = 1; i <= Model.PagesCount; i++)
-                                {
-                                    if (i == Model.CurrentPage)
-                                    {
-                                        <li class="active"><a href="/Models/Model?page=@i">@i</a></li>
-                                    }
-                                    else
-                                    {
-                                        <li><a href="/Models/Model?page=@i">@i</a></li>
-                                    }
-                                }
-                                <li><a href="/Models/Model?page=@Model.NextPage"></a></li>
-                            </ul>
-                        }*@
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
