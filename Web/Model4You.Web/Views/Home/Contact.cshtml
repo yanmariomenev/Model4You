@@ -36,9 +36,11 @@
                 </div>
                 <div class="col-md-3 d-flex">
                     <div class="con align-self-stretch p-5">
-                        <p><span>Phone:</span> <a href="tel://35989969690777">
-                            +35989969690777
-                        </a></p>
+                        <p>
+                            <span>Phone:</span> <a href="tel://35989969690777">
+                                +35989969690777
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-3 d-flex">
@@ -48,32 +50,35 @@
                 </div>
             </div>
             <div class="row block-9">
-                    <div class="col-md-6 pr-md-5">
-                        <form asp-controller="Home" asp-action="Contact" method="post">
-                            <div class="form-group">
-                                <input asp-for="Name" class="form-control" placeholder="Your Name">
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="Email" class="form-control" placeholder="Your Email">
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="Subject" class="form-control" placeholder="Subject">
-                            </div>
-                            <div class="form-group">
-                                <textarea name="Message" id="" cols="30" rows="7" asp-for="Message" class="form-control" placeholder="Message"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-                            </div>
-                        </form>
+                <div class="col-md-6 pr-md-5">
+                    <form asp-controller="Home" asp-action="Contact" method="post">
+                        <div class="form-group">
+                            <input asp-for="Name" class="form-control" placeholder="Your Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Email" class="form-control" placeholder="Your Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Subject" class="form-control" placeholder="Subject">
+                            <span asp-validation-for="Subject" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="Message" id="" cols="30" rows="7" asp-for="Message" class="form-control" placeholder="Message"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                        </div>
+                    </form>
 
-                    </div>
-
-                    <div class="col-md-6 d-flex">
-                        <iframe width="425" height="375" style="border:0" scrolling="no" src="https://www.bgmaps.com/link/map/A7E765C31C56649389EBEBBF8B066A7B"></iframe>
-                    </div>
                 </div>
+
+                <div class="col-md-6 d-flex">
+                    <iframe width="425" height="375" style="border:0" scrolling="no" src="https://www.bgmaps.com/link/map/A7E765C31C56649389EBEBBF8B066A7B"></iframe>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -107,3 +112,6 @@
 </body>
 
 </html>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
