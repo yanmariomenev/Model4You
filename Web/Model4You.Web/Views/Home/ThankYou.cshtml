@@ -1,6 +1,5 @@
-﻿@model Model4You.Web.ViewModels.Booking.ResultViewModel
-@{
-    this.ViewData["Title"] = "Booking result";
+﻿@{
+    this.ViewData["Title"] = "Thank You";
 }
 <html>
 <head>
@@ -15,11 +14,8 @@
         <div class="container">
             <div class="row slider-text justify-content-center align-items-center">
                 <div class="col-md-7 col-sm-12 text-center ftco-animate">
-                    @if (string.IsNullOrWhiteSpace(Model.Status))
-                    {
-                        <h1 class="mb-3 mt-5 bread">Something went wrong. Please try again</h1>
-                    }
-                    <h1 class="mb-3 mt-5 bread">@Model.Status</h1>
+                    <h1 class="mb-3 mt-5 bread">Thank you for contacting us!</h1>
+                    <h2 class="mb-3 mt-5 bread">We will be in touch as soon as possible.</h2>
                 </div>
 
             </div>

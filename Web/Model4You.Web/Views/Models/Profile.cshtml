@@ -1,5 +1,7 @@
 ﻿@model Model4You.Web.ViewModels.Model.ProfileViewModel
-
+@{
+    this.ViewData["Title"] = "Model Profile";
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,16 +42,16 @@
                             <li><span>Ethnicity:</span><span>@ViewData["Ethnicity"]</span></li>
                             <li><span>Nationality:</span><span>@Model.ModelInformation.Nationality</span></li>
                             @*<li><span>Bust:</span><span>85</span></li>
-            <li><span>Waist:</span><span>65</span></li>
-            <li><span>Hips:</span><span>90</span></li>
-            <li><span>Shoes:</span><span>39</span></li>
-            <li><span>Eyes:</span><span>Blue</span></li>*@
+                                <li><span>Waist:</span><span>65</span></li>
+                                <li><span>Hips:</span><span>90</span></li>
+                                <li><span>Shoes:</span><span>39</span></li>
+                                <li><span>Eyes:</span><span>Blue</span></li>*@
                         </ul>
                         <div class="col-md-12 model-single">
                             @*<a href="@Url.Action("Create", "Booking", new {id = Model.Id})" class="btn btn-default btn-block">
-                <input type="hidden" asp-for="" value="@this.Model.FirstName" />
-                <span class="btn btn-danger" aria-hidden="true">Book this model</span>
-            </a>*@
+                                    <input type="hidden" asp-for="" value="@this.Model.FirstName" />
+                                    <span class="btn btn-danger" aria-hidden="true">Book this model</span>
+                                </a>*@
                             <a asp-controller="Booking" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-outline-warning">Book this model</a>
 
                         </div>

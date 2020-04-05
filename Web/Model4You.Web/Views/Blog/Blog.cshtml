@@ -1,4 +1,7 @@
 ﻿@model Model4You.Web.ViewModels.Blog.BlogIndexViewModel
+@{
+    this.ViewData["Title"] = "Blog";
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +33,7 @@
                     <div class="row">
                         @foreach (var blog in Model.BlogViewModels)
                         {
-                            <div class="col-md-6 ftco-animate" >
+                            <div class="col-md-6 ftco-animate">
                                 <div class="blog-entry" data-aos-delay="200">
                                     <a href="@blog.Url" class="block-20" style="background-image: url('@blog.ImageUrl');">
                                     </a>
@@ -175,7 +178,6 @@
             </div>
         </div>
     </section> <!-- .section -->
-
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen">
         <svg class="circular" width="48px" height="48px">

@@ -1,6 +1,9 @@
 ﻿@using CloudinaryDotNet.Actions
 @using Microsoft.CodeAnalysis.CSharp.Syntax
 @model Model4You.Web.ViewModels.Search.SearchResultViewModel
+@{
+    this.ViewData["Title"] = "Search";
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -165,8 +168,8 @@
                                             <li><span>Model Type:</span><span>@modelInfo.ModelInformation.ModelType</span></li>
                                             @*<li><span>Body Type:</span><span></span></li>*@
                                             @*<li><span>Hips:</span><span>90</span></li>
-                                    <li><span>Shoes:</span><span>39</span></li>
-                                    <li><span>Eyes:</span><span>Blue</span></li>*@
+                                                <li><span>Shoes:</span><span>39</span></li>
+                                                <li><span>Eyes:</span><span>Blue</span></li>*@
                                         </ul>
                                     </div>
                                     <div class="text w-100 mb-3">

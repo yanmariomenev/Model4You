@@ -70,10 +70,15 @@ namespace Model4You.Web.Controllers
             await this.contactService.Create(model.Name, model.Email, model.Subject, model.Message);
             // TODO fix temp data not displaying
             this.TempData["ContactForm"] = "Your request has been sent to the owner";
-            return this.RedirectToAction(nameof(this.Index));
+            return this.RedirectToAction(nameof(this.ThankYou));
         }
 
         public IActionResult Privacy()
+        {
+            return this.View();
+        }
+
+        public IActionResult ThankYou()
         {
             return this.View();
         }

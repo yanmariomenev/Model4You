@@ -1,13 +1,7 @@
 ﻿@model Model4You.Web.ViewModels.ModelViews.IndexProfileViewModel
-@*@using Model4You.Common
-    @{
-        this.ViewData["Title"] = "Home Page";
-    }
-
-    <div class="text-center">
-        <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>*@
+@{
+    this.ViewData["Title"] = "Home Page";
+}
 @*TODO fix temp data not displaying*@
 @if (this.TempData["ContactForm"] != null)
 {
@@ -334,114 +328,114 @@
     </section>
 
     @*<section class="ftco-section testimony-section">
-        <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-7 heading-section ftco-animate text-center">
-                    <span class="subheading">Testimony</span>
-                    <h2 class="mb-4">My satisfied customer says</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+            <div class="container">
+                <div class="row justify-content-center mb-5">
+                    <div class="col-md-7 heading-section ftco-animate text-center">
+                        <span class="subheading">Testimony</span>
+                        <h2 class="mb-4">My satisfied customer says</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+                    </div>
                 </div>
-            </div>
-            <div class="row ftco-animate">
-                <div class="col-md-12">
-                    <div class="carousel-testimony owl-carousel">
-                        <div class="item">
-                            <div class="testimony-wrap p-4 pb-5 text-center">
-                                <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                </div>
-                                <div class="text">
-                                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Garreth Smith</p>
-                                    <span class="position">Agent</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap p-4 pb-5 text-center">
-                                <div class="user-img mb-5" style="background-image: url(images/person_2.jpg)">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                </div>
-                                <div class="text">
-                                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Garreth Smith</p>
-                                    <span class="position">Model</span>
+                <div class="row ftco-animate">
+                    <div class="col-md-12">
+                        <div class="carousel-testimony owl-carousel">
+                            <div class="item">
+                                <div class="testimony-wrap p-4 pb-5 text-center">
+                                    <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                                        <span class="quote d-flex align-items-center justify-content-center">
+                                            <i class="icon-quote-left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                        <p class="name">Garreth Smith</p>
+                                        <span class="position">Agent</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap p-4 pb-5 text-center">
-                                <div class="user-img mb-5" style="background-image: url(images/person_3.jpg)">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                </div>
-                                <div class="text">
-                                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Garreth Smith</p>
-                                    <span class="position">Model</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap p-4 pb-5 text-center">
-                                <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                </div>
-                                <div class="text">
-                                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Garreth Smith</p>
-                                    <span class="position">Agent</span>
+                            <div class="item">
+                                <div class="testimony-wrap p-4 pb-5 text-center">
+                                    <div class="user-img mb-5" style="background-image: url(images/person_2.jpg)">
+                                        <span class="quote d-flex align-items-center justify-content-center">
+                                            <i class="icon-quote-left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                        <p class="name">Garreth Smith</p>
+                                        <span class="position">Model</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap p-4 pb-5 text-center">
-                                <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
+                            <div class="item">
+                                <div class="testimony-wrap p-4 pb-5 text-center">
+                                    <div class="user-img mb-5" style="background-image: url(images/person_3.jpg)">
+                                        <span class="quote d-flex align-items-center justify-content-center">
+                                            <i class="icon-quote-left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                        <p class="name">Garreth Smith</p>
+                                        <span class="position">Model</span>
+                                    </div>
                                 </div>
-                                <div class="text">
-                                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Garreth Smith</p>
-                                    <span class="position">Businessman</span>
+                            </div>
+                            <div class="item">
+                                <div class="testimony-wrap p-4 pb-5 text-center">
+                                    <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                                        <span class="quote d-flex align-items-center justify-content-center">
+                                            <i class="icon-quote-left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                        <p class="name">Garreth Smith</p>
+                                        <span class="position">Agent</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="testimony-wrap p-4 pb-5 text-center">
+                                    <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                                        <span class="quote d-flex align-items-center justify-content-center">
+                                            <i class="icon-quote-left"></i>
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                        <p class="name">Garreth Smith</p>
+                                        <span class="position">Businessman</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>*@
+        </section>*@
 
     @*<section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/bg_2.jpg);">
-                    <a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
-                        <span class="icon-play"></span>
-                    </a>
-                </div>
-                <div class="col-md-6 py-5 wrap-about pb-md-5 ftco-animate">
-                    <div class="heading-section pt-md-5">
-                        <span class="subheading">Events</span>
-                        <h2 class="mb-4">Latest Fashion Shows</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/bg_2.jpg);">
+                        <a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
+                            <span class="icon-play"></span>
+                        </a>
                     </div>
-                    <div class="pb-md-5">
-                        <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                    <div class="col-md-6 py-5 wrap-about pb-md-5 ftco-animate">
+                        <div class="heading-section pt-md-5">
+                            <span class="subheading">Events</span>
+                            <h2 class="mb-4">Latest Fashion Shows</h2>
+                        </div>
+                        <div class="pb-md-5">
+                            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
+                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>*@
+        </section>*@
 
     <section class="ftco-section">
         <div class="container">
