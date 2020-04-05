@@ -1,5 +1,6 @@
 ﻿using CloudinaryDotNet;
 using Model4You.Services.Cloudinary;
+using Model4You.Services.Data.BookingService;
 using Model4You.Services.Data.CommentService;
 using Model4You.Services.Data.ImageService;
 using Model4You.Services.Data.SearchService;
@@ -89,6 +90,7 @@ namespace Model4You.Web
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<ISearchService, SearchService>();
+            services.AddTransient<IBookingService, BookingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

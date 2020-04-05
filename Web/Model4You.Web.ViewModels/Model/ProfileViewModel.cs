@@ -8,6 +8,7 @@
 
     public class ProfileViewModel : IMapFrom<ApplicationUser>
     {
+        public string Id { get; set; }
         public string FirstName { get; set; }
 
         [MaxLength(50)]

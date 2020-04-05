@@ -134,7 +134,7 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> ChangeProfilePicture(string imageUrl, string userId , int imageId)
+        public async Task<IActionResult> ChangeProfilePicture(string imageUrl, string userId, int imageId)
         {
             var changeProfilePicture = await this.imageService
                 .ChangeProfilePicture(imageUrl, userId, imageId);

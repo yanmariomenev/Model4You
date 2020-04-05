@@ -29,8 +29,8 @@
                 <div class="col-md-12 model-single">
                     <div class="text w-100 mb-3 text-center">
                         <h2><a>@Model.FirstName @Model.LastName</a></h2>
-                        <a href="@Model.ModelInformation.FacebookUrl"><span class="icon-facebook"></span> </a>
-                        <a href="@Model.ModelInformation.InstagramUrl"><span class="icon-instagram"></span></a>
+                        <a href="@Model.ModelInformation.FacebookUrl"><span style="font-size: 50px" class="icon-facebook">    </span> </a>
+                        <a href="@Model.ModelInformation.InstagramUrl"><span style="font-size: 50px" class="icon-instagram"></span></a>
 
                         <ul class="info w-100">
                             <li><span>Age:</span><span>@Model.ModelInformation.Age</span></li>
@@ -40,11 +40,19 @@
                             <li><span>Ethnicity:</span><span>@ViewData["Ethnicity"]</span></li>
                             <li><span>Nationality:</span><span>@Model.ModelInformation.Nationality</span></li>
                             @*<li><span>Bust:</span><span>85</span></li>
-                <li><span>Waist:</span><span>65</span></li>
-                <li><span>Hips:</span><span>90</span></li>
-                <li><span>Shoes:</span><span>39</span></li>
-                <li><span>Eyes:</span><span>Blue</span></li>*@
+            <li><span>Waist:</span><span>65</span></li>
+            <li><span>Hips:</span><span>90</span></li>
+            <li><span>Shoes:</span><span>39</span></li>
+            <li><span>Eyes:</span><span>Blue</span></li>*@
                         </ul>
+                        <div class="col-md-12 model-single">
+                            @*<a href="@Url.Action("Create", "Booking", new {id = Model.Id})" class="btn btn-default btn-block">
+                <input type="hidden" asp-for="" value="@this.Model.FirstName" />
+                <span class="btn btn-danger" aria-hidden="true">Book this model</span>
+            </a>*@
+                            <a asp-controller="Booking" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-outline-warning">Book this model</a>
+
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
