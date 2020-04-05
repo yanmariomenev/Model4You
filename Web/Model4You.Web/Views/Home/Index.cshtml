@@ -16,139 +16,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-    <section class="hero-wrap d-flex js-fullheight">
-        <div class="overlay"></div>
-        <div class="forth js-fullheight d-flex align-items-center" style="background-image: url(images/bg_1.jpg);">
-            <div class="text text-center">
-                <span class="subheading">Model4You</span>
-                <h1>Career of A Model</h1>
-                <h2 class="mb-5">We Are Professional Model Agency Based in Bulgaria</h2>
-                <p><a asp-area="" asp-controller="Home" asp-action="Contact" class="btn-custom py-3 pr-2">Contact Us</a></p>
+<section class="hero-wrap d-flex js-fullheight">
+    <div class="overlay"></div>
+    <div class="forth js-fullheight d-flex align-items-center" style="background-image: url(images/bg_1.jpg);">
+        <div class="text text-center">
+            <span class="subheading">Model4You</span>
+            <h1>Career of A Model</h1>
+            <h2 class="mb-5">We Are Professional Model Agency Based in Bulgaria</h2>
+            <p><a asp-area="" asp-controller="Home" asp-action="Contact" class="btn-custom py-3 pr-2">Contact Us</a></p>
+        </div>
+    </div>
+    <div class="third about-img js-fullheight" style="background-image: url(images/bg_2.jpg);">
+    </div>
+</section>
+
+<section class="ftco-consult bg-primary">
+    <div class="container-fluid px-md-4">
+        <div class="row align-items-center">
+            <div class="col-lg-2 text-lg-right">
+                <h3 class="mb-4 mb-lg-0">Search A Model</h3>
             </div>
-        </div>
-        <div class="third about-img js-fullheight" style="background-image: url(images/bg_2.jpg);">
-        </div>
-    </section>
-
-    <section class="ftco-consult bg-primary">
-
-        <div class="container-fluid px-md-4">
-            <div class="row align-items-center">
-                <div class="col-lg-2 text-lg-right">
-                    <h3 class="mb-4 mb-lg-0">Search A Model</h3>
-                </div>
-                <div class="col-lg-10">
-                    <form class="consult-form" method="get" enctype="multipart/form-data" asp-controller="Search" asp-action="Search">
-                        <div class="d-lg-flex align-items-md-end">
+            <div class="col-lg-10">
+                <form class="consult-form" method="get" enctype="multipart/form-data" asp-controller="Search" asp-action="Search">
+                    <div class="d-lg-flex align-items-md-end">
+                        <div class="form-field">
+                        </div>
+                        <div class="form-group mb-3 mb-lg-0 mr-4">
                             <div class="form-field">
-                            </div>
-                            <div class="form-group mb-3 mb-lg-0 mr-4">
-                                <div class="form-field">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="Country" id="1" class="form-control">
-                                            <option value="">Country</option>
-                                            <option value="Bulgaria">Bulgaria</option>
-                                        </select>
-                                        <span asp-validation-for="SearchInputModel.Country" class="text-danger"></span>
-                                    </div>
+                                <div class="select-wrap">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <select name="Country" id="1" class="form-control">
+                                        <option value="">Country</option>
+                                        <option value="Bulgaria">Bulgaria</option>
+                                    </select>
+                                    <span asp-validation-for="SearchInputModel.Country" class="text-danger"></span>
                                 </div>
-                            </div>
-                            <div class="form-group mb-3 mb-lg-0 mr-4">
-                                <div class="form-field">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="City" id="2" class="form-control">
-                                            <option value="">City</option>
-                                            <option value="Sofia">Sofia</option>
-                                            <option value="Plovdiv">Plovdiv</option>
-                                            <option value="Blagoevgrad">Blagoevgrad</option>
-                                            <option value="Burgas">Burgas</option>
-                                            <option value="Varna">Varna</option>
-                                            <option value="Stara Zagora">Stara Zagora</option>
-                                            <option value="Pleven">Pleven</option>
-                                            <option value="Pazardzhik">Pazardzhik</option>
-                                            <option value="Veliko Tarnovo">Veliko Tarnovo</option>
-                                            <option value="Haskovo">Haskovo</option>
-                                            <option value="Ruse">Ruse</option>
-                                            <option value="Vratsa">Vratsa</option>
-                                            <option value="Sliven">Sliven</option>
-                                            <option value="Dobrich">Dobrich</option>
-                                            <option value="Shumen">Shumen</option>
-                                            <option value="Montana">Montana</option>
-                                            <option value="Lovech">Lovech</option>
-                                            <option value="Kardzhali">Kardzhali</option>
-                                            <option value="Kyustendil">Kyustendil</option>
-                                            <option value="Yambol">Yambol</option>
-                                            <option value="Razgrad">Razgrad</option>
-                                            <option value="Pernik">Pernik</option>
-                                            <option value="Gabrovo">Gabrovo</option>
-                                            <option value="Silistra">Silistra</option>
-                                            <option value="Smolyan">Smolyan</option>
-                                            <option value="Targovishte">Targovishte</option>
-                                            <option value="Vidin">Vidin</option>
-                                        </select>
-                                        <span asp-validation-for="SearchInputModel.City" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mb-3 mb-lg-0 mr-4">
-                                <div class="form-field">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="Gender" id="3" class="form-control">
-                                            <option value="">Gender</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Male">Male</option>
-                                        </select>
-                                        <span asp-validation-for="SearchInputModel.Gender" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mb-3 mb-lg-0 mr-4">
-                                <!-- <label for="#">Bust</label> -->
-                                <div class="form-field">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="Age" id="4" class="form-control">
-                                            <option value="">Age from</option>
-                                            @for (int i = 12; i < 75; i++)
-                                            {
-                                                <option value="@i">@i</option>
-                                            }
-                                        </select>
-                                        <span asp-validation-for="SearchInputModel.Age" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mb-3 mb-lg-0 mr-4">
-                                <!-- <label for="#">Bust</label> -->
-                                <div class="form-field">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="To" id="4" class="form-control">
-                                            <option value="">To</option>
-                                            @for (int i = 13; i < 76; i++)
-                                            {
-                                                <option value="@i">@i</option>
-                                            }
-                                        </select>
-                                        <span asp-validation-for="SearchInputModel.To" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mb-3 mb-lg-0 mr-4">
-                            </div>
-
-                            <div class="form-group">
-                                <input type="submit" value="Search" class="btn btn-primary py-3 px-4">
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="form-group mb-3 mb-lg-0 mr-4">
+                            <div class="form-field">
+                                <div class="select-wrap">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <select name="City" id="2" class="form-control">
+                                        <option value="">City</option>
+                                        <option value="Sofia">Sofia</option>
+                                        <option value="Plovdiv">Plovdiv</option>
+                                        <option value="Blagoevgrad">Blagoevgrad</option>
+                                        <option value="Burgas">Burgas</option>
+                                        <option value="Varna">Varna</option>
+                                        <option value="Stara Zagora">Stara Zagora</option>
+                                        <option value="Pleven">Pleven</option>
+                                        <option value="Pazardzhik">Pazardzhik</option>
+                                        <option value="Veliko Tarnovo">Veliko Tarnovo</option>
+                                        <option value="Haskovo">Haskovo</option>
+                                        <option value="Ruse">Ruse</option>
+                                        <option value="Vratsa">Vratsa</option>
+                                        <option value="Sliven">Sliven</option>
+                                        <option value="Dobrich">Dobrich</option>
+                                        <option value="Shumen">Shumen</option>
+                                        <option value="Montana">Montana</option>
+                                        <option value="Lovech">Lovech</option>
+                                        <option value="Kardzhali">Kardzhali</option>
+                                        <option value="Kyustendil">Kyustendil</option>
+                                        <option value="Yambol">Yambol</option>
+                                        <option value="Razgrad">Razgrad</option>
+                                        <option value="Pernik">Pernik</option>
+                                        <option value="Gabrovo">Gabrovo</option>
+                                        <option value="Silistra">Silistra</option>
+                                        <option value="Smolyan">Smolyan</option>
+                                        <option value="Targovishte">Targovishte</option>
+                                        <option value="Vidin">Vidin</option>
+                                    </select>
+                                    <span asp-validation-for="SearchInputModel.City" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 mb-lg-0 mr-4">
+                            <div class="form-field">
+                                <div class="select-wrap">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <select name="Gender" id="3" class="form-control">
+                                        <option value="">Gender</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Male">Male</option>
+                                    </select>
+                                    <span asp-validation-for="SearchInputModel.Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 mb-lg-0 mr-4">
+                            <!-- <label for="#">Bust</label> -->
+                            <div class="form-field">
+                                <div class="select-wrap">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <select name="Age" id="4" class="form-control">
+                                        <option value="">Age from</option>
+                                        @for (int i = 12; i < 75; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="SearchInputModel.Age" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 mb-lg-0 mr-4">
+                            <!-- <label for="#">Bust</label> -->
+                            <div class="form-field">
+                                <div class="select-wrap">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <select name="To" id="4" class="form-control">
+                                        <option value="">To</option>
+                                        @for (int i = 13; i < 76; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="SearchInputModel.To" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 mb-lg-0 mr-4">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Search" class="btn btn-primary py-3 px-4">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="ftco-section ftco-services">
         <div class="container">
