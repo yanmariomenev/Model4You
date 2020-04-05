@@ -1,0 +1,35 @@
+﻿@model Model4You.Web.ViewModels.Booking.ResultViewModel
+<html>
+<head>
+    <title>Topmodel - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="refresh" content="6; url=/" />
+</head>
+<body>
+<section class="hero-wrap hero-wrap-2" style="background-image: url(images/bg_1.jpg);">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row slider-text justify-content-center align-items-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                @if (string.IsNullOrWhiteSpace(Model.Status))
+                {
+                    <h1 class="mb-3 mt-5 bread">Something went wrong. Please try again</h1>
+                }
+                <h1 class="mb-3 mt-5 bread">@Model.Status</h1>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+    </svg>
+</div>
+</body>
+
+</html>

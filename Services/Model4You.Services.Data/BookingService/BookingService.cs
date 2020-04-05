@@ -36,7 +36,7 @@ namespace Model4You.Services.Data.BookingService
 
             if (!userExist)
             {
-                return "User does not exist.";
+                return "Booking failed! Please try again.";
             }
 
             var booking = new Booking
@@ -53,7 +53,7 @@ namespace Model4You.Services.Data.BookingService
             await this.bookingRepository.AddAsync(booking);
             await this.bookingRepository.SaveChangesAsync();
 
-            return "Booking was sent to the model";
+            return "Booking was successful! Please wait for the model to contact you back";
         }
     }
 }

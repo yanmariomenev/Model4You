@@ -28,11 +28,21 @@ namespace Model4You.Web.Controllers
                 return this.View(input);
             }
 
-            var result= await this.bookingService.CreateBooking(id, input.BookingDate,
+            var status = await this.bookingService.CreateBooking(id, input.BookingDate,
                 input.FullName, input.CompanyName,
                 input.PhoneNumber, input.Days, input.HireDescription);
 
-            return this.Redirect("/");
+            return this.RedirectToAction("Result", new { result = status });
+        }
+
+        public IActionResult Result(string result)
+        {
+            var viewModel = new ResultViewModel
+            {
+                Status = result,
+            };
+
+            return this.View(viewModel);
         }
     }
 }

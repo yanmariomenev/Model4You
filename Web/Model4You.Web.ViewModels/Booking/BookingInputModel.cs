@@ -22,6 +22,7 @@
 
         [Required]
         [MaxLength(20)]
+        [Phone]
         public string PhoneNumber { get; set; }
 
         public int? Days { get; set; }
