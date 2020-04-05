@@ -67,6 +67,7 @@
 
         public async Task UploadAlbum(List<string> imageUrl, string userId)
         {
+            // TODO Make this better.
             foreach (var images in imageUrl
                 .Select(image => new UserImage { UserId = userId, ImageUrl = image }))
             {

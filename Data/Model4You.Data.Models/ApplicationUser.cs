@@ -20,6 +20,7 @@ namespace Model4You.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.UserImages = new HashSet<UserImage>();
             this.Blogs = new HashSet<Blog>();
+            this.Bookings = new HashSet<Booking>();
         }
 
         // My properties
@@ -40,6 +41,8 @@ namespace Model4You.Data.Models
         public ICollection<UserImage> UserImages { get; set; }
 
         public ICollection<Blog> Blogs { get; set; }
+
+        public ICollection<Booking> Bookings { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }
