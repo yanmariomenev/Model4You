@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Model4You.Data.Common.Repositories;
 using Model4You.Data.Models;
+using Model4You.Services.Mapping;
 
 namespace Model4You.Services.Data.BookingService
 {
@@ -64,6 +66,28 @@ namespace Model4You.Services.Data.BookingService
                 .Select(x => x.Email).FirstOrDefaultAsync();
 
             return userEmail;
+        }
+
+        public async Task<int> GetPagesCount(int perPage, string userId)
+        {
+            var profiles =
+                await this.bookingRepository
+                    .All()
+                    .Where(x => x.UserId == userId && !x.IsDeleted)
+                    .CountAsync();
+            var count = (int)Math.Ceiling(profiles / (decimal)perPage);
+
+            return count;
+        }
+
+        public async Task<IEnumerable<T>> TakeAllBookingsForCurrentUser<T>(string userId, int page, int perPage)
+        {
+            var bookings = this.bookingRepository.All()
+                .Where(x => !x.IsDeleted && x.UserId == userId)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(perPage * (page - 1))
+                .Take(perPage);
+            return await bookings.To<T>().ToListAsync();
         }
     }
 }

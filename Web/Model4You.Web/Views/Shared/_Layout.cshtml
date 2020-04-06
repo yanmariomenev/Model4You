@@ -102,7 +102,11 @@
                     <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
                     @if (User.IsInRole("Model"))
                     {
-                        <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="MyProfile" class="nav-link">My Profile</a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="MyProfile" class="nav-link">Profile</a></li>
+                    }
+                    @if (User.IsInRole("Model"))
+                    {
+                        <li class="nav-item"><a asp-area="" asp-controller="Inbox" asp-action="Bookings" class="nav-link">Bookings</a></li>
                     }
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <partial name="_LoginPartial" />

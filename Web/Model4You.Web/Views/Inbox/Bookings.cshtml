@@ -1,0 +1,101 @@
+﻿@model Model4You.Web.ViewModels.Inbox.InboxBookingViewModel
+@{
+    this.ViewData["Title"] = "Booking list";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Topmodel - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+
+    <section class="hero-wrap hero-wrap-2" style="background-image:url(https://localhost:5001/images/bg_1.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">My Bookings</h1>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section testimony-section">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    @*<th scope="col">#</th>*@
+                    <th scope="col">Date received</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Company name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Mobile Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.InboxViewModels)
+                {
+                    <tr>
+                        @*<th scope="row">1</th>*@
+                        <td><time datetime="@book.CreatedOn.ToString("O")"></time></td>
+                        <td>@book.FullName</td>
+                        <td>@book.CompanyName</td>
+                        <td>@book.Email</td>
+                        <td>@book.PhoneNumber</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+</section>
+<div class="row mt-5">
+    <div class="col text-center">
+        <div class="block-27">
+            @*<ul>
+                        <li><a href="#">&lt;</a></li>
+                        <li class="active"><span>1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&gt;</a></li>
+                    </ul>*@
+            @if (Model.PagesCount > 0)
+            {
+                <ul class="pagination">
+                    <li><a href="/Inbox/bookings?page=@Model.PreviousPage"></a></li>
+                    @for (int i = 1; i <= Model.PagesCount; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <li class="active"><a href="/Inbox/bookings?page=@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/Inbox/bookings?page=@i">@i</a></li>
+                        }
+                    }
+                    <li><a href="/Inbox/bookings?page=@Model.NextPage"></a></li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+        </svg>
+    </div>
+
+</body>
+
+</html>

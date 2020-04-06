@@ -454,7 +454,8 @@
                             </a>
                             <div class="text py-4">
                                 <div class="meta mb-3">
-                                    <div><a href="@blog.Url">@blog.CreatedOn</a></div>
+                                    @*<div><a href="@blog.Url">@blog.CreatedOn</a></div>*@
+                                    <div><a href="@blog.Url"><time datetime="@blog.CreatedOn.ToString("O")"></time></a></div>
                                     <div><a href="@blog.Url">Admin</a></div>
                                 </div>
                                 <div class="desc">

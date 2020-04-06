@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Model4You.Services.Data.BookingService
@@ -16,5 +17,9 @@ namespace Model4You.Services.Data.BookingService
             string hireDescription);
 
         Task<string> GetUserEmail(string userId);
+
+        Task<int> GetPagesCount(int perPage, string userId);
+
+        Task<IEnumerable<T>> TakeAllBookingsForCurrentUser<T>(string userId, int page, int perPage);
     }
 }
