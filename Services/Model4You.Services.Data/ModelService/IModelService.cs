@@ -16,7 +16,7 @@ namespace Model4You.Services.Data.ModelService
 
         Task<IEnumerable<T>> TakeAllPictures<T>(string userId);
 
-        Task UploadAlbum(List<string> imageUrl,string userId);
+        Task UploadAlbum(List<string> imageUrl, string userId);
 
         Task<IEnumerable<T>> TakeSixModels<T>();
 

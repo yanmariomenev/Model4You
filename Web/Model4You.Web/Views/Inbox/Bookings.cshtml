@@ -36,6 +36,10 @@
                     <th scope="col">Company name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Mobile Number</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    @*<th scope="col">View Booking</th>
+        <th scope="col">Delete Booking</th>*@
                 </tr>
             </thead>
             <tbody>
@@ -48,16 +52,44 @@
                         <td>@book.CompanyName</td>
                         <td>@book.Email</td>
                         <td>@book.PhoneNumber</td>
+                        <td>
+                            <a asp-controller="Inbox" asp-action="ViewBooking" asp-route-id="@book.Id" class="btn btn-default btn-block">
+                                <span class="btn btn-info" aria-hidden="true">View Booking</span>
+                            </a>
+                        </td>
+                        <td>
+                            <a @*asp-controller="Inbox" asp-action="Delete" asp-route-id="@book.Id"*@ data-toggle="modal" data-target="#confirm-delete" class="btn btn-default btn-block">
+                                <span class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" aria-hidden="true">Delete Booking</span>
+                            </a>
+                        </td>
                     </tr>
+                    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Do you want to delete this booking from:
+                                    @book.FullName
+                                </div>
+                                <div class="modal-body">
+                                    @book.Email
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <a class="btn btn-danger btn-ok" asp-controller="Inbox" asp-action="Delete" asp-route-id="@book.Id">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
 
             </tbody>
         </table>
-</section>
-<div class="row mt-5">
-    <div class="col text-center">
-        <div class="block-27">
-            @*<ul>
+       
+    </section>
+    <div class="row mt-5">
+        <div class="col text-center">
+            <div class="block-27">
+                @*<ul>
                         <li><a href="#">&lt;</a></li>
                         <li class="active"><span>1</span></li>
                         <li><a href="#">2</a></li>
@@ -66,27 +98,27 @@
                         <li><a href="#">5</a></li>
                         <li><a href="#">&gt;</a></li>
                     </ul>*@
-            @if (Model.PagesCount > 0)
-            {
-                <ul class="pagination">
-                    <li><a href="/Inbox/bookings?page=@Model.PreviousPage"></a></li>
-                    @for (int i = 1; i <= Model.PagesCount; i++)
-                    {
-                        if (i == Model.CurrentPage)
+                @if (Model.PagesCount > 0)
+                {
+                    <ul class="pagination">
+                        <li><a href="/Inbox/bookings?page=@Model.PreviousPage"></a></li>
+                        @for (int i = 1; i <= Model.PagesCount; i++)
                         {
-                            <li class="active"><a href="/Inbox/bookings?page=@i">@i</a></li>
+                            if (i == Model.CurrentPage)
+                            {
+                                <li class="active"><a href="/Inbox/bookings?page=@i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Inbox/bookings?page=@i">@i</a></li>
+                            }
                         }
-                        else
-                        {
-                            <li><a href="/Inbox/bookings?page=@i">@i</a></li>
-                        }
-                    }
-                    <li><a href="/Inbox/bookings?page=@Model.NextPage"></a></li>
-                </ul>
-            }
+                        <li><a href="/Inbox/bookings?page=@Model.NextPage"></a></li>
+                    </ul>
+                }
+            </div>
         </div>
     </div>
-</div>
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen">
@@ -99,3 +131,12 @@
 </body>
 
 </html>
+@section Scripts {
+    <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+    </script>
+}

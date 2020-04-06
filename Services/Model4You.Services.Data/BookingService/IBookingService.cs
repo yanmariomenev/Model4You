@@ -21,5 +21,9 @@ namespace Model4You.Services.Data.BookingService
         Task<int> GetPagesCount(int perPage, string userId);
 
         Task<IEnumerable<T>> TakeAllBookingsForCurrentUser<T>(string userId, int page, int perPage);
+
+        Task<T> GetBookingById<T>(string id);
+
+        Task DeleteBooking(string id);
     }
 }

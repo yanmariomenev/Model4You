@@ -89,5 +89,24 @@ namespace Model4You.Services.Data.BookingService
                 .Take(perPage);
             return await bookings.To<T>().ToListAsync();
         }
+
+        public async Task<T> GetBookingById<T>(string id)
+        {
+            var bookingId = int.Parse(id);
+            var booking = this.bookingRepository.All().Where(x => x.Id == bookingId);
+
+            return await booking.To<T>().FirstOrDefaultAsync();
+        }
+
+        public async Task DeleteBooking(string id)
+        {
+            var bookingIdParse = int.Parse(id);
+            var deleteBooking =
+                await this.bookingRepository.All()
+                    .Where(x => x.Id == bookingIdParse)
+                    .FirstOrDefaultAsync();
+            this.bookingRepository.Delete(deleteBooking);
+            await this.bookingRepository.SaveChangesAsync();
+        }
     }
 }
