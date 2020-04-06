@@ -40,35 +40,39 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     @*<th scope="col">View Booking</th>
-        <th scope="col">Delete Booking</th>*@
+                <th scope="col">Delete Booking</th>*@
                 </tr>
             </thead>
             <tbody>
+                @if (!Model.InboxViewModels.Any())
+                {
+                    <h3>Currently you don't have any bookings.</h3>
+                }
                 @foreach (var book in Model.InboxViewModels)
                 {
-                <tr>
-                    @*<th scope="row">1</th>*@
-                    <td><time datetime="@book.CreatedOn.ToString("O")"></time></td>
-                    <td>@book.FullName</td>
-                    <td>@book.CompanyName</td>
-                    <td>@book.Email</td>
-                    <td>@book.PhoneNumber</td>
-                    <td>
-                        <a asp-controller="Inbox" asp-action="ViewBooking" asp-route-id="@book.Id" class="btn btn-default btn-block">
-                            <span class="btn btn-info" aria-hidden="true">View Booking</span>
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Inbox" asp-action="Archive" class="btn btn-default btn-block">
-                            <span class="btn btn-warning" aria-hidden="true">View Archive</span>
-                        </a>
-                    </td>
-                    <td>
-                        <a @*asp-controller="Inbox" asp-action="Delete" asp-route-id="@book.Id"*@ data-toggle="modal" data-target="#confirm-delete" class="btn btn-default btn-block">
-                            <span class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" aria-hidden="true">Archive Booking</span>
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        @*<th scope="row">1</th>*@
+                        <td><time datetime="@book.CreatedOn.ToString("O")"></time></td>
+                        <td>@book.FullName</td>
+                        <td>@book.CompanyName</td>
+                        <td>@book.Email</td>
+                        <td>@book.PhoneNumber</td>
+                        <td>
+                            <a asp-controller="Inbox" asp-action="ViewBooking" asp-route-id="@book.Id" class="btn btn-default btn-block">
+                                <span class="btn btn-info" aria-hidden="true">View Booking</span>
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="Inbox" asp-action="Archive" class="btn btn-default btn-block">
+                                <span class="btn btn-warning" aria-hidden="true">View Archive</span>
+                            </a>
+                        </td>
+                        <td>
+                            <a @*asp-controller="Inbox" asp-action="Delete" asp-route-id="@book.Id"*@ data-toggle="modal" data-target="#confirm-delete" class="btn btn-default btn-block">
+                                <span class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" aria-hidden="true">Archive Booking</span>
+                            </a>
+                        </td>
+                    </tr>
                     <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -89,8 +93,8 @@
                     </div>
                 }
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
        
     </section>
     <div class="row mt-5">
