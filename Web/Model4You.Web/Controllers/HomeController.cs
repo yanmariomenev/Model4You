@@ -1,4 +1,6 @@
-﻿using Model4You.Services.Data.AdminServices;
+﻿using Model4You.Common;
+using Model4You.Services.Data.AdminServices;
+using Model4You.Services.Messaging;
 using Model4You.Web.ViewModels.Blog;
 using Model4You.Web.ViewModels.Home.AboutView;
 using Model4You.Web.ViewModels.Search;
@@ -21,15 +23,18 @@ namespace Model4You.Web.Controllers
         private readonly IModelService modelService;
         private readonly IContactFormService contactService;
         private readonly IBlogService blogService;
+        private readonly IEmailSender emailSender;
 
         public HomeController(
             IModelService modelService,
             IContactFormService contactService,
-            IBlogService blogService)
+            IBlogService blogService,
+            IEmailSender emailSender)
         {
             this.modelService = modelService;
             this.contactService = contactService;
             this.blogService = blogService;
+            this.emailSender = emailSender;
         }
 
         // TODO DISPLAY RANDOM 6 MODELS OR TOP MODELS
@@ -68,8 +73,12 @@ namespace Model4You.Web.Controllers
             }
 
             await this.contactService.Create(model.Name, model.Email, model.Subject, model.Message);
-            // TODO fix temp data not displaying
-            this.TempData["ContactForm"] = "Your request has been sent to the owner";
+            await this.emailSender.SendEmailAsync(
+                model.Email,
+                model.Name,
+                GlobalConstants.SystemEmail,
+                model.Subject,
+                model.Message);
             return this.RedirectToAction(nameof(this.ThankYou));
         }
 

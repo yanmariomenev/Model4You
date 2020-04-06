@@ -6,5 +6,6 @@
 
         public const string AdministratorRoleName = "Administrator";
         public const string ModelRoleName = "Model";
+        public const string SystemEmail = "model4youbg@gmail.com";
     }
 }
