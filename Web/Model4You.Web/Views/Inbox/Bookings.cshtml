@@ -46,7 +46,11 @@
             <tbody>
                 @if (!Model.InboxViewModels.Any())
                 {
-                    <h3>Currently you don't have any bookings.</h3>
+                <div class="text text-center">
+                    <h2 class="mb-5">Currently there is no bookings.</h2>
+                    <p><a asp-area="" asp-controller="Home" asp-action="Index" class="btn-custom py-3 pr-2">Go Back</a></p>
+                    <p><a asp-area="" asp-controller="Inbox" asp-action="Archive" class="btn-custom py-3 pr-2">Look Archive</a></p>
+                </div>
                 }
                 @foreach (var book in Model.InboxViewModels)
                 {
@@ -93,7 +97,7 @@
                     </div>
                 }
 
-                </tbody>
+            </tbody>
             </table>
        
     </section>

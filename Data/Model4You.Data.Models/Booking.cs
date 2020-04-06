@@ -5,8 +5,13 @@
 
     using Model4You.Data.Common.Models;
 
-    public class Booking : BaseDeletableModel<int>
+    public class Booking : BaseDeletableModel<string>
     {
+        public Booking()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         [Required]
         public string UserId { get; set; }
 

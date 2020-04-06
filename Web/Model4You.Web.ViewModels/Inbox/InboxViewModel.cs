@@ -5,7 +5,7 @@ namespace Model4You.Web.ViewModels.Inbox
 {
     public class InboxViewModel : IMapFrom<Data.Models.Booking>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string FullName { get; set; }
 

@@ -22,9 +22,9 @@ namespace Model4You.Services.Data.BookingService
 
         Task<IEnumerable<T>> TakeAllBookingsForCurrentUser<T>(string userId, int page, int perPage);
 
-        Task<T> GetBookingById<T>(string id);
+        Task<T> GetBookingById<T>(string id, string userId);
 
-        Task DeleteBooking(string id);
+        Task DeleteBooking(string id, string userId);
 
         Task<IEnumerable<T>> TakeAllDeletedBookings<T>(string id);
 

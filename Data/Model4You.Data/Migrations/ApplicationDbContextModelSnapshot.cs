@@ -379,10 +379,8 @@ namespace Model4You.Data.Migrations
 
             modelBuilder.Entity("Model4You.Data.Models.Booking", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");

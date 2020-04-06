@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Model4You.Data.Migrations
 {
-    public partial class InitialDbBuild : Migration
+    public partial class InitialAdd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,7 @@ namespace Model4You.Data.Migrations
                     FirstName = table.Column<string>(maxLength: 50, nullable: true),
                     LastName = table.Column<string>(maxLength: 50, nullable: true),
                     ModelRole = table.Column<int>(nullable: false),
-                    Gender = table.Column<bool>(nullable: false),
+                    ProfilePicture = table.Column<string>(nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -56,6 +56,27 @@ namespace Model4You.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContactFormDatas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Subject = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true),
+                    Answered = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactFormDatas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,20 +230,28 @@ namespace Model4You.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Locations",
+                name: "Bookings",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true),
-                    Country = table.Column<string>(maxLength: 30, nullable: true),
-                    Town = table.Column<string>(maxLength: 30, nullable: true)
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    BookingDate = table.Column<DateTime>(nullable: false),
+                    FullName = table.Column<string>(maxLength: 60, nullable: false),
+                    CompanyName = table.Column<string>(maxLength: 70, nullable: true),
+                    Email = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(maxLength: 20, nullable: false),
+                    Days = table.Column<int>(nullable: true),
+                    HireDescription = table.Column<string>(maxLength: 600, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Locations", x => x.Id);
+                    table.PrimaryKey("PK_Bookings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Locations_AspNetUsers_UserId",
+                        name: "FK_Bookings_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -235,11 +264,24 @@ namespace Model4You.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     Age = table.Column<int>(nullable: false),
+                    Gender = table.Column<int>(nullable: false),
                     Height = table.Column<double>(nullable: false),
-                    Nationality = table.Column<string>(nullable: false),
-                    Ethnicity = table.Column<int>(nullable: false)
+                    ModelType = table.Column<string>(nullable: true),
+                    Bust = table.Column<double>(nullable: false),
+                    Waist = table.Column<double>(nullable: false),
+                    Hips = table.Column<double>(nullable: false),
+                    InstagramUrl = table.Column<string>(nullable: true),
+                    FacebookUrl = table.Column<string>(nullable: true),
+                    Nationality = table.Column<string>(nullable: true),
+                    Ethnicity = table.Column<int>(nullable: false),
+                    Country = table.Column<string>(maxLength: 30, nullable: true),
+                    City = table.Column<string>(maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -274,6 +316,30 @@ namespace Model4You.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserImages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserImages_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BlogContents",
                 columns: table => new
                 {
@@ -284,7 +350,9 @@ namespace Model4You.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     BlogId = table.Column<int>(nullable: false),
-                    Content = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -298,7 +366,7 @@ namespace Model4You.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserImages",
+                name: "BlogComments",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -307,24 +375,18 @@ namespace Model4You.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    ImageUrl = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
-                    BlogContentId = table.Column<string>(nullable: true),
-                    BlogContentId1 = table.Column<int>(nullable: true)
+                    BlogContentId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserImages", x => x.Id);
+                    table.PrimaryKey("PK_BlogComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserImages_BlogContents_BlogContentId1",
-                        column: x => x.BlogContentId1,
+                        name: "FK_BlogComments_BlogContents_BlogContentId",
+                        column: x => x.BlogContentId,
                         principalTable: "BlogContents",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserImages_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -379,6 +441,16 @@ namespace Model4You.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BlogComments_BlogContentId",
+                table: "BlogComments",
+                column: "BlogContentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlogComments_IsDeleted",
+                table: "BlogComments",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BlogContents_BlogId",
                 table: "BlogContents",
                 column: "BlogId");
@@ -399,11 +471,24 @@ namespace Model4You.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locations_UserId",
-                table: "Locations",
-                column: "UserId",
-                unique: true,
-                filter: "[UserId] IS NOT NULL");
+                name: "IX_Bookings_IsDeleted",
+                table: "Bookings",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bookings_UserId",
+                table: "Bookings",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContactFormDatas_IsDeleted",
+                table: "ContactFormDatas",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ModelsInformation_IsDeleted",
+                table: "ModelsInformation",
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ModelsInformation_UserId",
@@ -423,11 +508,6 @@ namespace Model4You.Data.Migrations
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserImages_BlogContentId1",
-                table: "UserImages",
-                column: "BlogContentId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserImages_IsDeleted",
@@ -458,7 +538,13 @@ namespace Model4You.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "BlogComments");
+
+            migrationBuilder.DropTable(
+                name: "Bookings");
+
+            migrationBuilder.DropTable(
+                name: "ContactFormDatas");
 
             migrationBuilder.DropTable(
                 name: "ModelsInformation");

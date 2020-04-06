@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model4You.Services.Data.BookingService;
 using Model4You.Web.ViewModels.Inbox;
@@ -16,6 +17,7 @@ namespace Model4You.Web.Controllers
             this.bookService = bookService;
         }
 
+        [Authorize]
         public async Task<IActionResult> Bookings(int page = 1, int perPage = PerPage)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -29,23 +31,29 @@ namespace Model4You.Web.Controllers
             return this.View(viewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrWhiteSpace(id))
             {
                 return this.RedirectToAction(nameof(this.Bookings));
             }
 
-            await this.bookService.DeleteBooking(id);
+            await this.bookService.DeleteBooking(id, userId);
             return this.RedirectToAction(nameof(this.Bookings));
         }
 
+        [Authorize]
         public async Task<IActionResult> ViewBooking(string id)
         {
-            var viewModel = await this.bookService.GetBookingById<InboxViewModel>(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var viewModel = await this.bookService.GetBookingById<InboxViewModel>(id, userId);
+
             return this.View(viewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> Archive()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -56,6 +64,7 @@ namespace Model4You.Web.Controllers
             return this.View(viewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> Return(string id)
         {
             if (string.IsNullOrWhiteSpace(id))

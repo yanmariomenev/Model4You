@@ -10,8 +10,8 @@ using Model4You.Data;
 namespace Model4You.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200310161847_InitialDbBuildFix")]
-    partial class InitialDbBuildFix
+    [Migration("20200406155244_InitialAdd")]
+    partial class InitialAdd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -195,9 +195,6 @@ namespace Model4You.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<bool>("Gender")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -233,6 +230,9 @@ namespace Model4You.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -299,6 +299,46 @@ namespace Model4You.Data.Migrations
                     b.ToTable("Blogs");
                 });
 
+            modelBuilder.Entity("Model4You.Data.Models.BlogComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BlogContentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogContentId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("BlogComments");
+                });
+
             modelBuilder.Entity("Model4You.Data.Models.BlogContent", b =>
                 {
                     b.Property<int>("Id")
@@ -318,11 +358,17 @@ namespace Model4You.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -333,31 +379,104 @@ namespace Model4You.Data.Migrations
                     b.ToTable("BlogContents");
                 });
 
-            modelBuilder.Entity("Model4You.Data.Models.Location", b =>
+            modelBuilder.Entity("Model4You.Data.Models.Booking", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("BookingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(70)")
+                        .HasMaxLength(70);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Days")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
+
+                    b.Property<string>("HireDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(600)")
+                        .HasMaxLength(600);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Bookings");
+                });
+
+            modelBuilder.Entity("Model4You.Data.Models.ContactFormData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                    b.Property<bool>("Answered")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Town")
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                    b.HasIndex("IsDeleted");
 
-                    b.ToTable("Locations");
+                    b.ToTable("ContactFormDatas");
                 });
 
             modelBuilder.Entity("Model4You.Data.Models.ModelInformation", b =>
@@ -370,20 +489,62 @@ namespace Model4You.Data.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<double>("Bust")
+                        .HasColumnType("float");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Ethnicity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FacebookUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<double>("Height")
                         .HasColumnType("float");
 
+                    b.Property<double>("Hips")
+                        .HasColumnType("float");
+
+                    b.Property<string>("InstagramUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModelType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Nationality")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<double>("Waist")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("UserId")
                         .IsUnique()
@@ -458,9 +619,6 @@ namespace Model4You.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BlogContentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -480,8 +638,6 @@ namespace Model4You.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BlogContentId");
 
                     b.HasIndex("IsDeleted");
 
@@ -548,6 +704,15 @@ namespace Model4You.Data.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("Model4You.Data.Models.BlogComment", b =>
+                {
+                    b.HasOne("Model4You.Data.Models.BlogContent", "BlogContent")
+                        .WithMany("BlogComments")
+                        .HasForeignKey("BlogContentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Model4You.Data.Models.BlogContent", b =>
                 {
                     b.HasOne("Model4You.Data.Models.Blog", "Blog")
@@ -557,11 +722,13 @@ namespace Model4You.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Model4You.Data.Models.Location", b =>
+            modelBuilder.Entity("Model4You.Data.Models.Booking", b =>
                 {
                     b.HasOne("Model4You.Data.Models.ApplicationUser", "User")
-                        .WithOne("Location")
-                        .HasForeignKey("Model4You.Data.Models.Location", "UserId");
+                        .WithMany("Bookings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model4You.Data.Models.ModelInformation", b =>
@@ -580,12 +747,6 @@ namespace Model4You.Data.Migrations
 
             modelBuilder.Entity("Model4You.Data.Models.UserImage", b =>
                 {
-                    b.HasOne("Model4You.Data.Models.BlogContent", "BlogContent")
-                        .WithMany("Images")
-                        .HasForeignKey("BlogContentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Model4You.Data.Models.ApplicationUser", "User")
                         .WithMany("UserImages")
                         .HasForeignKey("UserId");

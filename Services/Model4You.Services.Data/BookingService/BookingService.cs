@@ -90,20 +90,18 @@ namespace Model4You.Services.Data.BookingService
             return await bookings.To<T>().ToListAsync();
         }
 
-        public async Task<T> GetBookingById<T>(string id)
+        public async Task<T> GetBookingById<T>(string id, string userId)
         {
-            var bookingId = int.Parse(id);
-            var booking = this.bookingRepository.All().Where(x => x.Id == bookingId);
+            var booking = this.bookingRepository.All().Where(x => x.Id == id && x.UserId == userId);
 
             return await booking.To<T>().FirstOrDefaultAsync();
         }
 
-        public async Task DeleteBooking(string id)
+        public async Task DeleteBooking(string id, string userId)
         {
-            var bookingIdParse = int.Parse(id);
             var deleteBooking =
                 await this.bookingRepository.All()
-                    .Where(x => x.Id == bookingIdParse)
+                    .Where(x => x.Id == id && x.UserId == userId)
                     .FirstOrDefaultAsync();
             this.bookingRepository.Delete(deleteBooking);
             await this.bookingRepository.SaveChangesAsync();
@@ -118,9 +116,7 @@ namespace Model4You.Services.Data.BookingService
 
         public async Task UnDeleteBooking(string id)
         {
-            var bookingIdParse = int.Parse(id);
-
-            var unDelete = await this.bookingRepository.AllWithDeleted().Where(x => x.Id == bookingIdParse)
+            var unDelete = await this.bookingRepository.AllWithDeleted().Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             this.bookingRepository.Undelete(unDelete);
