@@ -49,10 +49,13 @@
                         </ul>
                         <div class="col-md-12 model-single">
                             @*<a href="@Url.Action("Create", "Booking", new {id = Model.Id})" class="btn btn-default btn-block">
-                                    <input type="hidden" asp-for="" value="@this.Model.FirstName" />
-                                    <span class="btn btn-danger" aria-hidden="true">Book this model</span>
-                                </a>*@
-                            <a asp-controller="Booking" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-outline-warning">Book this model</a>
+            <input type="hidden" asp-for="" value="@this.Model.FirstName" />
+            <span class="btn btn-danger" aria-hidden="true">Book this model</span>
+        </a>*@
+                            @if (!User.IsInRole("Model"))
+                            {
+                                <a asp-controller="Booking" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-outline-warning">Book this model</a>
+                            }
 
                         </div>
                     </div>

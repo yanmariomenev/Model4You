@@ -20,6 +20,10 @@
         [MaxLength(70)]
         public string CompanyName { get; set; }
 
+        [EmailAddress]
+        [MaxLength(100)]
+        public string Email { get; set; }
+
         [Required]
         [MaxLength(20)]
         [Phone]

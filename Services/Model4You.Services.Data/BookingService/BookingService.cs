@@ -26,6 +26,7 @@ namespace Model4You.Services.Data.BookingService
             DateTime bookingDate,
             string fullName,
             string companyName,
+            string email,
             string phoneNumber,
             int? days,
             string hireDescription)
@@ -45,6 +46,7 @@ namespace Model4You.Services.Data.BookingService
                 BookingDate = bookingDate,
                 FullName = fullName,
                 CompanyName = companyName,
+                Email = email,
                 PhoneNumber = phoneNumber,
                 Days = days,
                 HireDescription = hireDescription,
@@ -54,6 +56,14 @@ namespace Model4You.Services.Data.BookingService
             await this.bookingRepository.SaveChangesAsync();
 
             return "Booking was successful! Please wait for the model to contact you back";
+        }
+
+        public async Task<string> GetUserEmail(string userId)
+        {
+            var userEmail = await this.userRepository.All().Where(x => x.Id == userId)
+                .Select(x => x.Email).FirstOrDefaultAsync();
+
+            return userEmail;
         }
     }
 }

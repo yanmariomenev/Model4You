@@ -22,6 +22,9 @@
         public string CompanyName { get; set; }
 
         [Required]
+        public string Email { get; set; }
+
+        [Required]
         [MaxLength(20)]
         public string PhoneNumber { get; set; }
 

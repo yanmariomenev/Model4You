@@ -10,8 +10,11 @@ namespace Model4You.Services.Data.BookingService
             DateTime bookingDate,
             string fullName,
             string companyName,
+            string email,
             string phoneNumber,
             int? days,
             string hireDescription);
+
+        Task<string> GetUserEmail(string userId);
     }
 }

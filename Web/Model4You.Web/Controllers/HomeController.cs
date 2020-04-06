@@ -71,7 +71,7 @@ namespace Model4You.Web.Controllers
             {
                 return this.View(model);
             }
-
+            // TODO Test this again if it works like before. And change the SendGrid account if needed...
             await this.contactService.Create(model.Name, model.Email, model.Subject, model.Message);
             await this.emailSender.SendEmailAsync(
                 model.Email,
