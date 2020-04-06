@@ -108,5 +108,23 @@ namespace Model4You.Services.Data.BookingService
             this.bookingRepository.Delete(deleteBooking);
             await this.bookingRepository.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<T>> TakeAllDeletedBookings<T>(string id)
+        {
+            var archive = this.bookingRepository.AllWithDeleted().Where(x => x.UserId == id && x.IsDeleted);
+
+            return await archive.To<T>().ToListAsync();
+        }
+
+        public async Task UnDeleteBooking(string id)
+        {
+            var bookingIdParse = int.Parse(id);
+
+            var unDelete = await this.bookingRepository.AllWithDeleted().Where(x => x.Id == bookingIdParse)
+                .FirstOrDefaultAsync();
+
+            this.bookingRepository.Undelete(unDelete);
+            await this.bookingRepository.SaveChangesAsync();
+        }
     }
 }

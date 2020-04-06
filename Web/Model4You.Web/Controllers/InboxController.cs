@@ -45,5 +45,26 @@ namespace Model4You.Web.Controllers
             var viewModel = await this.bookService.GetBookingById<InboxViewModel>(id);
             return this.View(viewModel);
         }
+
+        public async Task<IActionResult> Archive()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var viewModel = new InboxBookingViewModel
+            {
+                InboxViewModels = await this.bookService.TakeAllDeletedBookings<InboxViewModel>(userId),
+            };
+            return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> Return(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return this.RedirectToAction(nameof(this.Archive));
+            }
+
+            await this.bookService.UnDeleteBooking(id);
+            return this.RedirectToAction(nameof(this.Bookings));
+        }
     }
 }

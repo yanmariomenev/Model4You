@@ -38,6 +38,7 @@
                     <th scope="col">Mobile Number</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                     @*<th scope="col">View Booking</th>
         <th scope="col">Delete Booking</th>*@
                 </tr>
@@ -45,29 +46,35 @@
             <tbody>
                 @foreach (var book in Model.InboxViewModels)
                 {
-                    <tr>
-                        @*<th scope="row">1</th>*@
-                        <td><time datetime="@book.CreatedOn.ToString("O")"></time></td>
-                        <td>@book.FullName</td>
-                        <td>@book.CompanyName</td>
-                        <td>@book.Email</td>
-                        <td>@book.PhoneNumber</td>
-                        <td>
-                            <a asp-controller="Inbox" asp-action="ViewBooking" asp-route-id="@book.Id" class="btn btn-default btn-block">
-                                <span class="btn btn-info" aria-hidden="true">View Booking</span>
-                            </a>
-                        </td>
-                        <td>
-                            <a @*asp-controller="Inbox" asp-action="Delete" asp-route-id="@book.Id"*@ data-toggle="modal" data-target="#confirm-delete" class="btn btn-default btn-block">
-                                <span class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" aria-hidden="true">Delete Booking</span>
-                            </a>
-                        </td>
-                    </tr>
+                <tr>
+                    @*<th scope="row">1</th>*@
+                    <td><time datetime="@book.CreatedOn.ToString("O")"></time></td>
+                    <td>@book.FullName</td>
+                    <td>@book.CompanyName</td>
+                    <td>@book.Email</td>
+                    <td>@book.PhoneNumber</td>
+                    <td>
+                        <a asp-controller="Inbox" asp-action="ViewBooking" asp-route-id="@book.Id" class="btn btn-default btn-block">
+                            <span class="btn btn-info" aria-hidden="true">View Booking</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Inbox" asp-action="Archive" class="btn btn-default btn-block">
+                            <span class="btn btn-warning" aria-hidden="true">View Archive</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a @*asp-controller="Inbox" asp-action="Delete" asp-route-id="@book.Id"*@ data-toggle="modal" data-target="#confirm-delete" class="btn btn-default btn-block">
+                            <span class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" aria-hidden="true">Archive Booking</span>
+                        </a>
+                    </td>
+                </tr>
                     <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    Do you want to delete this booking from:
+                                    This booking will be send to the archive.
+                                    Are you sure you want to archive this booking?
                                     @book.FullName
                                 </div>
                                 <div class="modal-body">
@@ -75,7 +82,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <a class="btn btn-danger btn-ok" asp-controller="Inbox" asp-action="Delete" asp-route-id="@book.Id">Delete</a>
+                                    <a class="btn btn-danger btn-ok" asp-controller="Inbox" asp-action="Delete" asp-route-id="@book.Id">Archive</a>
                                 </div>
                             </div>
                         </div>

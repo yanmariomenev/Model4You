@@ -25,5 +25,9 @@ namespace Model4You.Services.Data.BookingService
         Task<T> GetBookingById<T>(string id);
 
         Task DeleteBooking(string id);
+
+        Task<IEnumerable<T>> TakeAllDeletedBookings<T>(string id);
+
+        Task UnDeleteBooking(string id);
     }
 }
