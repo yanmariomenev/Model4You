@@ -12,26 +12,26 @@ using Model4You.Data.Models;
 namespace Model4You.Web.Areas.Administration.Controllers
 {
     [Area("Administration")]
-    public class ModelInformationsController : AdministrationController
+    public class UserImagesController : AdministrationController
     {
         private readonly ApplicationDbContext _context;
-        private readonly IDeletableEntityRepository<ModelInformation> mdRepository;
+        private readonly IDeletableEntityRepository<UserImage> imagesRepository;
 
-        public ModelInformationsController(ApplicationDbContext context,
-            IDeletableEntityRepository<ModelInformation> mdRepository)
+        public UserImagesController(ApplicationDbContext context,
+            IDeletableEntityRepository<UserImage> imagesRepository)
         {
             _context = context;
-            this.mdRepository = mdRepository;
+            this.imagesRepository = imagesRepository;
         }
 
-        // GET: Administration/ModelInformations
+        // GET: Administration/UserImages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ModelsInformation.Include(m => m.User);
+            var applicationDbContext = _context.UserImages.Include(u => u.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Administration/ModelInformations/Details/5
+        // GET: Administration/UserImages/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,42 +39,42 @@ namespace Model4You.Web.Areas.Administration.Controllers
                 return NotFound();
             }
 
-            var modelInformation = await _context.ModelsInformation
-                .Include(m => m.User)
+            var userImage = await _context.UserImages
+                .Include(u => u.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (modelInformation == null)
+            if (userImage == null)
             {
                 return NotFound();
             }
 
-            return View(modelInformation);
+            return View(userImage);
         }
 
-        // GET: Administration/ModelInformations/Create
+        // GET: Administration/UserImages/Create
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Administration/ModelInformations/Create
+        // POST: Administration/UserImages/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,Age,Gender,Height,ModelType,Bust,Waist,Hips,InstagramUrl,FacebookUrl,Nationality,Ethnicity,Country,City,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] ModelInformation modelInformation)
+        public async Task<IActionResult> Create([Bind("ImageUrl,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] UserImage userImage)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(modelInformation);
+                _context.Add(userImage);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", modelInformation.UserId);
-            return View(modelInformation);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", userImage.UserId);
+            return View(userImage);
         }
 
-        // GET: Administration/ModelInformations/Edit/5
+        // GET: Administration/UserImages/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,23 +82,23 @@ namespace Model4You.Web.Areas.Administration.Controllers
                 return NotFound();
             }
 
-            var modelInformation = await _context.ModelsInformation.FindAsync(id);
-            if (modelInformation == null)
+            var userImage = await _context.UserImages.FindAsync(id);
+            if (userImage == null)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", modelInformation.UserId);
-            return View(modelInformation);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", userImage.UserId);
+            return View(userImage);
         }
 
-        // POST: Administration/ModelInformations/Edit/5
+        // POST: Administration/UserImages/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,Age,Gender,Height,ModelType,Bust,Waist,Hips,InstagramUrl,FacebookUrl,Nationality,Ethnicity,Country,City,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] ModelInformation modelInformation)
+        public async Task<IActionResult> Edit(int id, [Bind("ImageUrl,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] UserImage userImage)
         {
-            if (id != modelInformation.Id)
+            if (id != userImage.Id)
             {
                 return NotFound();
             }
@@ -107,12 +107,12 @@ namespace Model4You.Web.Areas.Administration.Controllers
             {
                 try
                 {
-                    _context.Update(modelInformation);
+                    _context.Update(userImage);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ModelInformationExists(modelInformation.Id))
+                    if (!UserImageExists(userImage.Id))
                     {
                         return NotFound();
                     }
@@ -123,11 +123,11 @@ namespace Model4You.Web.Areas.Administration.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", modelInformation.UserId);
-            return View(modelInformation);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", userImage.UserId);
+            return View(userImage);
         }
 
-        // GET: Administration/ModelInformations/Delete/5
+        // GET: Administration/UserImages/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,31 +135,31 @@ namespace Model4You.Web.Areas.Administration.Controllers
                 return NotFound();
             }
 
-            var modelInformation = await _context.ModelsInformation
-                .Include(m => m.User)
+            var userImage = await _context.UserImages
+                .Include(u => u.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (modelInformation == null)
+            if (userImage == null)
             {
                 return NotFound();
             }
 
-            return View(modelInformation);
+            return View(userImage);
         }
 
-        // POST: Administration/ModelInformations/Delete/5
+        // POST: Administration/UserImages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var modelInformation = await _context.ModelsInformation.FindAsync(id);
-            this.mdRepository.Delete(modelInformation);
-           await this.mdRepository.SaveChangesAsync();
+            var userImage = await _context.UserImages.FindAsync(id);
+            userImage.IsDeleted = true;
+            await this.imagesRepository.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ModelInformationExists(int id)
+        private bool UserImageExists(int id)
         {
-            return _context.ModelsInformation.Any(e => e.Id == id);
+            return _context.UserImages.Any(e => e.Id == id);
         }
     }
 }
