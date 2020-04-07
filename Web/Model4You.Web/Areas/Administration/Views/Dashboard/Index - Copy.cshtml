@@ -1,0 +1,190 @@
+﻿@model Model4You.Web.ViewModels.Administration.Dashboard.IndexViewModel
+@{
+    Layout = "~/Areas/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+
+<body>
+   
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+   
+    <div id="main-wrapper" class="pb-3" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
+    <div class="page-wrapper">
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Ravenue - page-view-bounce rate -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Latest Users</h4>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">NAME</th>
+                                            <th class="border-top-0">STATUS</th>
+                                            <th class="border-top-0">DATE</th>
+                                            <th class="border-top-0">PRICE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <td class="txt-oflo">Elite admin</td>
+                                            <td><span class="label label-success label-rounded">SALE</span> </td>
+                                            <td class="txt-oflo">April 18, 2017</td>
+                                            <td><span class="font-medium">$24</span></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td class="txt-oflo">Real Homes WP Theme</td>
+                                            <td><span class="label label-info label-rounded">EXTENDED</span></td>
+                                            <td class="txt-oflo">April 19, 2017</td>
+                                            <td><span class="font-medium">$1250</span></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td class="txt-oflo">Ample Admin</td>
+                                            <td><span class="label label-purple label-rounded">Tax</span></td>
+                                            <td class="txt-oflo">April 19, 2017</td>
+                                            <td><span class="font-medium">$1250</span></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td class="txt-oflo">Medical Pro WP Theme</td>
+                                            <td><span class="label label-success label-rounded">Sale</span></td>
+                                            <td class="txt-oflo">April 20, 2017</td>
+                                            <td><span class="font-medium">-$24</span></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td class="txt-oflo">Hosting press html</td>
+                                            <td><span class="label label-success label-rounded">SALE</span></td>
+                                            <td class="txt-oflo">April 21, 2017</td>
+                                            <td><span class="font-medium">$24</span></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td class="txt-oflo">Digital Agency PSD</td>
+                                            <td><span class="label label-danger label-rounded">Tax</span> </td>
+                                            <td class="txt-oflo">April 23, 2017</td>
+                                            <td><span class="font-medium">-$14</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Ravenue - page-view-bounce rate -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Recent comment and chats -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Contact Form Questions</h4>
+                            </div>
+                            <div class="comment-widgets" style="height:430px;">
+                                <!-- Comment Row -->
+                                @foreach (var form in Model.UnAnsweredQuestions)
+                                {
+                            <div class="d-flex flex-row comment-row">
+                                <div class="comment-text active w-100">
+                                    <h6 class="font-medium">@form.Name; @form.Email</h6>
+                                    <h6 class="font-medium">Subject - @form.Subject</h6>
+                                    <span class="m-b-15 d-block">@form.Message</span>
+                                    <div class="comment-footer ">
+                                        <span class="text-muted float-right">@form.CreatedOn</span>
+                                        <span class="label label-red label-rounded">Current Status: UnAnswered</span>
+                                        <span class="action-icons active">
+                                            <a asp-controller="Dashboard" asp-action="Answered" asp-route-id="@form.Id">
+                                                <span class="btn btn-success" aria-hidden="true">Move to answered</span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Answered Questions</h4>
+                            </div>
+                            <div class="comment-widgets" style="height:430px;">
+                                <!-- Comment Row -->
+                                @foreach (var answered in Model.AnsweredQuestions)
+                                {
+                                    <div class="d-flex flex-row comment-row">
+                                        <div class="comment-text active w-100">
+                                            <h6 class="font-medium">@answered.Name; @answered.Email</h6>
+                                            <h6 class="font-medium">Subject - @answered.Subject</h6>
+                                            <span class="m-b-15 d-block">@answered.Message</span>
+                                            <div class="comment-footer ">
+                                                <span class="text-muted float-right">@answered.CreatedOn</span>
+                                                <span class="label label-success label-rounded">Answered</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <!-- Comment Row -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Recent comment and chats -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+                All Rights Reserved by Nice admin. Designed and Developed by
+                <a href="https://wrappixel.com">WrapPixel</a>.
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+
+</body>
+
+</html>
