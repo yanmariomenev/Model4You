@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <title>Nice admin Template - The Ultimate Multipurpose admin template</title>
+    <!-- Custom CSS -->
+    <link href="~/css/chartist.min.css" asp-append-version="true" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/flaticon.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/icomoon.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" asp-append-version="true" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+</head>
+<body>
+    <header>
+           <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Model<span>4You</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            
+           
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="Model" class="nav-link">Models</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Blog" asp-action="Blog" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
+                    @if (User.IsInRole("Model"))
+                    {
+                        <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="MyProfile" class="nav-link">Profile</a></li>
+                    }
+                    @if (User.IsInRole("Model"))
+                    {
+                        <li class="nav-item"><a asp-area="" asp-controller="Inbox" asp-action="Bookings" class="nav-link">Bookings</a></li>
+                    }
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        </header>
+
+    <aside class="left-sidebar" data-sidebarbg="skin5">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
+                            <i class="mdi mdi-av-timer"></i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" aria-expanded="false">
+                            <i class="icon-dashboard"></i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Administration" asp-controller="Blog" asp-action="Create" aria-expanded="false">
+                            <i class="icon-chat"></i>
+                            <span class="hide-menu">Create Blog</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false">
+                            <i class="mdi mdi-border-none"></i>
+                            <span class="hide-menu">Table</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html" aria-expanded="false">
+                            <i class="mdi mdi-face"></i>
+                            <span class="hide-menu">Icon</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="starter-kit.html" aria-expanded="false">
+                            <i class="mdi mdi-file"></i>
+                            <span class="hide-menu">Blank</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="error-404.html" aria-expanded="false">
+                            <i class="mdi mdi-alert-outline"></i>
+                            <span class="hide-menu">404</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    @*FIX THE COOKIE POLICY / make it bell)*@
+
+    <main role="main" class="pb-3">
+        @this.RenderBody()
+    </main>
+    <partial name="_CookieConsentPartial" />
+
+    @*<div class="container">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                @this.RenderBody()
+            </main>
+        </div>*@
+
+    @*<footer class="border-bottom footer text-muted">
+            <div class="container">
+                &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5 d-flex">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">About Me</h2>
+                        <p>model4you is the world’s modeling community, leading the way internationally in connecting new faces (aspiring models) and professional models with reputable agencies, photographers, stylists and other industry clients.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+                            <li class="ftco-animate"><a href="https://www.facebook.com/Model4YouBG"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.instagram.com/model4youbulgaria/"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">Popular Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Finding Agency</a></li>
+                            <li><a href="#">Types of Modeling</a></li>
+                            <li><a href="#">Freelance</a></li>
+                            <li><a href="#">Search Models</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Quick Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a asp-area="" asp-controller="Home" asp-action="About">About Us</a></li>
+                            <li><a asp-area="" asp-controller="Models" asp-action="Model">Models</a></li>
+                            <li><a asp-area="" asp-controller="Blog" asp-action="Blog">Blog</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">ul."Kosta Lulchev" 52, 1111 g.k. Hristo Smirnenski, Sofia, Bulgaria</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+35989969690777</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">model4youbg@gmail.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <div id="google_translate_element"></div>
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="~/js/popper.min.js" asp-append-version="true"></script>
+        <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="~/js/sparkline.js" asp-append-version="true"></script>
+        <!--Wave Effects -->
+        <script src="~/js/waves.js" asp-append-version="true"></script>
+        <!--Menu sidebar -->
+        <script src="~/js/sidebarmenu.js" asp-append-version="true"></script>
+        <!--Custom JavaScript -->
+        <script src="~/js/custom.min.js" asp-append-version="true"></script>
+        <!--This page JavaScript -->
+        <!--chartis chart-->
+        <script src="~/js/chartist.min.js" asp-append-version="true"></script>
+        <script src="~/js/chartist-plugin-tooltip.min.js" asp-append-version="true"></script>
+        <script src="~/js/dashboard1.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="~/js/popper.min.js" asp-append-version="true"></script>
+        <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="~/js/sparkline.js" asp-append-version="true"></script>
+        <!--Wave Effects -->
+        <script src="~/js/waves.js" asp-append-version="true"></script>
+        <!--Menu sidebar -->
+        <script src="~/js/sidebarmenu.js" asp-append-version="true"></script>
+        <!--Custom JavaScript -->
+        <script src="~/js/custom.min.js" asp-append-version="true"></script>
+        <!--This page JavaScript -->
+        <!--chartis chart-->
+        <script src="~/js/chartist.min.js" asp-append-version="true"></script>
+        <script src="~/js/chartist-plugin-tooltip.min.js" asp-append-version="true"></script>
+        <script src="~/js/dashboard1.js" asp-append-version="true"></script>
+    </environment>
+    @this.RenderSection("Scripts", required: false)
+</body>
+</html>
