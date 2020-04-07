@@ -21,10 +21,17 @@ namespace Model4You.Web.Areas.Administration.Controllers
         {
             var viewModel = new IndexViewModel
             {
-                AnsweredQuestions = await contactServices.TakeAllAnswered<ContactFormDataView>(),
-                UnAnsweredQuestions = await contactServices.TakeAllUnAnswered<ContactFormDataView>(),
+                AnsweredQuestions = await this.contactServices.TakeAllAnswered<ContactFormDataView>(),
+                UnAnsweredQuestions = await this.contactServices.TakeAllUnAnswered<ContactFormDataView>(),
             };
             return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> Answered(string id)
+        {
+            await this.contactServices.MoveToAnswered(id);
+
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

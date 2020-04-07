@@ -21,50 +21,44 @@
 </head>
 <body>
     <header>
-           <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Model<span>4You</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-            
-           
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
-                    <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="Model" class="nav-link">Models</a></li>
-                    <li class="nav-item"><a asp-area="" asp-controller="Blog" asp-action="Blog" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
-                    @if (User.IsInRole("Model"))
-                    {
-                        <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="MyProfile" class="nav-link">Profile</a></li>
-                    }
-                    @if (User.IsInRole("Model"))
-                    {
-                        <li class="nav-item"><a asp-area="" asp-controller="Inbox" asp-action="Bookings" class="nav-link">Bookings</a></li>
-                    }
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <partial name="_LoginPartial" />
-                    </div>
-                </ul>
-            </div>
-        </div>
-    </nav>
-        </header>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Model<span>4You</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
 
-    <aside class="left-sidebar" data-sidebarbg="skin5">
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="Model" class="nav-link">Models</a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Blog" asp-action="Blog" class="nav-link">Blog</a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
+                        @if (User.IsInRole("Model"))
+                        {
+                            <li class="nav-item"><a asp-area="" asp-controller="Models" asp-action="MyProfile" class="nav-link">Profile</a></li>
+                        }
+                        @if (User.IsInRole("Model"))
+                        {
+                            <li class="nav-item"><a asp-area="" asp-controller="Inbox" asp-action="Bookings" class="nav-link">Bookings</a></li>
+                        }
+                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                            <partial name="_LoginPartial" />
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-sidebar" style="background-image: url('https://res.cloudinary.com/dpp9tqhjn/image/upload/v1586262726/images/darkGreyBackground_rvtsqf.jpg');">
+
         <!-- Sidebar scroll-->
         <div class="scroll-sidebar">
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
-                    <li class="sidebar-item">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
-                            <i class="mdi mdi-av-timer"></i>
-                            <span class="hide-menu">Dashboard</span>
-                        </a>
-                    </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" aria-expanded="false">
                             <i class="icon-dashboard"></i>
@@ -108,8 +102,8 @@
         <!-- End Sidebar scroll-->
     </aside>
     @*FIX THE COOKIE POLICY / make it bell)*@
-
-    <main role="main" class="pb-3">
+   
+    <main role="main">
         @this.RenderBody()
     </main>
     <partial name="_CookieConsentPartial" />

@@ -30,5 +30,14 @@
             var answered = this.contactRep.AllWithDeleted().Where(x => x.IsDeleted == true);
             return await answered.To<T>().ToListAsync();
         }
+
+        public async Task MoveToAnswered(string id)
+        {
+            var toInt = int.Parse(id);
+            var quest = await this.contactRep.All().Where(x => x.Id == toInt)
+                .FirstOrDefaultAsync();
+            this.contactRep.Delete(quest);
+            await this.contactRep.SaveChangesAsync();
+        }
     }
 }

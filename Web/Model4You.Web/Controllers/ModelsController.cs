@@ -104,18 +104,15 @@
             {
                 return this.View(input);
             }
+
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            // TODO Limit users to upload only 6-8 pictures
-            // TODO Check if the user has 7 images before uploading them to the cloud
             var imageUrls = input.AlbumInputViewModel.UserImages
                 .Select(async x =>
                     await this.cloudinaryService.UploadPictureAsync(x, x.FileName))
                 .Select(x => x.Result)
                 .ToList();
-            
             await this.modelService.UploadAlbum(imageUrls, userId);
 
-            // TODO redirect to user profile.
             return this.RedirectToAction(nameof(this.MyProfile));
         }
 

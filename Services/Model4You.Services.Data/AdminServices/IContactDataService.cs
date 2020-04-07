@@ -8,5 +8,7 @@
         Task<IEnumerable<T>> TakeAllUnAnswered<T>();
 
         Task<IEnumerable<T>> TakeAllAnswered<T>();
+
+        Task MoveToAnswered(string id);
     }
 }

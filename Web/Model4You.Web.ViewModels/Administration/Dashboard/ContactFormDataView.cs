@@ -6,6 +6,8 @@ namespace Model4You.Web.ViewModels.Administration.Dashboard
 {
     public class ContactFormDataView : IMapFrom<ContactFormData>
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Email { get; set; }

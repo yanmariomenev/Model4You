@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Model4You.Data.Common.Repositories;
 using Model4You.Data.Models;
 
@@ -27,7 +29,6 @@ namespace Model4You.Services.Data.ContactFormService
             await this.contactRepository.AddAsync(contactForm);
             await this.contactRepository.SaveChangesAsync();
         }
-
 
     }
 }
