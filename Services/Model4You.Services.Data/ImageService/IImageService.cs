@@ -9,5 +9,7 @@
         Task<string> DeleteProfilePicture(string userId);
 
         Task<string> ChangeProfilePicture(string imageUrl, string userId, int imageId);
+
+        public Task<int> GetImageCountOfCurrentUser(string userId);
     }
 }

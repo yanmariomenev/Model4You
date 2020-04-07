@@ -47,10 +47,13 @@ namespace Model4You.Web.Controllers
 
             // TODO Build an html email response if there is time;
             var emailContentBuilder = new StringBuilder();
-            emailContentBuilder.AppendLine($"Company name - {input.CompanyName}");
-            emailContentBuilder.AppendLine($"Phone number - {input.PhoneNumber}");
-            emailContentBuilder.AppendLine($"Approximate days for hire - {input.Days}");
-            emailContentBuilder.AppendLine($"Description : {input.HireDescription}");
+            emailContentBuilder.AppendLine($"<p>Company name - {input.CompanyName}</p>");
+            emailContentBuilder.AppendLine($"<br>");
+            emailContentBuilder.AppendLine($"<p>Phone number - {input.PhoneNumber}</p>");
+            emailContentBuilder.AppendLine($"<br>");
+            emailContentBuilder.AppendLine($"<p>Approximate days for hire - {input.Days} days.</p>");
+            emailContentBuilder.AppendLine($"<br>");
+            emailContentBuilder.AppendLine($"<p>Description : {input.HireDescription}</p>");
             await this.emailSender.SendEmailAsync(
                 input.Email,
                 input.FullName,

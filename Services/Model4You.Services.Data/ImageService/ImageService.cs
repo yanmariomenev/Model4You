@@ -70,5 +70,11 @@
 
             return "Changed profile picture";
         }
+
+        public async Task<int> GetImageCountOfCurrentUser(string userId)
+        {
+            var count = await this.imagesRepository.All().Where(x => x.UserId == userId).CountAsync();
+            return count;
+        }
     }
 }

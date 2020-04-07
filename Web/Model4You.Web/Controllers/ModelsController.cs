@@ -86,10 +86,12 @@
         public async Task<IActionResult> Album()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var imageCount = await this.imageService.GetImageCountOfCurrentUser(userId);
             var pictures = await this.modelService.TakeAllPictures<AlbumViewModel>(userId);
             var viewModel = new AlbumBindingViewModel
             {
                 AlbumViewModel = pictures,
+                ImageCount = imageCount,
             };
             return this.View(viewModel);
         }
@@ -102,7 +104,7 @@
             {
                 return this.View(input);
             }
-
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             // TODO Limit users to upload only 6-8 pictures
             // TODO Check if the user has 7 images before uploading them to the cloud
             var imageUrls = input.AlbumInputViewModel.UserImages
@@ -110,8 +112,7 @@
                     await this.cloudinaryService.UploadPictureAsync(x, x.FileName))
                 .Select(x => x.Result)
                 .ToList();
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
+            
             await this.modelService.UploadAlbum(imageUrls, userId);
 
             // TODO redirect to user profile.

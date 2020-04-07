@@ -26,6 +26,7 @@ namespace Model4You.Services.Data.ModelService
 
         Task InsertModelInformation(string id);
 
+
         Task<string> ChangeUserFirstName(ApplicationUser user, string name);
 
         Task<string> ChangeUserLastName(ApplicationUser user, string name);

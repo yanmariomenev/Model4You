@@ -16,53 +16,59 @@
         <div class="container">
             <div class="row slider-text justify-content-center align-items-center">
                 <div class="col-md-7 col-sm-12 text-center ftco-animate">
-                    <h1 class="mb-3 mt-5 bread">Model Single</h1>
+                    <h1 class="mb-3 mt-5 bread">Your Album</h1>
                 </div>
 
             </div>
         </div>
     </section>
-
-<form asp-controller="Models" asp-action="Album" enctype="multipart/form-data" method="post">
-    <div class="form-group">
-        <div class="row justify-content-lg-between">
-            @for (int i = 0; i < 6; i++)
-            {
-
-                <input type="file" asp-for="@Model.AlbumInputViewModel.UserImages" />
-
-            }
-        </div>
-        <div class="row d-flex justify-content-around">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
-</form>
-<div class="row">
-    @foreach (var image in Model.AlbumViewModel)
+    @if (Model.ImageCount >= 6)
     {
-    <div class="col-md-4">
-        <div class="model model-2 img d-flex align-items-end" style="background-image: url(@image.ProfilePicture);">
-        </div>
-        <a href="@Url.Action("DeleteProfilePicture", "Models",new { id = image.Id })" class="btn btn-default btn-block">
-            <span class="btn btn-danger" aria-hidden="true">Delete profile picture</span>
-        </a>
-    </div>
-        @foreach (var album in image.UserImages)
-        {
-<div class="col-md-4">
-    <div class="model model-2 img d-flex align-items-end" style="background-image: url(@album.ImageUrl);">
-    </div>
-    <a href="@Url.Action("ChangeProfilePicture", "Models",new { imageUrl = album.ImageUrl, userId = album.UserId, imageId = album.Id })" class="btn btn-default btn-block">
-        <span class="btn btn-success" aria-hidden="true">Set as profile picture</span>
-    </a>
-    <a href="@Url.Action("DeleteImage", "Models",new { id = album.Id })" class="btn btn-default btn-block">
-        <span class="btn btn-danger" aria-hidden="true">Delete this picture</span>
-    </a>
-</div>
-        }
+        <h1>Maximum picture limit was reached.You have to remove a picture to upload a new one.</h1>
+        <br>
     }
-</div>
+    else
+    {
+        <form asp-controller="Models" asp-action="Album" enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <div class="row justify-content-lg-between">
+                    @for (int i = Model.ImageCount + 1; i < 7; i++)
+                    {
+                        <input class="btn btn-primary" type="file" asp-for="@Model.AlbumInputViewModel.UserImages" />
+                    }
+                </div>
+                <div class="row d-flex justify-content-around">
+                    <button type="submit" class="btn btn-primary">Upload Images</button>
+                </div>
+            </div>
+        </form>
+    }
+
+    <div class="row">
+        @foreach (var image in Model.AlbumViewModel)
+        {
+            <div class="col-md-4">
+                <div class="model model-2 img d-flex align-items-end" style="background-image: url(@image.ProfilePicture);">
+                </div>
+                <a href="@Url.Action("DeleteProfilePicture", "Models",new { id = image.Id })" class="btn btn-default btn-block">
+                    <span class="btn btn-danger" aria-hidden="true">Delete profile picture</span>
+                </a>
+            </div>
+            @foreach (var album in image.UserImages)
+            {
+                <div class="col-md-4">
+                    <div class="model model-2 img d-flex align-items-end" style="background-image: url(@album.ImageUrl);">
+                    </div>
+                    <a href="@Url.Action("ChangeProfilePicture", "Models",new { imageUrl = album.ImageUrl, userId = album.UserId, imageId = album.Id })" class="btn btn-default btn-block">
+                        <span class="btn btn-success" aria-hidden="true">Set as profile picture</span>
+                    </a>
+                    <a href="@Url.Action("DeleteImage", "Models",new { id = album.Id })" class="btn btn-default btn-block">
+                        <span class="btn btn-danger" aria-hidden="true">Delete this picture</span>
+                    </a>
+                </div>
+            }
+        }
+    </div>
     @*<section class="ftco-section">
             <div class="container">
                 <div class="row">

@@ -135,6 +135,7 @@
             await this.modelInformationRepository.SaveChangesAsync();
         }
 
+
         public async Task<string> ChangeUserFirstName(ApplicationUser user, string firstName)
         {
             if (user == null)

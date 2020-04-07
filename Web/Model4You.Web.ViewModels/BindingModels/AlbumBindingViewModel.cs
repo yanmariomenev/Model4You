@@ -11,5 +11,7 @@ namespace Model4You.Web.ViewModels.BindingModels
         public IEnumerable<AlbumViewModel> AlbumViewModel { get; set; }
 
         public AlbumInputViewModel AlbumInputViewModel { get; set; }
+
+        public int ImageCount { get; set; }
     }
 }
