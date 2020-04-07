@@ -1,0 +1,142 @@
+﻿@model IEnumerable<Model4You.Data.Models.ModelInformation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div id="main-wrapper" class="pb-3" data-theme="light" data-layout="vertical" data-sidebartype="full">
+    <div class="page-wrapper">
+        <table class="table" cols="5" aria-expanded="True">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Age)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Height)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModelType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bust)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Waist)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Hips)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InstagramUrl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FacebookUrl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nationality)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ethnicity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsDeleted)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeletedOn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifiedOn)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Age)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Height)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModelType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bust)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Waist)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hips)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InstagramUrl)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FacebookUrl)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nationality)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ethnicity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsDeleted)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeletedOn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedOn)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -17,8 +17,13 @@ namespace Model4You.Web.Areas.Administration.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            return this.View();
         }
+
+        //public IActionResult Edit()
+        //{
+        //    return this.View();
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Create(BlogInputModel input)

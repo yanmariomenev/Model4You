@@ -1,0 +1,156 @@
+﻿@using Model4You.Data.Models.Enums
+@model Model4You.Data.Models.ModelInformation
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ModelInformation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender"></label>
+                <select asp-for="Gender" class="form-control" id="Gender">
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Other</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Height" class="control-label"></label>
+                <input asp-for="Height" class="form-control" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelType" class="control-label"></label>
+                <input asp-for="ModelType" class="form-control" />
+                <span asp-validation-for="ModelType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bust" class="control-label"></label>
+                <input asp-for="Bust" class="form-control" />
+                <span asp-validation-for="Bust" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Waist" class="control-label"></label>
+                <input asp-for="Waist" class="form-control" />
+                <span asp-validation-for="Waist" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hips" class="control-label"></label>
+                <input asp-for="Hips" class="form-control" />
+                <span asp-validation-for="Hips" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InstagramUrl" class="control-label"></label>
+                <input asp-for="InstagramUrl" class="form-control" />
+                <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FacebookUrl" class="control-label"></label>
+                <input asp-for="FacebookUrl" class="form-control" />
+                <span asp-validation-for="FacebookUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nationality" class="control-label"></label>
+                <input asp-for="Nationality" class="form-control" />
+                <span asp-validation-for="Nationality" class="text-danger"></span>
+            </div>
+            <div class="dropdown">
+                <label asp-for="Ethnicity"></label>
+                <select asp-for="Ethnicity"
+                        asp-items="Html.GetEnumSelectList<Ethnicity>()" class="form-control" id="Ethnicity">
+                </select>
+                <span asp-validation-for="Ethnicity" class="text-danger"></span>
+            </div>
+            <div class="dropdown">
+                <label asp-for="Country"></label>
+                <select asp-for="Country" class="form-control" id="Country">
+                    <option value="Bulgaria">Bulgaria</option>
+                </select>
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="dropdown">
+                <label asp-for="City"></label>
+                <select asp-for="City" class="form-control" id="City">
+                    <option value="Sofia">Sofia</option>
+                    <option value="Plovdiv">Plovdiv</option>
+                    <option value="Blagoevgrad">Blagoevgrad</option>
+                    <option value="Burgas">Burgas</option>
+                    <option value="Varna">Varna</option>
+                    <option value="Stara Zagora">Stara Zagora</option>
+                    <option value="Pleven">Pleven</option>
+                    <option value="Pazardzhik">Pazardzhik</option>
+                    <option value="Veliko Tarnovo">Veliko Tarnovo</option>
+                    <option value="Haskovo">Haskovo</option>
+                    <option value="Ruse">Ruse</option>
+                    <option value="Vratsa">Vratsa</option>
+                    <option value="Sliven">Sliven</option>
+                    <option value="Dobrich">Dobrich</option>
+                    <option value="Shumen">Shumen</option>
+                    <option value="Montana">Montana</option>
+                    <option value="Lovech">Lovech</option>
+                    <option value="Kardzhali">Kardzhali</option>
+                    <option value="Kyustendil">Kyustendil</option>
+                    <option value="Yambol">Yambol</option>
+                    <option value="Razgrad">Razgrad</option>
+                    <option value="Pernik">Pernik</option>
+                    <option value="Gabrovo">Gabrovo</option>
+                    <option value="Silistra">Silistra</option>
+                    <option value="Smolyan">Smolyan</option>
+                    <option value="Targovishte">Targovishte</option>
+                    <option value="Vidin">Vidin</option>
+                </select>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeletedOn" class="control-label"></label>
+                <input asp-for="DeletedOn" class="form-control" />
+                <span asp-validation-for="DeletedOn" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="CreatedOn" class="control-label"></label>
+                <input asp-for="CreatedOn" class="form-control" />
+                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModifiedOn" class="control-label"></label>
+                <input asp-for="ModifiedOn" class="form-control" />
+                <span asp-validation-for="ModifiedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
