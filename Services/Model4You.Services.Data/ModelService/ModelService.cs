@@ -31,7 +31,6 @@
             this.modelInformationRepository = modelInformationRepository;
         }
 
-
         public async Task<int> GetPagesCount(int perPage)
         {
             var profiles =
@@ -202,6 +201,7 @@
             {
                 return "Invalid user";
             }
+
             var result = property switch
             {
                 "hips" => user.ModelInformation.Hips = value,
