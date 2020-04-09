@@ -1,10 +1,10 @@
 ﻿@page
 @using Model4You.Data.Models.Enums
 @model IndexModel
-@{
+@*@{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
-}
+}*@
 @*@Html.DropDownList("Gender",
         new SelectList(Enum.GetValues(typeof(Gender))),
         "Select Gender",
@@ -29,6 +29,7 @@
         </div>
     </div>
 </section>
+
 <div class="row">
     <div class="col-md-6">
         <a href="/Models/album" class="btn btn-primary">Go to image upload</a>
