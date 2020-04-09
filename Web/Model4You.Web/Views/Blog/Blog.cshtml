@@ -26,60 +26,63 @@
         </div>
     </section>
 
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 ftco-animate">
-                    <div class="row">
-                        @foreach (var blog in Model.BlogViewModels)
-                        {
-                            <div class="col-md-6 ftco-animate">
-                                <div class="blog-entry" data-aos-delay="200">
-                                    <a href="@blog.Url" class="block-20" style="background-image: url('@blog.ImageUrl');">
-                                    </a>
-                                    <div class="text d-flex py-4">
-                                        <div class="meta mb-3">
-                                            <div><a href="@blog.Url">@blog.CreatedOn</a></div>
-                                            <div><a href="@blog.Url">Admin</a></div>
-                                            @*<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
-                                        </div>
-                                        <div class="desc pl-3">
-                                            <h3 class="heading"><a href="@blog.Url">@blog.Title</a></h3>
-                                        </div>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 ftco-animate">
+                <div class="row">
+                    @foreach (var blog in Model.BlogViewModels)
+                    {
+                        <div class="col-md-6 ftco-animate">
+                            <div class="blog-entry" data-aos-delay="200">
+                                <a href="@blog.Url" class="block-20" style="background-image: url('@blog.ImageUrl');">
+                                </a>
+                                <div class="text d-flex py-4">
+                                    <div class="meta mb-3">
+                                        <div><a href="@blog.Url"><time datetime="@blog.CreatedOn.ToString("O")"></time></a></div>
+                                        <div><a href="@blog.Url">Admin</a></div>
+                                        @*<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
+                                    </div>
+                                    <div class="desc pl-3">
+                                        <h3 class="heading"><a href="@blog.Url">@blog.Title</a></h3>
                                     </div>
                                 </div>
                             </div>
-                        }
+                        </div>
+                    }
 
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col text-center">
-                            <div class="block-27">
-                                @if (Model.PagesCount > 0)
-                                {
-                                    <ul class="pagination">
-                                        <li><a href="/Blog/Blog?page=@Model.PreviousPage"></a></li>
-                                        @for (int i = 1; i <= Model.PagesCount; i++)
+                </div>
+                <div class="row mt-5">
+                    <div class="col text-center">
+                        <div class="block-27">
+                            @if (Model.PagesCount > 0)
+                            {
+                                <ul class="pagination">
+                                    <li><a href="/Blog/Blog?page=@Model.PreviousPage"></a></li>
+                                    @for (int i = 1; i <= Model.PagesCount; i++)
+                                    {
+                                        if (i == Model.CurrentPage)
                                         {
-                                            if (i == Model.CurrentPage)
-                                            {
-                                                <li class="active"><a href="/Blog/Blog?page=@i">@i</a></li>
-                                            }
-                                            else
-                                            {
-                                                <li><a href="/Blog/Blog?page=@i">@i</a></li>
-                                            }
+                                            <li class="active"><a href="/Blog/Blog?page=@i">@i</a></li>
                                         }
-                                        <li><a href="/Blog/Blog?page=@Model.NextPage"></a></li>
-                                    </ul>
-                                }
-                            </div>
+                                        else
+                                        {
+                                            <li><a href="/Blog/Blog?page=@i">@i</a></li>
+                                        }
+                                    }
+                                    <li><a href="/Blog/Blog?page=@Model.NextPage"></a></li>
+                                </ul>
+                            }
                         </div>
                     </div>
-                </div> <!-- .col-md-8 -->
-            </div>
+                </div>
+            </div> <!-- .col-md-8 -->
+            <partial name="_SideBlogPartial" model="Model.SideBlogViewModels" />
         </div>
-    </section> <!-- .section -->
+    </div>
+</section>
+
+<!-- .section -->
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen">
         <svg class="circular" width="48px" height="48px">

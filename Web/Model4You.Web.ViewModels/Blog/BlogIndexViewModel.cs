@@ -6,6 +6,8 @@ namespace Model4You.Web.ViewModels.Blog
     {
         public IEnumerable<BlogViewModel> BlogViewModels { get; set; }
 
+        public IEnumerable<BlogViewModel> SideBlogViewModels { get; set; }
+
         public int PagesCount { get; set; }
 
         public int CurrentPage { get; set; }

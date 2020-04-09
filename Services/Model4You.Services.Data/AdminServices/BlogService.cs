@@ -82,6 +82,14 @@ namespace Model4You.Services.Data.AdminServices
             return await blogs.To<T>().ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> TakeRandomBlogs<T>(int count)
+        {
+            var blogs = this.blogRepository.All()
+                .OrderBy(x => Guid.NewGuid())
+                .Take(count);
+            return await blogs.To<T>().ToListAsync();
+        }
+
         public async Task<T> GetBlogContent<T>(int id)
         {
             var content = await this.blogContentRepository

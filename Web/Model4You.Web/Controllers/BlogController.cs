@@ -11,6 +11,7 @@ namespace Model4You.Web.Controllers
 
     public class BlogController : Controller
     {
+        public const int TakeBlogs = 3;
         public const int BlogPerPage = 6;
         private readonly IBlogService blogService;
         private readonly ICommentService commentService;
@@ -30,6 +31,7 @@ namespace Model4You.Web.Controllers
             var viewModel = new BlogIndexViewModel
             {
                BlogViewModels = await this.blogService.TakeAllBlogs<BlogViewModel>(page, perPage),
+               SideBlogViewModels = await this.blogService.TakeRandomBlogs<BlogViewModel>(TakeBlogs),
                CurrentPage = page,
                PagesCount = pagesCount,
             };

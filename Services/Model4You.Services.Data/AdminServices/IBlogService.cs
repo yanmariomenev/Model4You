@@ -15,6 +15,8 @@ namespace Model4You.Services.Data.AdminServices
 
         Task<IEnumerable<T>> TakeThreeBlogs<T>();
 
+        Task<IEnumerable<T>> TakeRandomBlogs<T>(int count);
+
         Task<T> GetBlogContent<T>(int id);
 
     }
