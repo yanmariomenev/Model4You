@@ -45,8 +45,9 @@
                             <div class="form-field">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <label>Select Country</label>
                                     <select name="Country" id="1" class="form-control">
-                                        <option value="">Country</option>
+                                        @*<option value="">Country</option>*@
                                         <option value="Bulgaria">Bulgaria</option>
                                     </select>
                                     <span asp-validation-for="SearchInputModel.Country" class="text-danger"></span>
@@ -57,8 +58,9 @@
                             <div class="form-field">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <label>Select City</label>
                                     <select name="City" id="2" class="form-control">
-                                        <option value="">City</option>
+                                        @*<option value="">City</option>*@
                                         <option value="Sofia">Sofia</option>
                                         <option value="Plovdiv">Plovdiv</option>
                                         <option value="Blagoevgrad">Blagoevgrad</option>
@@ -95,8 +97,9 @@
                             <div class="form-field">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <label>Select Gender</label>
                                     <select name="Gender" id="3" class="form-control">
-                                        <option value="">Gender</option>
+                                        @*<option value="">Gender</option>*@
                                         <option value="Female">Female</option>
                                         <option value="Male">Male</option>
                                     </select>
@@ -109,8 +112,9 @@
                             <div class="form-field">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <label>Select Age From</label>
                                     <select name="Age" id="4" class="form-control">
-                                        <option value="">Age from</option>
+                                        @*<option value="">Age from</option>*@
                                         @for (int i = 12; i < 75; i++)
                                         {
                                             <option value="@i">@i</option>
@@ -125,8 +129,9 @@
                             <div class="form-field">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <label>To Age</label>
                                     <select name="To" id="4" class="form-control">
-                                        <option value="">To</option>
+                                        @*<option value="">To</option>*@
                                         @for (int i = 13; i < 76; i++)
                                         {
                                             <option value="@i">@i</option>

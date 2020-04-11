@@ -23,7 +23,7 @@
             if (!this.ModelState.IsValid)
             {
                 // TODO send them to redo the search
-                return this.Redirect("/");
+                return this.Redirect("/Models/model");
             }
 
             var search = await
