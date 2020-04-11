@@ -3,7 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-Model4You-BBB373B5-EF3F-4DBB-B8AA-7152CEC275BF</UserSecretsId>
-	<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+	<!--<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>-->
+  <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+  <AspNetCoreModuleName>AspNetCoreModule</AspNetCoreModuleName>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -51,9 +53,9 @@
     <ProjectReference Include="..\Model4You.Web.ViewModels\Model4You.Web.ViewModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <Content Update="wwwroot\images\bg_1.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
+  </ItemGroup>-->
 </Project>
