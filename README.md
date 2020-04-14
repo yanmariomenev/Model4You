@@ -1,8 +1,16 @@
 # Model4You
+
+
+
+Home page view
 ![model4you test](ReadMeGif/1.gif)
-Test
+Blog/Article view
 ![model4you test](ReadMeGif/2.gif)
-Test
+Profile/Profile page view
 ![model4you test](ReadMeGif/3.gif)
-Test
+User booking view
 ![model4you test](ReadMeGif/4.gif)
+User album view
+![model4you test](ReadMeGif/5.gif)
+Administration view
+![model4you test](ReadMeGif/6.gif)
