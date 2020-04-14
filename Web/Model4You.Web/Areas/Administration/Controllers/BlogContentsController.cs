@@ -10,8 +10,7 @@ using Model4You.Data.Models;
 
 namespace Model4You.Web.Areas.Administration.Controllers
 {
-    [Area("Administration")]
-    public class BlogContentsController : Controller
+    public class BlogContentsController : AdministrationController
     {
         private readonly ApplicationDbContext _context;
 
