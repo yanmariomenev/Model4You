@@ -154,7 +154,7 @@
                                     <ul>
                                         <li><span>Location:</span><span>@modelInfo.ModelInformation.Country, @modelInfo.ModelInformation.City</span></li>
                                         <li><span>Age:</span><span>@modelInfo.ModelInformation.Age</span></li>
-                                        <li><span>Height:</span><span>@modelInfo.ModelInformation.Height</span></li>
+                                        <li><span>Height:</span><span>@modelInfo.ModelInformation.Height.ToString("F2")</span></li>
                                         @if (!string.IsNullOrWhiteSpace(modelInfo.ModelInformation.ModelType))
                                         {
                                             <li><span>Model Type:</span><span>@modelInfo.ModelInformation.ModelType</span></li>

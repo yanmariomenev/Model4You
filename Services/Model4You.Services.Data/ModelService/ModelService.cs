@@ -14,6 +14,8 @@
 
     public class ModelService : IModelService
     {
+        private const string InfoUpdate = "User Information Updated";
+        private const string InfoCreated = "User Information was created";
         private readonly IDeletableEntityRepository<ApplicationUser> appRepository;
         private readonly ICloudinaryService cloudinaryService;
         private readonly IDeletableEntityRepository<UserImage> imageRepository;
@@ -106,7 +108,7 @@
             return model;
         }
 
-        public async Task InsertModelInformation(string id)
+        public async Task<string> InsertModelInformation(string id)
         {
             var checkUser = await this.modelInformationRepository
                 .All()
@@ -114,7 +116,7 @@
 
             if (checkUser != null)
             {
-                return;
+                return InfoUpdate;
             }
 
             var modelInformation = new ModelInformation
@@ -132,6 +134,7 @@
             };
             await this.modelInformationRepository.AddAsync(modelInformation);
             await this.modelInformationRepository.SaveChangesAsync();
+            return InfoCreated;
         }
 
 

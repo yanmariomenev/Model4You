@@ -72,6 +72,7 @@ namespace Model4You.Web.Areas.Identity.Pages.Account.Manage
             public Ethnicity Ethnicity { get; set; }
 
             [Display(Name = "Your height in centimeters.")]
+            [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
             public double Height { get; set; }
 
             [Display(Name = "Bust size in centimeters.")]

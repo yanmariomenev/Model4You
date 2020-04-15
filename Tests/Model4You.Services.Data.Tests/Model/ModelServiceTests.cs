@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -31,9 +32,9 @@ namespace Model4You.Services.Data.Tests.Model
             var service = new ModelService.ModelService(repository, null, null, null);
 
 
-            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev",repository);
-            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko",repository);
-            var user3 = await this.CreateUserAsync("Ri@abv.bg", "Ri", "Ro",repository);
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var user3 = await this.CreateUserAsync("Ri@abv.bg", "Ri", "Ro", repository);
             var count = await service.GetModelCount();
 
             Assert.Equal(3, count);
@@ -95,6 +96,48 @@ namespace Model4You.Services.Data.Tests.Model
 
             var getModel = await service.GetModelById<ProfileViewModel>("TESTID123");
             Assert.Null(getModel);
+        }
+
+        [Fact]
+        public async Task InsertModelInformation_ShouldAddFillTablesWithDefaultInformation()
+        {
+            //AutoMapperConfig.RegisterMappings(typeof(ProfileViewModel).GetTypeInfo().Assembly);
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+            var modelInfoRepository = new EfDeletableEntityRepository<ModelInformation>(new ApplicationDbContext(options));
+            var service = new ModelService.ModelService(userRepository, null, null, modelInfoRepository);
+
+            var user1 = await this.CreateUserWithNoInformationAsync("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            var user2 = await this.CreateUserWithNoInformationAsync("Vank@abv.bg", "Vank", "Vanko", userRepository);
+            await service.InsertModelInformation(user1);
+
+            var check = await modelInfoRepository.All().Where(x => x.UserId == user1).FirstOrDefaultAsync();
+
+            Assert.NotNull(check);
+
+        }
+
+        [Fact]
+        public async Task InsertModelInformation_CallingTheMethodTwiceShoudReturnRightStatusMassages()
+        {
+            string InfoUpdate = "User Information Updated";
+            string InfoCreated = "User Information was created";
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+            var modelInfoRepository = new EfDeletableEntityRepository<ModelInformation>(new ApplicationDbContext(options));
+            var service = new ModelService.ModelService(userRepository, null, null, modelInfoRepository);
+
+            var user1 = await this.CreateUserWithNoInformationAsync("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            var user2 = await this.CreateUserWithNoInformationAsync("Vank@abv.bg", "Vank", "Vanko", userRepository);
+            var response = await service.InsertModelInformation(user1);
+            var response2 = await service.InsertModelInformation(user1);
+            Assert.Equal(InfoCreated, response);
+            Assert.Equal(InfoUpdate, response2);
+
         }
 
         private async Task<string> CreateUserAsync(string email, string name, string lastName, IDeletableEntityRepository<ApplicationUser> repo)

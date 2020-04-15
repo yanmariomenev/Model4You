@@ -24,7 +24,7 @@ namespace Model4You.Services.Data.ModelService
 
         Task<T> GetModelById<T>(string modelId);
 
-        Task InsertModelInformation(string id);
+        Task<string> InsertModelInformation(string id);
 
 
         Task<string> ChangeUserFirstName(ApplicationUser user, string name);
