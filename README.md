@@ -6,7 +6,7 @@ This my first project made for SoftUni ASP.NET Core project defense.
 Huge thanks to @NikolayIT for the template, as well one of the best lecturer at SoftUni.
 Also huge thanks to @StoyanShopov for all of the help, support and knowledge he gives to the students. 
 
-Here you can check out some of the functionality and look of the website. ⤵️
+Here you can check out some of the functionality and design of the website. ⤵️
 
 Home page view
 ![model4you test](ReadMeGif/1.gif)
