@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -38,6 +39,54 @@ namespace Model4You.Services.Data.Tests.Model
             var count = await service.GetModelCount();
 
             Assert.Equal(3, count);
+
+        }
+
+        [Fact]
+        public async Task TakeAllPictures_ShouldReturnAllPicturesFromUser()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+            var imageRepository = new EfDeletableEntityRepository<UserImage>(new ApplicationDbContext(options));
+            var service = new ModelService.ModelService(repository, null, imageRepository, null);
+
+            var user1 = await this.CreateUserWithImage("pesho@abv.bg", "Pesho", "Peshev", repository);
+            //var userImages = await this.CreateUserImages(user1, imageRepository, repository);
+
+            var takeImages = await service.TakeAllPictures<AlbumViewModel>(user1);
+            var count = 0;
+            foreach (var image in takeImages)
+            {
+               count = image.UserImages.Count();
+            }
+
+            Assert.Equal(3, count);
+
+        }
+
+        [Fact]
+        public async Task TakeAllPictures_UserWithNoImagesShouldReturnImageCountZero()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+            var imageRepository = new EfDeletableEntityRepository<UserImage>(new ApplicationDbContext(options));
+            var service = new ModelService.ModelService(repository, null, imageRepository, null);
+
+            var user1 = await this.CreateUserWithNoInformationAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            //var userImages = await this.CreateUserImages(user1, imageRepository, repository);
+
+            var takeImages = await service.TakeAllPictures<AlbumViewModel>(user1);
+            var count = 0;
+            foreach (var image in takeImages)
+            {
+                count = image.UserImages.Count();
+            }
+
+            Assert.Equal(0, count);
 
         }
 
@@ -695,6 +744,43 @@ namespace Model4You.Services.Data.Tests.Model
                 LastName = lastName,
                 Email = email,
                 UserName = email,
+            };
+            await repo.AddAsync(user);
+            await repo.SaveChangesAsync();
+            return user.Id;
+        }
+
+        //private async Task<string> CreateUserImages(string userId, IDeletableEntityRepository<UserImage> imageRepo, IDeletableEntityRepository<ApplicationUser> repo)
+        //{
+        //    var userImages = new List<UserImage>
+        //    {
+        //        new UserImage { UserId = userId, ImageUrl = "testUrl1" },
+        //        new UserImage { UserId = userId, ImageUrl = "testUrl2" },
+        //        new UserImage { UserId = userId, ImageUrl = "testUrl3" },
+        //    };
+        //    foreach (var image in userImages)
+        //    {
+        //        await imageRepo.AddAsync(image);
+        //        await repo.SaveChangesAsync();
+        //    }
+
+        //    return userId;
+        //}
+
+        private async Task<string> CreateUserWithImage(string email, string name, string lastName, IDeletableEntityRepository<ApplicationUser> repo)
+        {
+            var user = new ApplicationUser()
+            {
+                FirstName = name,
+                LastName = lastName,
+                Email = email,
+                UserName = email,
+                UserImages = new List<UserImage>
+                {
+                    new UserImage { ImageUrl = "testUrl1" },
+                    new UserImage { ImageUrl = "testUrl2" },
+                    new UserImage { ImageUrl = "testUrl3" },
+                },
             };
             await repo.AddAsync(user);
             await repo.SaveChangesAsync();
