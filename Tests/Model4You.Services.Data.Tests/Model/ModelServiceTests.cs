@@ -120,7 +120,7 @@ namespace Model4You.Services.Data.Tests.Model
         }
 
         [Fact]
-        public async Task InsertModelInformation_CallingTheMethodTwiceShoudReturnRightStatusMassages()
+        public async Task InsertModelInformation_CallingTheMethodTwiceShouldReturnRightStatusMassages()
         {
             string InfoUpdate = "User Information Updated";
             string InfoCreated = "User Information was created";
@@ -164,7 +164,7 @@ namespace Model4You.Services.Data.Tests.Model
         }
 
         [Fact]
-        public async Task ChangeUserFirstNameWithNullUser_ShoudReturnStatusInvalidUser()
+        public async Task ChangeUserFirstNameWithNullUser_ShouldReturnStatusInvalidUser()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
@@ -177,7 +177,6 @@ namespace Model4You.Services.Data.Tests.Model
             var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
             var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
             var nameChangeExample = "Sancho";
-            var status = "Success";
             var statusInvalid = "Invalid user";
             
             var changeUserFirstName = await service.ChangeUserFirstName(null, nameChangeExample);
@@ -211,7 +210,7 @@ namespace Model4You.Services.Data.Tests.Model
         }
 
         [Fact]
-        public async Task ChangeUserLastNameWithNullUser_ShoudReturnStatusInvalidUser()
+        public async Task ChangeUserLastNameWithNullUser_ShouldReturnStatusInvalidUser()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
@@ -224,7 +223,6 @@ namespace Model4You.Services.Data.Tests.Model
             var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
             var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
             var nameChangeExample = "Sanchev";
-            var status = "Success";
             var statusInvalid = "Invalid user";
 
             var changeUserLastName = await service.ChangeUserFirstName(null, nameChangeExample);
@@ -232,6 +230,98 @@ namespace Model4You.Services.Data.Tests.Model
 
             Assert.Equal(statusInvalid, changeUserLastName);
             Assert.Equal("Peshev", userCurrentNameSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserAge_ShouldChangeUserAgeWithStatusSuccess()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var ageExample = 68;
+            var status = "Success";
+
+            var changeUserAge = await service.ChangeUserAge(getUser, ageExample);
+            var userCurrentAgeSecondCheck = getUser.ModelInformation.Age;
+
+            Assert.Equal(status, changeUserAge);
+            Assert.Equal(ageExample, userCurrentAgeSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserAgeWithNullUser_ShouldReturnStatusInvalidUser()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var ageExample = 68;
+            var statusInvalid = "Invalid user";
+
+            var changeUserAge = await service.ChangeUserAge(null, ageExample);
+            var userCurrentAgeSecondCheck = getUser.ModelInformation.Age;
+
+            Assert.Equal(statusInvalid, changeUserAge);
+            Assert.Equal(13, userCurrentAgeSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserGender_ShouldChangeUsersGenderWithStatusSuccess()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var changeTo = Gender.Female;
+            var status = "Success";
+
+            var changeUserGender = await service.ChangeUserGender(getUser, changeTo);
+            var userCurrentGenderSecondCheck = getUser.ModelInformation.Gender;
+
+            Assert.Equal(status, changeUserGender);
+            Assert.Equal(changeTo, userCurrentGenderSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserGenderWithNullUser_ShouldReturnStatusInvalidUser()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var changeTo = Gender.Female;
+            var statusInvalid = "Invalid user";
+
+            var changeUserGender = await service.ChangeUserGender(null, changeTo);
+            var userCurrentGenderSecondCheck = getUser.ModelInformation.Gender;
+
+            Assert.Equal(statusInvalid, changeUserGender);
+            Assert.Equal(Gender.Male, userCurrentGenderSecondCheck);
         }
 
         private async Task<string> CreateUserAsync(string email, string name, string lastName, IDeletableEntityRepository<ApplicationUser> repo)
