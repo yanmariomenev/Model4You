@@ -187,6 +187,53 @@ namespace Model4You.Services.Data.Tests.Model
             Assert.Equal("Pesho", userCurrentNameSecondCheck);
         }
 
+        [Fact]
+        public async Task ChangeUserLastName_ShouldChangeUsersFirstNameWithStatusSuccess()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var nameChangeExample = "Sanchev";
+            var status = "Success";
+
+            var changeUserLastName = await service.ChangeUserLastName(getUser, nameChangeExample);
+            var userCurrentNameSecondCheck = getUser.LastName;
+
+            Assert.Equal(status, changeUserLastName);
+            Assert.Equal(nameChangeExample, userCurrentNameSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserLastNameWithNullUser_ShoudReturnStatusInvalidUser()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var nameChangeExample = "Sanchev";
+            var status = "Success";
+            var statusInvalid = "Invalid user";
+
+            var changeUserLastName = await service.ChangeUserFirstName(null, nameChangeExample);
+            var userCurrentNameSecondCheck = getUser.LastName;
+
+            Assert.Equal(statusInvalid, changeUserLastName);
+            Assert.Equal("Peshev", userCurrentNameSecondCheck);
+        }
+
         private async Task<string> CreateUserAsync(string email, string name, string lastName, IDeletableEntityRepository<ApplicationUser> repo)
         {
             var user = new ApplicationUser()
