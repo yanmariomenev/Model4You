@@ -493,6 +493,173 @@ namespace Model4You.Services.Data.Tests.Model
             Assert.Equal(16, userCurrentWaistSizeSecondCheck);
         }
 
+        [Fact]
+        public async Task ChangeUserStringValuesModelType_ShouldChangeUserValuesWithStatusSuccess()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var valueInput = "modelType";
+            var valueExample = "Swimsuit";
+            var status = "Success";
+
+            var changeUserValues = await service.ChangeUserStringValues(getUser, valueExample, valueInput);
+            var userCurrentValueSecondCheck = getUser.ModelInformation.ModelType;
+
+            Assert.Equal(status, changeUserValues);
+            Assert.Equal(valueExample, userCurrentValueSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserStringValuesNationality_ShouldChangeUserValuesWithStatusSuccess()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var valueInput = "nationality";
+            var valueExample = "Serbian";
+            var status = "Success";
+
+            var changeUserValues = await service.ChangeUserStringValues(getUser, valueExample, valueInput);
+            var userCurrentValueSecondCheck = getUser.ModelInformation.Nationality;
+
+            Assert.Equal(status, changeUserValues);
+            Assert.Equal(valueExample, userCurrentValueSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserStringValuesiInstagramUrl_ShouldChangeUserValuesWithStatusSuccess()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var valueInput = "instagramUrl";
+            var valueExample = "https://www.instagram.com/model4youbulgaria/";
+            var status = "Success";
+
+            var changeUserValues = await service.ChangeUserStringValues(getUser, valueExample, valueInput);
+            var userCurrentValueSecondCheck = getUser.ModelInformation.InstagramUrl;
+
+            Assert.Equal(status, changeUserValues);
+            Assert.Equal(valueExample, userCurrentValueSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserStringValuesFacebookUrl_ShouldChangeUserValuesWithStatusSuccess()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var valueInput = "facebookUrl";
+            var valueExample = "www.facebook.com/randomurl";
+            var status = "Success";
+
+            var changeUserValues = await service.ChangeUserStringValues(getUser, valueExample, valueInput);
+            var userCurrentValueSecondCheck = getUser.ModelInformation.FacebookUrl;
+
+            Assert.Equal(status, changeUserValues);
+            Assert.Equal(valueExample, userCurrentValueSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserStringValuesCity_ShouldChangeUserValuesWithStatusSuccess()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var valueInput = "city";
+            var valueExample = "Oslo";
+            var status = "Success";
+
+            var changeUserValues = await service.ChangeUserStringValues(getUser, valueExample, valueInput);
+            var userCurrentValueSecondCheck = getUser.ModelInformation.City;
+
+            Assert.Equal(status, changeUserValues);
+            Assert.Equal(valueExample, userCurrentValueSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserStringValuesCountry_ShouldChangeUserValuesWithStatusSuccess()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var valueInput = "country";
+            var valueExample = "Norway";
+            var status = "Success";
+
+            var changeUserValues = await service.ChangeUserStringValues(getUser, valueExample, valueInput);
+            var userCurrentValueSecondCheck = getUser.ModelInformation.Country;
+
+            Assert.Equal(status, changeUserValues);
+            Assert.Equal(valueExample, userCurrentValueSecondCheck);
+        }
+
+        [Fact]
+        public async Task ChangeUserStringValuesWithNullUser_ShouldReturnStatusInvalidUser()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+
+            var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
+            var valueInput = "country";
+            var valueExample = "Norway";
+            var statusInvalid = "Invalid user";
+
+            var changeUserAge = await service.ChangeUserStringValues(null, valueExample, valueInput);
+            //var userCurrentCountrySecondCheck = getUser.ModelInformation.Country;
+            //var userCurrentCitySecondCheck = getUser.ModelInformation.City;
+
+            Assert.Equal(statusInvalid, changeUserAge);
+        }
 
         private async Task<string> CreateUserAsync(string email, string name, string lastName, IDeletableEntityRepository<ApplicationUser> repo)
         {
