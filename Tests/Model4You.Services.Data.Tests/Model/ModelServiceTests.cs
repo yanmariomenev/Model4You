@@ -13,6 +13,7 @@ using Model4You.Data.Repositories;
 using Model4You.Services.Data.ModelService;
 using Model4You.Services.Mapping;
 using Model4You.Web.ViewModels.Model;
+using Model4You.Web.ViewModels.ModelViews;
 
 namespace Model4You.Services.Data.Tests.Model
 {
@@ -88,6 +89,90 @@ namespace Model4You.Services.Data.Tests.Model
 
             Assert.Equal(0, count);
 
+        }
+
+        [Fact]
+        public async Task TakeAllModels_ShouldReturnListOfModelsDependingOnPerPage()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+            for (int i = 0; i < 12; i++)
+            {
+                await this.CreateUserAsync($"pesho{i}@abv.bg", "Pesho", "Peshev", repository);
+            }
+
+            var perPage = 6;
+            var pagesCount = await service.GetPagesCount(perPage);
+            var takeModels = await service.TakeAllModels<ModelProfileView>(1, perPage);
+            var modelReturned = takeModels.Count();
+            //var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            //var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
+            //var user3 = await this.CreateUserAsync("Ri@abv.bg", "Ri", "Ro", repository);
+
+
+            Assert.Equal(6, modelReturned);
+            Assert.Equal(2, pagesCount);
+        }
+
+        [Fact]
+        public async Task TakeAllModels_WithNoUsersShouldReturnZero()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+            
+            var perPage = 6;
+            var pagesCount = await service.GetPagesCount(perPage);
+            var takeModels = await service.TakeAllModels<ModelProfileView>(1, perPage);
+            var modelReturned = takeModels.Count();
+
+            Assert.Equal(0, modelReturned);
+            Assert.Equal(0, pagesCount);
+        }
+
+        [Fact]
+        public async Task GetPageCount_ShouldRetunPageCountDependingOnPerPage()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+            for (int i = 0; i < 12; i++)
+            {
+                await this.CreateUserAsync($"pesho{i}@abv.bg", "Pesho", "Peshev", repository);
+            }
+
+            var perPage = 6;
+            var pagesCount = await service.GetPagesCount(perPage);
+            var pageCountPlus1 = pagesCount + 1;
+
+            Assert.Equal(2, pagesCount);
+            Assert.Equal(3, pageCountPlus1);
+        }
+
+        [Fact]
+        public async Task GetPageCount_NoUsersShouldReturnZero()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+            var perPage = 6;
+           
+            var pagesCount = await service.GetPagesCount(perPage);
+            
+            Assert.Equal(0, pagesCount);
         }
 
         [Fact]
@@ -227,7 +312,6 @@ namespace Model4You.Services.Data.Tests.Model
             var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
             var nameChangeExample = "Sancho";
             var statusInvalid = "Invalid user";
-            
             var changeUserFirstName = await service.ChangeUserFirstName(null, nameChangeExample);
             var userCurrentNameSecondCheck = getUser.FirstName;
 
@@ -728,6 +812,10 @@ namespace Model4You.Services.Data.Tests.Model
                     Height = 15,
                     Gender = Gender.Male,
                     Ethnicity = Ethnicity.Chinese,
+                },
+                UserImages = new List<UserImage>
+                {
+                    new UserImage{ImageUrl = "Test"},
                 },
             };
             await repo.AddAsync(user);
