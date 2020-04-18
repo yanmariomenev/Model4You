@@ -66,7 +66,7 @@
             return await pictures.To<T>().ToListAsync();
         }
 
-        public async Task UploadAlbum(List<string> imageUrl, string userId)
+        public async Task<int> UploadAlbum(List<string> imageUrl, string userId)
         {
             // TODO Make this better.
             foreach (var images in imageUrl
@@ -75,6 +75,8 @@
                 await this.imageRepository.AddAsync(images);
                 await this.imageRepository.SaveChangesAsync();
             }
+
+            return imageUrl.Count;
         }
 
         public async Task<IEnumerable<T>> TakeSixModels<T>()

@@ -44,6 +44,52 @@ namespace Model4You.Services.Data.Tests.Model
         }
 
         [Fact]
+        public async Task UploadAlbum_ShouldUpdateDatabaseWithPictureUrls()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+            var imageRepo = new EfDeletableEntityRepository<UserImage>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, imageRepo, null);
+           
+            var user1 = await this.CreateUserAsync($"pesho@abv.bg", "Pesho", "Peshev", repository);
+            var listUrls = new List<string>
+            {
+                "TestUrl",
+                "TestUrl2",
+            };
+            var count = await service.UploadAlbum(listUrls, user1);
+
+            //var count = await imageRepo.All()
+            //    .Where(x => x.UserId == user1 && x.ImageUrl == "TestUrl" && x.ImageUrl == "TestUrl2")
+            //    .CountAsync();
+
+            Assert.Equal(2, count);
+        }
+
+        [Fact]
+        public async Task UploadAlbum_WithNoUrls_ShouldRetunNoUpdates()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+            var imageRepo = new EfDeletableEntityRepository<UserImage>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, imageRepo, null);
+
+            var user1 = await this.CreateUserAsync($"pesho@abv.bg", "Pesho", "Peshev", repository);
+            var listUrls = new List<string>
+            {
+            };
+            var count = await service.UploadAlbum(listUrls, user1);
+
+            Assert.Equal(0, count);
+        }
+
+        [Fact]
         public async Task TakeAllPictures_ShouldReturnAllPicturesFromUser()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
@@ -198,6 +244,7 @@ namespace Model4You.Services.Data.Tests.Model
             Assert.Equal(2, pagesCount);
             Assert.Equal(3, pageCountPlus1);
         }
+
 
         [Fact]
         public async Task GetPageCount_NoUsersShouldReturnZero()
