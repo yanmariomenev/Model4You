@@ -138,6 +138,46 @@ namespace Model4You.Services.Data.Tests.Model
         }
 
         [Fact]
+        public async Task TakeSixModels_ShouldRetunSixModels()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+            for (int i = 0; i < 8; i++)
+            {
+                await this.CreateUserAsync($"pesho{i}@abv.bg", "Pesho", "Peshev", repository);
+            }
+
+            var takeSixUsers = await service.TakeSixModels<ModelProfileView>();
+            var countUsers = takeSixUsers.Count();
+
+            Assert.Equal(6, countUsers);
+        }
+
+        [Fact]
+        public async Task TakeSixModels_WithLessThanSixUsers_ShouldReturnLessThanSix()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ModelService.ModelService(repository, null, null, null);
+            for (int i = 0; i < 4; i++)
+            {
+                await this.CreateUserAsync($"pesho{i}@abv.bg", "Pesho", "Peshev", repository);
+            }
+
+            var takeSixUsers = await service.TakeSixModels<ModelProfileView>();
+            var countUsers = takeSixUsers.Count();
+
+            Assert.Equal(4, countUsers);
+        }
+
+        [Fact]
         public async Task GetPageCount_ShouldRetunPageCountDependingOnPerPage()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
