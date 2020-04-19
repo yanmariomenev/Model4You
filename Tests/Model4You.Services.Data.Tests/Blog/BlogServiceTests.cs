@@ -7,6 +7,7 @@ using Model4You.Data.Common.Repositories;
 using Model4You.Data.Models;
 using Model4You.Data.Repositories;
 using Model4You.Services.Data.AdminServices;
+using Model4You.Web.ViewModels.Blog;
 using Xunit;
 
 namespace Model4You.Services.Data.Tests.Blog
@@ -74,7 +75,82 @@ namespace Model4You.Services.Data.Tests.Blog
             Assert.NotNull(title);
         }
 
+        [Fact]
+        public async Task TakeThreeBlogs_ShouldReturnThreeBlogs()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
 
+            var repository = new EfDeletableEntityRepository<Model4You.Data.Models.Blog>(new ApplicationDbContext(options));
+            var blogContentRepository = new EfDeletableEntityRepository<BlogContent>(new ApplicationDbContext(options));
+
+            var service = new BlogService(repository, blogContentRepository);
+
+            for (int i = 0; i < 5; i++)
+            {
+                await this.CreateBlogForTest
+                    ($"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
+            }
+
+            var takeBlogs = await service.TakeThreeBlogs<BlogViewModel>();
+            var count = takeBlogs.Count();
+
+            Assert.Equal(3, count);
+        }
+
+        [Fact]
+        public async Task TakeThreeBlogs_WithLessThanThreeBlogs_ShouldReturnLessThanThree()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<Model4You.Data.Models.Blog>(new ApplicationDbContext(options));
+            var blogContentRepository = new EfDeletableEntityRepository<BlogContent>(new ApplicationDbContext(options));
+
+            var service = new BlogService(repository, blogContentRepository);
+
+            for (int i = 0; i < 2; i++)
+            {
+                await this.CreateBlogForTest
+                    ($"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
+            }
+
+            var takeBlogs = await service.TakeThreeBlogs<BlogViewModel>();
+            var count = takeBlogs.Count();
+
+            Assert.Equal(2, count);
+        }
+
+        [Fact]
+        public async Task TakeAllBlogs_DependingOnPerPage_ShouldReturnAllBlogsDependingOnPerPageNumber()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<Model4You.Data.Models.Blog>(new ApplicationDbContext(options));
+            var blogContentRepository = new EfDeletableEntityRepository<BlogContent>(new ApplicationDbContext(options));
+
+            var service = new BlogService(repository, blogContentRepository);
+
+            for (int i = 0; i < 8; i++)
+            {
+                await this.CreateBlogForTest
+                    ($"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
+            }
+
+            var perPage = 6;
+            var pagesCount = await service.GetPagesCount(perPage);
+            var takeAllBlogs = await service.TakeAllBlogs<BlogViewModel>(1, perPage);
+            var takeAllBlogsPage2 = await service.TakeAllBlogs<BlogViewModel>(2, perPage);
+            var blogsReturned = takeAllBlogs.Count();
+            var blogsReturnedPage2 = takeAllBlogsPage2.Count();
+            
+            // First page should return 6 and second 2 for overall 8 blogs
+            Assert.Equal(6, blogsReturned);
+            Assert.Equal(2, blogsReturnedPage2);
+            Assert.Equal(2, pagesCount);
+
+        }
 
         private async Task CreateBlogForTest(
             string title,

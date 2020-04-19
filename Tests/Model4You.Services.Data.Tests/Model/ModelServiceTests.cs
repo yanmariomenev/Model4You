@@ -154,13 +154,13 @@ namespace Model4You.Services.Data.Tests.Model
             var perPage = 6;
             var pagesCount = await service.GetPagesCount(perPage);
             var takeModels = await service.TakeAllModels<ModelProfileView>(1, perPage);
+            var takeModelsPage2 = await service.TakeAllModels<ModelProfileView>(2, perPage);
             var modelReturned = takeModels.Count();
-            //var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
-            //var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
-            //var user3 = await this.CreateUserAsync("Ri@abv.bg", "Ri", "Ro", repository);
+            var modelReturnedPage2 = takeModelsPage2.Count();
 
-
+            // Page one should return 6 and page 2 should return 6 for overall 12 users in the db;
             Assert.Equal(6, modelReturned);
+            Assert.Equal(6, modelReturnedPage2);
             Assert.Equal(2, pagesCount);
         }
 
