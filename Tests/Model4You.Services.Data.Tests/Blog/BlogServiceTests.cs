@@ -152,7 +152,62 @@ namespace Model4You.Services.Data.Tests.Blog
 
         }
 
-        private async Task CreateBlogForTest(
+        [Fact]
+        public async Task TakeRandomBlogs_ShouldReturnRandomMixBlogsDependingOnTheCountThatIsGiven()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<Model4You.Data.Models.Blog>(new ApplicationDbContext(options));
+            var blogContentRepository = new EfDeletableEntityRepository<BlogContent>(new ApplicationDbContext(options));
+
+            var service = new BlogService(repository, blogContentRepository);
+
+            for (int i = 0; i < 9; i++)
+            {
+                await this.CreateBlogForTest
+                    ($"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
+            }
+
+            var count = 7;
+            var getRandomBlogsFirst = await service.TakeRandomBlogs<BlogViewModel>(count);
+            var getRandomBlogsSecond = await service.TakeRandomBlogs<BlogViewModel>(count);
+            // RandomShould return randomly picked blogs and it's always randomly sorted;
+            // Guid is used for TakeRandomBlogs;
+
+            Assert.NotEqual(getRandomBlogsFirst, getRandomBlogsSecond);
+        }
+
+        [Fact]
+        public async Task TakeBlogContent_ShouldReturnTheBlogContent_FromTheGivenId()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<Model4You.Data.Models.Blog>(new ApplicationDbContext(options));
+            var blogContentRepository = new EfDeletableEntityRepository<BlogContent>(new ApplicationDbContext(options));
+
+            var service = new BlogService(repository, blogContentRepository);
+            var firstBlogId = await this.CreateBlogForTest
+                ($"testTitle", $"TestUrl", $"TestUserId", repository);
+            for (int i = 0; i < 3; i++)
+            {
+                await this.CreateBlogForTest
+                    ($"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
+            }
+
+            await this.CreateBlogContentForTests(
+                "testTitle",
+                "insert random content",
+                firstBlogId,
+                blogContentRepository);
+            var getBlogContent = service.GetBlogContent<BlogContentView>(firstBlogId);
+            // Check if it returns the correct title and content;
+            Assert.Equal("testTitle", getBlogContent.Result.Title);
+            Assert.Equal("insert random content", getBlogContent.Result.Content);
+        }
+
+        private async Task<int> CreateBlogForTest(
             string title,
             string imageUrl,
             string userId,
@@ -167,6 +222,20 @@ namespace Model4You.Services.Data.Tests.Blog
 
             await blogRepo.AddAsync(blog);
             await blogRepo.SaveChangesAsync();
+            return blog.Id;
+        }
+
+        private async Task CreateBlogContentForTests(string title, string content, int blogId, IDeletableEntityRepository<BlogContent> cRepo)
+        {
+            var blogContent = new BlogContent
+            {
+                BlogId = blogId,
+                Title = title,
+                Content = content,
+            };
+
+            await cRepo.AddAsync(blogContent);
+            await cRepo.SaveChangesAsync();
         }
     }
 }
