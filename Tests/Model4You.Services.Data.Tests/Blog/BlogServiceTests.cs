@@ -207,6 +207,30 @@ namespace Model4You.Services.Data.Tests.Blog
             Assert.Equal("insert random content", getBlogContent.Result.Content);
         }
 
+        [Fact]
+        public async Task GetPageCount_ShoudReturnThePageCount_DependingOnPerPage()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var repository = new EfDeletableEntityRepository<Model4You.Data.Models.Blog>(new ApplicationDbContext(options));
+            var blogContentRepository = new EfDeletableEntityRepository<BlogContent>(new ApplicationDbContext(options));
+
+            var service = new BlogService(repository, blogContentRepository);
+
+            for (int i = 0; i < 8; i++)
+            {
+                await this.CreateBlogForTest
+                    ($"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
+            }
+
+            var perPage = 6;
+            var pagesCount = await service.GetPagesCount(perPage);
+            
+            // 8 blogs you can have 6 per page  returns 2 pages;
+            Assert.Equal(2, pagesCount);
+        }
+
         private async Task<int> CreateBlogForTest(
             string title,
             string imageUrl,
