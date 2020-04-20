@@ -60,6 +60,7 @@ namespace Model4You.Services.Data.BookingService
             return "Booking was successful! Please wait for the model to contact you back";
         }
 
+        // This should not be here but apparently needed it when i was doing the booking.
         public async Task<string> GetUserEmail(string userId)
         {
             var userEmail = await this.userRepository.All().Where(x => x.Id == userId)
