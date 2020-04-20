@@ -26,7 +26,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var service = new BookingService.BookingService(bookingRepository, userRepository);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
-            var booking = await this.CreateBookingForTest(
+            var booking = await service.CreateBooking(
                 user1,
                 DateTime.UtcNow,
                 "TestName",
@@ -34,10 +34,7 @@ namespace Model4You.Services.Data.Tests.Booking
                 "test@abv.bg",
                 "059593",
                 3,
-                "descriptionTest",
-                false,
-                userRepository,
-                bookingRepository);
+                "descriptionTest");
 
             var success = "Booking was successful! Please wait for the model to contact you back";
             var getBooking = await bookingRepository
@@ -81,7 +78,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var fakeUserId = "FakeUser6006";
-            var booking = await this.CreateBookingForTest(
+            var booking = await service.CreateBooking(
                 fakeUserId,
                 DateTime.UtcNow,
                 "TestName",
@@ -89,15 +86,12 @@ namespace Model4You.Services.Data.Tests.Booking
                 "test@abv.bg",
                 "059593",
                 3,
-                "descriptionTest",
-                false,
-                userRepository,
-                bookingRepository);
+                "descriptionTest");
 
             var failedNoUser = "Booking failed! Please try again.";
             var getBooking = await bookingRepository
                 .All()
-                .Where(x => x.UserId == failedNoUser)
+                .Where(x => x.UserId == fakeUserId)
                 .FirstOrDefaultAsync();
 
             Assert.Equal(failedNoUser, booking);

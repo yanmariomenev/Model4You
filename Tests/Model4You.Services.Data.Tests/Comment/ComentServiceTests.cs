@@ -31,9 +31,9 @@ namespace Model4You.Services.Data.Tests.Comment
                 await this.CreateBlogContentForTests
                     ("Test", "TestContent", createdBlogId, blogContentRepository);
 
-            var commentCreated = await this.CreateCommentForTests
-                (createBlogContentId, "Sancho", "Sancho@abv.bg", "Test", commentRepository);
-
+            //var commentCreated = await this.CreateCommentForTests
+            //    (createBlogContentId, "Sancho", "Sancho@abv.bg", "Test", commentRepository);
+            await service.Create(createBlogContentId, "Sancho", "Sancho@abv.bg", "Test");
             var takeComment = await commentRepository
                 .All()
                 .Where(x => x.BlogContentId == createBlogContentId)
