@@ -26,7 +26,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var service = new BookingService.BookingService(bookingRepository, userRepository);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
-            var booking = await service.CreateBooking(
+            var booking = await this.CreateBookingForTest(
                 user1,
                 DateTime.UtcNow,
                 "TestName",
@@ -34,7 +34,10 @@ namespace Model4You.Services.Data.Tests.Booking
                 "test@abv.bg",
                 "059593",
                 3,
-                "descriptionTest");
+                "descriptionTest",
+                false,
+                userRepository,
+                bookingRepository);
 
             var success = "Booking was successful! Please wait for the model to contact you back";
             var getBooking = await bookingRepository
@@ -78,7 +81,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var fakeUserId = "FakeUser6006";
-            var booking = await service.CreateBooking(
+            var booking = await this.CreateBookingForTest(
                 fakeUserId,
                 DateTime.UtcNow,
                 "TestName",
@@ -86,7 +89,10 @@ namespace Model4You.Services.Data.Tests.Booking
                 "test@abv.bg",
                 "059593",
                 3,
-                "descriptionTest");
+                "descriptionTest",
+                false,
+                userRepository,
+                bookingRepository);
 
             var failedNoUser = "Booking failed! Please try again.";
             var getBooking = await bookingRepository
@@ -113,7 +119,7 @@ namespace Model4You.Services.Data.Tests.Booking
 
             for (int i = 0; i < 18; i++)
             {
-                await service.CreateBooking(
+                await this.CreateBookingForTest(
                     user1,
                     DateTime.UtcNow,
                     $"TestName{i}",
@@ -121,7 +127,10 @@ namespace Model4You.Services.Data.Tests.Booking
                     $"test{i}@abv.bg",
                     $"059593{i}",
                     1,
-                    $"descriptionTest{i}");
+                    $"descriptionTest{i}",
+                    false,
+                    userRepository,
+                    bookingRepository);
             }
 
             var perPage = 10;
@@ -173,7 +182,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var service = new BookingService.BookingService(bookingRepository, userRepository);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
-            var booking = await service.CreateBooking(
+            var booking = await this.CreateBookingForTest(
                 user1,
                 DateTime.UtcNow,
                 "TestName",
@@ -181,10 +190,13 @@ namespace Model4You.Services.Data.Tests.Booking
                 "test@abv.bg",
                 "059593",
                 1,
-                "descriptionTest");
+                "descriptionTest",
+                false,
+                userRepository,
+                bookingRepository);
             for (int i = 0; i < 3; i++)
             {
-                await service.CreateBooking(
+                await this.CreateBookingForTest(
                     user1,
                     DateTime.UtcNow,
                     $"TestName{i}",
@@ -192,7 +204,10 @@ namespace Model4You.Services.Data.Tests.Booking
                     $"test{i}@abv.bg",
                     $"059593{i}",
                     1,
-                    $"descriptionTest{i}");
+                    $"descriptionTest{i}",
+                    false,
+                    userRepository,
+                    bookingRepository);
             }
 
             var getBookingId = await bookingRepository.All()
@@ -219,7 +234,7 @@ namespace Model4You.Services.Data.Tests.Booking
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             for (int i = 0; i < 2; i++)
             {
-                await service.CreateBooking(
+                await this.CreateBookingForTest(
                     user1,
                     DateTime.UtcNow,
                     $"TestName{i}",
@@ -227,12 +242,171 @@ namespace Model4You.Services.Data.Tests.Booking
                     $"test{i}@abv.bg",
                     $"059593{i}",
                     1,
-                    $"descriptionTest{i}");
+                    $"descriptionTest{i}",
+                    false,
+                    userRepository,
+                    bookingRepository);
             }
             var getBookingById = await service.GetBookingById<InboxViewModel>("FakeUser6006", user1);
 
             Assert.Null(getBookingById);
         }
+
+        [Fact]
+        public async Task DeleteBooking_ShouldDeleteTheBookingByIdForTheUser()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+            var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
+
+            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var user1 = await this.CreateUserWithNoInformationAsync
+                ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            var booking = await this.CreateBookingForTest(
+                user1,
+                DateTime.UtcNow,
+                "TestName",
+                "TestCompany",
+                "test@abv.bg",
+                "059593",
+                1,
+                "descriptionTest",
+                false,
+                userRepository,
+                bookingRepository);
+            for (int i = 0; i < 2; i++)
+            {
+                await this.CreateBookingForTest(
+                    user1,
+                    DateTime.UtcNow,
+                    $"TestName{i}",
+                    "TestCompany",
+                    $"test{i}@abv.bg",
+                    $"059593{i}",
+                    1,
+                    $"descriptionTest{i}",
+                    false,
+                    userRepository,
+                    bookingRepository);
+            }
+            var getBookingId = await bookingRepository.All()
+                .Where(x => x.UserId == user1 && x.HireDescription == "descriptionTest")
+                .Select(x => x.Id)
+                .FirstOrDefaultAsync();
+            await service.DeleteBooking(getBookingId, user1);
+            var bookingCount = await bookingRepository
+                .All()
+                .Where(x => x.UserId == user1)
+                .CountAsync();
+            
+            // We have 3 bookings calling Delete makes the bookings 2 in count;
+            Assert.Equal(2, bookingCount);
+        }
+
+        [Fact]
+        public async Task TakeAllDeletedBookings_ShouldReturnAllDeletedBookingsForTheUser()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+            var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
+
+            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var user1 = await this.CreateUserWithNoInformationAsync
+                ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            
+            for (int i = 0; i < 3; i++)
+            {
+                await this.CreateBookingForTest(
+                    user1,
+                    DateTime.UtcNow,
+                    $"TestName{i}",
+                    "TestCompany",
+                    $"test{i}@abv.bg",
+                    $"059593{i}",
+                    1,
+                    $"descriptionTest{i}",
+                    false,
+                    userRepository,
+                    bookingRepository);
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                await this.CreateBookingForTest(
+                    user1,
+                    DateTime.UtcNow,
+                    $"TestName{i}",
+                    "TestCompany",
+                    $"test{i}@abv.bg",
+                    $"059593{i}",
+                    1,
+                    $"descriptionTest{i}",
+                    true,
+                    userRepository,
+                    bookingRepository);
+            }
+
+            var takeAllDeleted = await service.TakeAllDeletedBookings<InboxViewModel>(user1);
+            var countDeleted = takeAllDeleted.Count();
+
+            Assert.Equal(2, countDeleted);
+        }
+
+        [Fact]
+        public async Task UnDeleteBooking_ShouldUnDeleteTheBookingByIdForTheUser()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+            var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
+
+            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var user1 = await this.CreateUserWithNoInformationAsync
+                ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            var booking = await this.CreateBookingForTest(
+                user1,
+                DateTime.UtcNow,
+                "TestName",
+                "TestCompany",
+                "test@abv.bg",
+                "059593",
+                1,
+                "descriptionTest",
+                true,
+                userRepository,
+                bookingRepository);
+            for (int i = 0; i < 2; i++)
+            {
+                await this.CreateBookingForTest(
+                    user1,
+                    DateTime.UtcNow,
+                    $"TestName{i}",
+                    "TestCompany",
+                    $"test{i}@abv.bg",
+                    $"059593{i}",
+                    1,
+                    $"descriptionTest{i}",
+                    false,
+                    userRepository,
+                    bookingRepository);
+            }
+            var getBookingId = await bookingRepository.AllWithDeleted()
+                .Where(x => x.UserId == user1 && x.HireDescription == "descriptionTest")
+                .Select(x => x.Id)
+                .FirstOrDefaultAsync();
+            await service.UnDeleteBooking(getBookingId);
+            var bookingCount = await bookingRepository
+                .All()
+                .Where(x => x.UserId == user1)
+                .CountAsync();
+
+            Assert.Equal(3, bookingCount);
+        }
+
 
         private async Task<string> CreateUserWithNoInformationAsync
             (string email, string name, string lastName, IDeletableEntityRepository<ApplicationUser> repo)
@@ -247,6 +421,46 @@ namespace Model4You.Services.Data.Tests.Booking
             await repo.AddAsync(user);
             await repo.SaveChangesAsync();
             return user.Id;
+        }
+        private async Task<string> CreateBookingForTest(
+            string userId,
+            DateTime bookingDate,
+            string fullName,
+            string companyName,
+            string email,
+            string phoneNumber,
+            int? days,
+            string hireDescription,
+            bool isDeleted,
+            IDeletableEntityRepository<ApplicationUser> uRepo,
+            IDeletableEntityRepository<Model4You.Data.Models.Booking> bRepo)
+        {
+            var userExist = await uRepo
+                .All()
+                .AnyAsync(x => x.Id == userId);
+
+            if (!userExist)
+            {
+                return "Booking failed! Please try again.";
+            }
+
+            var booking = new Model4You.Data.Models.Booking
+            {
+                UserId = userId,
+                BookingDate = bookingDate,
+                FullName = fullName,
+                CompanyName = companyName,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                Days = days,
+                HireDescription = hireDescription,
+                IsDeleted = isDeleted,
+            };
+
+            await bRepo.AddAsync(booking);
+            await bRepo.SaveChangesAsync();
+
+            return "Booking was successful! Please wait for the model to contact you back";
         }
     }
 }
