@@ -14,6 +14,7 @@ namespace Model4You.Services.Data.Tests.Image
     public class ImageServiceTests : BaseServiceTest
     {
         private const string Success = "Deleted";
+        private const string ChangedProfilePictureSuccess = "Changed profile picture";
         private const string DefaultProfilePicture = 
             "https://res.cloudinary.com/dpp9tqhjn/image/upload/v1585748850/images/no-avatar-png-8_rbh1ni.png";
 
@@ -65,6 +66,32 @@ namespace Model4You.Services.Data.Tests.Image
 
             Assert.Equal(Success, removeProfilePicture);
             Assert.Equal(DefaultProfilePicture, profilePictureDefaultUrlCheck);
+        }
+
+        [Fact]
+        public async Task ChangeProfilePicture_ShouldChangeProfilePicture_AndRemoveItFromAlbum()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var imageRepository = new EfDeletableEntityRepository<UserImage>(new ApplicationDbContext(options));
+            var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ImageService.ImageService(imageRepository, userRepository);
+            var user1 = await this.CreateUserForTests
+                ("pesho@abv.bg", "Pesho", "Peshev", "testUrl", userRepository);
+            var imageFromAlbum = await this.CreateImageForTest("TestUrlFromAlbumImage", user1, imageRepository);
+
+            var changeImage = await service.ChangeProfilePicture
+                ("TestUrlFromAlbumImage", user1, imageFromAlbum);
+            var currentProfilePicture = await userRepository
+                .All()
+                .Where(x => x.Id == user1)
+                .Select(x => x.ProfilePicture)
+                .FirstOrDefaultAsync();
+
+            Assert.Equal(ChangedProfilePictureSuccess, changeImage);
+            Assert.Equal("TestUrlFromAlbumImage", currentProfilePicture);
         }
 
         private async Task<int> CreateImageForTest(string url, string userId, IDeletableEntityRepository<UserImage> repo)

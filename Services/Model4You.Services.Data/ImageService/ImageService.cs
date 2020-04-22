@@ -65,7 +65,7 @@
                 .FirstOrDefaultAsync();
 
             profilePicture.ProfilePicture = imageUrl;
-
+            await this.userRepository.SaveChangesAsync();
             await this.DeleteImage(imageId);
 
             return "Changed profile picture";

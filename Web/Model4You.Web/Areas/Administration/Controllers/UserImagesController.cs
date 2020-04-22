@@ -27,7 +27,7 @@ namespace Model4You.Web.Areas.Administration.Controllers
         // GET: Administration/UserImages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.UserImages.Include(u => u.User);
+            var applicationDbContext = this.imagesRepository.AllWithDeleted();
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -39,9 +39,8 @@ namespace Model4You.Web.Areas.Administration.Controllers
                 return NotFound();
             }
 
-            var userImage = await _context.UserImages
-                .Include(u => u.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var userImage =
+                await this.imagesRepository.AllWithDeleted().Where(x => x.Id == id).FirstOrDefaultAsync();
             if (userImage == null)
             {
                 return NotFound();
@@ -82,7 +81,8 @@ namespace Model4You.Web.Areas.Administration.Controllers
                 return NotFound();
             }
 
-            var userImage = await _context.UserImages.FindAsync(id);
+            //var userImage = await _context.UserImages.FindAsync(id);
+            var userImage = await this.imagesRepository.AllWithDeleted().Where(x => x.Id == id).FirstOrDefaultAsync();
             if (userImage == null)
             {
                 return NotFound();
@@ -135,9 +135,8 @@ namespace Model4You.Web.Areas.Administration.Controllers
                 return NotFound();
             }
 
-            var userImage = await _context.UserImages
-                .Include(u => u.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var userImage =
+                await this.imagesRepository.AllWithDeleted().Where(x => x.Id == id).FirstOrDefaultAsync();
             if (userImage == null)
             {
                 return NotFound();
