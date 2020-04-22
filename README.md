@@ -6,6 +6,8 @@ This my first project made for SoftUni ASP.NET Core project defense.
 Huge thanks to @NikolayIT for the template, as well one of the best lecturer at SoftUni.
 Also huge thanks to @StoyanShopov for all of the help, support and knowledge he gives to the students. 
 
+Unit testing code coverage 82~89% ✔️
+
 Here you can check out some of the functionality and design of the website. ⤵️
 
 Home page view

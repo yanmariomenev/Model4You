@@ -94,6 +94,29 @@ namespace Model4You.Services.Data.Tests.Image
             Assert.Equal("TestUrlFromAlbumImage", currentProfilePicture);
         }
 
+        [Fact]
+        public async Task GetImageCountOfCurrentUser_ShouldReturnTheNumberOfImages_ForTheUserGivenById()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var imageRepository = new EfDeletableEntityRepository<UserImage>(new ApplicationDbContext(options));
+            var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
+
+            var service = new ImageService.ImageService(imageRepository, userRepository);
+            var user1 = await this.CreateUserForTests
+                ("pesho@abv.bg", "Pesho", "Peshev", "testUrl", userRepository);
+            for (int i = 0; i < 3; i++)
+            {
+                await this.CreateImageForTest($"TestUrlFromAlbumImage{i}", user1, imageRepository);
+            }
+
+            var imageCount = await service.GetImageCountOfCurrentUser(user1);
+
+            Assert.Equal(3, imageCount);
+
+        }
+
         private async Task<int> CreateImageForTest(string url, string userId, IDeletableEntityRepository<UserImage> repo)
         {
             var userImages = new UserImage

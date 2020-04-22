@@ -27,7 +27,8 @@ namespace Model4You.Web.Areas.Administration.Controllers
         // GET: Administration/UserImages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = this.imagesRepository.AllWithDeleted();
+            var applicationDbContext = this.imagesRepository
+                .AllWithDeleted().OrderBy(x => x.IsDeleted);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -40,7 +41,10 @@ namespace Model4You.Web.Areas.Administration.Controllers
             }
 
             var userImage =
-                await this.imagesRepository.AllWithDeleted().Where(x => x.Id == id).FirstOrDefaultAsync();
+                await this.imagesRepository
+                    .AllWithDeleted()
+                    .Where(x => x.Id == id)
+                    .FirstOrDefaultAsync();
             if (userImage == null)
             {
                 return NotFound();
