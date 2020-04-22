@@ -123,7 +123,8 @@ namespace Model4You.Services.Data.Tests.Model
             var imageRepository = new EfDeletableEntityRepository<UserImage>(new ApplicationDbContext(options));
             var service = new ModelService.ModelService(repository, null, imageRepository, null);
 
-            var user1 = await this.CreateUserWithNoInformationAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
+            var user1 = await this.CreateUserWithNoInformationAsync
+                ("pesho@abv.bg", "Pesho", "Peshev", repository);
             //var userImages = await this.CreateUserImages(user1, imageRepository, repository);
 
             var takeImages = await service.TakeAllPictures<AlbumViewModel>(user1);

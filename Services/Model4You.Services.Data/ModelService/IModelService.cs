@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Model4You.Data.Models.Enums;
-
-namespace Model4You.Services.Data.ModelService
+﻿namespace Model4You.Services.Data.ModelService
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity;
     using Model4You.Data.Models;
+    using Model4You.Data.Models.Enums;
 
     public interface IModelService
     {
