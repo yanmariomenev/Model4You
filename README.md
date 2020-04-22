@@ -9,8 +9,9 @@ Also huge thanks to @StoyanShopov for all of the help, support and knowledge he 
 Unit testing code coverage 82~89% ✔️
 
 Here you can check out some of the functionality and design of the website. ⤵️
+
 Home page view
-![model4you test](ReadMeGif/1.gif)
+![model4you test](ReadMeGif/01.gif)
 Blog/Article view
 ![model4you test](ReadMeGif/2.gif)
 Profile/Profile page view
