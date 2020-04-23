@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Model4You.Data.Common.Models;
-using Model4You.Data.Common.Repositories;
-using Model4You.Data.Models;
-using Model4You.Data.Models.Enums;
-using Model4You.Services.Mapping;
-
-namespace Model4You.Services.Data.SearchService
+﻿namespace Model4You.Services.Data.SearchService
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using Model4You.Data.Common.Models;
+    using Model4You.Data.Common.Repositories;
+    using Model4You.Data.Models;
+    using Model4You.Data.Models.Enums;
+    using Model4You.Services.Mapping;
+
     public class SearchService : ISearchService
     {
         private readonly IDeletableEntityRepository<ModelInformation> modelInfoRepo;

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Model4You.Services.Data.BookingService
+﻿namespace Model4You.Services.Data.BookingService
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IBookingService
     {
         Task<string> CreateBooking(

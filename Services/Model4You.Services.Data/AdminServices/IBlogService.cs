@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Model4You.Services.Data.AdminServices
+﻿namespace Model4You.Services.Data.AdminServices
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IBlogService
     {
         Task<int> GetPagesCount(int perPage);

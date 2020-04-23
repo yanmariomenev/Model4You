@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
-using Model4You.Data.Common.Models;
-using Model4You.Data.Common.Repositories;
-using Model4You.Data.Models;
-
-namespace Model4You.Services.Data.CommentService
+﻿namespace Model4You.Services.Data.CommentService
 {
+    using System.Threading.Tasks;
+
+    using Model4You.Data.Common.Models;
+    using Model4You.Data.Common.Repositories;
+    using Model4You.Data.Models;
+
     public class CommentService : ICommentService
     {
         private readonly IDeletableEntityRepository<BlogComment> commentRepository;
