@@ -1,21 +1,20 @@
-﻿using Model4You.Common;
-using Model4You.Services.Data.AdminServices;
-using Model4You.Services.Messaging;
-using Model4You.Web.ViewModels.Blog;
-using Model4You.Web.ViewModels.Home.AboutView;
-using Model4You.Web.ViewModels.Search;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using Model4You.Common;
+    using Model4You.Services.Data.AdminServices;
     using Model4You.Services.Data.ContactFormService;
     using Model4You.Services.Data.ModelService;
+    using Model4You.Services.Messaging;
     using Model4You.Web.ViewModels;
+    using Model4You.Web.ViewModels.Blog;
+    using Model4You.Web.ViewModels.Home.AboutView;
     using Model4You.Web.ViewModels.Home.ContactView;
     using Model4You.Web.ViewModels.ModelViews;
+    using Model4You.Web.ViewModels.Search;
     using Model4You.Web.ViewModels.Settings;
 
     public class HomeController : BaseController
@@ -71,7 +70,7 @@ namespace Model4You.Web.Controllers
             {
                 return this.View(model);
             }
-            // TODO Test this again if it works like before. And change the SendGrid account if needed...
+
             await this.contactService.Create(model.Name, model.Email, model.Subject, model.Message);
             await this.emailSender.SendEmailAsync(
                 model.Email,

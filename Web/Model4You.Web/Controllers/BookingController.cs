@@ -1,14 +1,15 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Model4You.Common;
-using Model4You.Services.Data.BookingService;
-using Model4You.Services.Messaging;
-using Model4You.Web.ViewModels.Booking;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
+    using System;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Model4You.Common;
+    using Model4You.Services.Data.BookingService;
+    using Model4You.Services.Messaging;
+    using Model4You.Web.ViewModels.Booking;
+
     public class BookingController : Controller
     {
         private readonly IBookingService bookingService;

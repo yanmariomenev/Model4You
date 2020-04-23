@@ -1,12 +1,11 @@
-﻿using Model4You.Services.Data.CommentService;
-using Model4You.Web.ViewModels.BindingModels;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
     using Model4You.Services.Data.AdminServices;
+    using Model4You.Services.Data.CommentService;
+    using Model4You.Web.ViewModels.BindingModels;
     using Model4You.Web.ViewModels.Blog;
 
     public class BlogController : Controller

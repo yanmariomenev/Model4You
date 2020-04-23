@@ -1,17 +1,17 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Model4You.Services.Data.BookingService;
-using Model4You.Web.ViewModels.Inbox;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Model4You.Services.Data.BookingService;
+    using Model4You.Web.ViewModels.Inbox;
+
     public class InboxController : Controller
     {
+        private const int PerPage = 10;
         private readonly IBookingService bookService;
-        public const int PerPage = 10;
-
         public InboxController(IBookingService bookService)
         {
             this.bookService = bookService;
