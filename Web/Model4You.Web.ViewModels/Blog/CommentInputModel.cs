@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Model4You.Services.Mapping;
-
-namespace Model4You.Web.ViewModels.Blog
+﻿namespace Model4You.Web.ViewModels.Blog
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class CommentInputModel
     {
         [Required]

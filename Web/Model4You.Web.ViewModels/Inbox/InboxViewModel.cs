@@ -1,8 +1,9 @@
-﻿using System;
-using Model4You.Services.Mapping;
-
-namespace Model4You.Web.ViewModels.Inbox
+﻿namespace Model4You.Web.ViewModels.Inbox
 {
+    using System;
+
+    using Model4You.Services.Mapping;
+
     public class InboxViewModel : IMapFrom<Data.Models.Booking>
     {
         public string Id { get; set; }

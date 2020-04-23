@@ -6,7 +6,7 @@
     using Model4You.Data.Models;
     using Model4You.Services.Mapping;
 
-    public class BookingInputModel : IMapFrom<Data.Models.Booking>
+    public class BookingInputModel : IMapFrom<Booking>
     {
         //[Required]
         //public string UserId { get; set; }

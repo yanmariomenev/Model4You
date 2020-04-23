@@ -1,9 +1,10 @@
-﻿using System;
-using Model4You.Data.Models;
-using Model4You.Services.Mapping;
-
-namespace Model4You.Web.ViewModels.Administration.Dashboard
+﻿namespace Model4You.Web.ViewModels.Administration.Dashboard
 {
+    using System;
+
+    using Model4You.Data.Models;
+    using Model4You.Services.Mapping;
+
     public class ContactFormDataView : IMapFrom<ContactFormData>
     {
         public int Id { get; set; }

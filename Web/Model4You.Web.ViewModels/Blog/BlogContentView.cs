@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using Ganss.XSS;
-using Model4You.Data.Models;
-using Model4You.Services.Mapping;
-
-namespace Model4You.Web.ViewModels.Blog
+﻿namespace Model4You.Web.ViewModels.Blog
 {
+    using System.Collections.Generic;
+
+    using Ganss.XSS;
+    using Model4You.Data.Models;
+    using Model4You.Services.Mapping;
+
     public class BlogContentView : IMapFrom<BlogContent>
     {
         public int Id { get; set; }

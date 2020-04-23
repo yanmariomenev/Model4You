@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using Model4You.Services.Data.AdminServices;
-
-namespace Model4You.Web.Areas.Administration.Controllers
+﻿namespace Model4You.Web.Areas.Administration.Controllers
 {
-    using Model4You.Services.Data;
-    using Model4You.Web.ViewModels.Administration.Dashboard;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using Model4You.Services.Data;
+    using Model4You.Services.Data.AdminServices;
+    using Model4You.Web.ViewModels.Administration.Dashboard;
 
     public class DashboardController : AdministrationController
     {

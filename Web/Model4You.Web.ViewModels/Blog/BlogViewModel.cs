@@ -1,11 +1,12 @@
-﻿using System;
-using AutoMapper;
-using Model4You.Data.Models;
-using Model4You.Services.Mapping;
-
-namespace Model4You.Web.ViewModels.Blog
+﻿namespace Model4You.Web.ViewModels.Blog
 {
-    public class BlogViewModel : IMapFrom<Data.Models.Blog>
+    using System;
+
+    using AutoMapper;
+    using Model4You.Data.Models;
+    using Model4You.Services.Mapping;
+
+    public class BlogViewModel : IMapFrom<Blog>
     {
         public int Id { get; set; }
 

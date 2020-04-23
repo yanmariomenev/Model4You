@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Model4You.Web.ViewModels.Home.ContactView
+﻿namespace Model4You.Web.ViewModels.Home.ContactView
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ContactInputModel
     {
         [Required]

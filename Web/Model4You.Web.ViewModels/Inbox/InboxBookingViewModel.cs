@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Model4You.Web.ViewModels.Inbox
+﻿namespace Model4You.Web.ViewModels.Inbox
 {
+    using System.Collections.Generic;
+
     public class InboxBookingViewModel
     {
         public IEnumerable<InboxViewModel> InboxViewModels { get; set; }

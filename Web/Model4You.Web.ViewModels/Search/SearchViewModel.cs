@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Model4You.Data.Models;
-using Model4You.Data.Models.Enums;
-using Model4You.Services.Mapping;
-
-namespace Model4You.Web.ViewModels.Search
+﻿namespace Model4You.Web.ViewModels.Search
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using Model4You.Data.Models;
+    using Model4You.Data.Models.Enums;
+    using Model4You.Services.Mapping;
+
     public class SearchViewModel : IMapFrom<ApplicationUser>
     {
         public string Id { get; set; }

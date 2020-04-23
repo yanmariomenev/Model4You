@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Model4You.Web.ViewModels.Search
+﻿namespace Model4You.Web.ViewModels.Search
 {
+    using System.Collections.Generic;
+
     public class SearchResultViewModel
     {
         public ICollection<SearchViewModel> SearchViewModels { get; set; }

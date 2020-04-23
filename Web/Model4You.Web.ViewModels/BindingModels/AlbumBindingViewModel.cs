@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using Model4You.Data.Models;
-using Model4You.Services.Mapping;
-using Model4You.Web.ViewModels.Model;
-using Model4You.Web.ViewModels.ModelViews;
-
-namespace Model4You.Web.ViewModels.BindingModels
+﻿namespace Model4You.Web.ViewModels.BindingModels
 {
+    using System.Collections.Generic;
+
+    using Model4You.Data.Models;
+    using Model4You.Services.Mapping;
+    using Model4You.Web.ViewModels.Model;
+    using Model4You.Web.ViewModels.ModelViews;
+
     public class AlbumBindingViewModel
     {
         public IEnumerable<AlbumViewModel> AlbumViewModel { get; set; }
