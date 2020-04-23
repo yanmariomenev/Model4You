@@ -20,21 +20,18 @@ namespace Model4You.Web.Areas.Administration.Controllers
             return this.View();
         }
 
-        //public IActionResult Edit()
-        //{
-        //    return this.View();
-        //}
-
         [HttpPost]
         public async Task<IActionResult> Create(BlogInputModel input)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             await this.blogService.CreateBlog(input.Title, input.ImageUrl, userId);
             await this.blogService.CreateBlogContent(input.Title, input.Content);
 
-            // TODO Redirect to the blog post when i finnish doing the functions and views for that.
-            return this.Redirect("/");
+            return this.RedirectToAction(
+                "Blog",
+                "Blog",
+                new { area = string.Empty });
         }
     }
 }
