@@ -22,6 +22,7 @@ namespace Model4You.Services.Data.Tests
 {
     public abstract class BaseServiceTest : IDisposable
     {
+        // Dependency Injection
         protected BaseServiceTest()
         {
             var service = this.SetServices();

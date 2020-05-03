@@ -26,6 +26,8 @@
 
         Task DeleteBooking(string id, string userId);
 
+        Task CancelBooking(string id, string userId);
+
         Task<IEnumerable<T>> TakeAllDeletedBookings<T>(string id);
 
         Task UnDeleteBooking(string id);

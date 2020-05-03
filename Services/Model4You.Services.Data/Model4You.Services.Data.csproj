@@ -22,7 +22,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Model4You.Data.Common\Model4You.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Model4You.Data.Models\Model4You.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Model4You.Common\Model4You.Common.csproj" />
     <ProjectReference Include="..\Model4You.Services.Mapping\Model4You.Services.Mapping.csproj" />
+    <ProjectReference Include="..\Model4You.Services.Messaging\Model4You.Services.Messaging.csproj" />
     <ProjectReference Include="..\Model4You.Services\Model4You.Services.csproj" />
   </ItemGroup>
 

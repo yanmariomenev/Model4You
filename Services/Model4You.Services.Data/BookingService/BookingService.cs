@@ -1,4 +1,7 @@
-﻿namespace Model4You.Services.Data.BookingService
+﻿using Model4You.Common;
+using Model4You.Services.Messaging;
+
+namespace Model4You.Services.Data.BookingService
 {
     using System;
     using System.Collections.Generic;
@@ -15,13 +18,16 @@
     {
         private readonly IDeletableEntityRepository<Booking> bookingRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
+        private readonly IEmailSender emailSender;
 
         public BookingService(
             IDeletableEntityRepository<Booking> bookingRepository,
-            IDeletableEntityRepository<ApplicationUser> userRepository)
+            IDeletableEntityRepository<ApplicationUser> userRepository,
+            IEmailSender emailSender)
         {
             this.bookingRepository = bookingRepository;
             this.userRepository = userRepository;
+            this.emailSender = emailSender;
         }
 
         public async Task<string> CreateBooking(
@@ -107,6 +113,26 @@
                     .FirstOrDefaultAsync();
             this.bookingRepository.Delete(deleteBooking);
             await this.bookingRepository.SaveChangesAsync();
+        }
+
+        public async Task CancelBooking(string id, string userId)
+        {
+            var email = await this.bookingRepository
+                .All()
+                .Where(x => x.Id == id)
+                .Select(x => x.Email)
+                .FirstOrDefaultAsync();
+
+            await this.DeleteBooking(id, userId);
+
+            // The cancel message can be improved.
+            await this.emailSender.SendEmailAsync(
+                GlobalConstants.SystemEmail,
+                GlobalConstants.SystemName,
+                email,
+                GlobalConstants.Cancel,
+                GlobalConstants.CancelMessage
+            );
         }
 
         public async Task<IEnumerable<T>> TakeAllDeletedBookings<T>(string id)

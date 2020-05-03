@@ -1,4 +1,7 @@
-﻿namespace Model4You.Web.Controllers
+﻿using Model4You.Common;
+using Model4You.Services.Messaging;
+
+namespace Model4You.Web.Controllers
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -12,6 +15,7 @@
     {
         private const int PerPage = 10;
         private readonly IBookingService bookService;
+
         public InboxController(IBookingService bookService)
         {
             this.bookService = bookService;
@@ -62,6 +66,16 @@
                 InboxViewModels = await this.bookService.TakeAllDeletedBookings<InboxViewModel>(userId),
             };
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Cancel(string id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            await this.bookService.CancelBooking(id, userId);
+
+            return this.RedirectToAction(nameof(this.Bookings));
         }
 
         [Authorize]
