@@ -36,26 +36,19 @@
                         <h3 class="mb-5">@Model.BlogContentView.BlogComments.Count Comments</h3>
                         <ul class="comment-list">
 
-                            @*<div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>*@
-
                             @foreach (var comment in Model.BlogContentView.BlogComments)
                             {
                                 <li class="comment">
                                     <div class="comment-body">
                                         <h3>@comment.Name</h3>
-                                        @*<div class="meta">@comment.CreatedOn</div>*@
                                         <div class="meta">
                                             <time datetime="@comment.CreatedOn.ToString("O")"></time>
                                         </div>
                                         <p>@comment.Content</p>
                                     </div>
-                                    @*<p><a href="#" class="reply">Reply</a></p>*@
                                 </li>
                             }
                         </ul>
-                        <!-- END comment-list -->
 
                         <div class="comment-form-wrap pt-5">
                             <h3 class="mb-5">Leave a comment</h3>

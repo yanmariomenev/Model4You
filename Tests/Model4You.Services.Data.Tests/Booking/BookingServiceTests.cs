@@ -23,7 +23,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var booking = await service.CreateBooking(
@@ -55,7 +55,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
 
@@ -74,7 +74,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var fakeUserId = "FakeUser6006";
@@ -107,7 +107,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
 
@@ -152,7 +152,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
 
@@ -173,7 +173,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var booking = await this.CreateBookingForTest(
@@ -223,7 +223,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             for (int i = 0; i < 2; i++)
@@ -255,7 +255,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var booking = await this.CreateBookingForTest(
@@ -308,7 +308,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             
@@ -358,7 +358,7 @@ namespace Model4You.Services.Data.Tests.Booking
             var userRepository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
-            var service = new BookingService.BookingService(bookingRepository, userRepository);
+            var service = new BookingService.BookingService(bookingRepository, userRepository, null);
             var user1 = await this.CreateUserWithNoInformationAsync
                 ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var booking = await this.CreateBookingForTest(

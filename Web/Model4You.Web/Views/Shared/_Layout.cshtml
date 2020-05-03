@@ -59,31 +59,6 @@
 
 </head>
 <body>
-    @*<header>
-            <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <partial name="_LoginPartial" />
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>*@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
@@ -113,25 +88,12 @@
             </div>
         </div>
     </nav>
-    @*FIX THE COOKIE POLICY / make it bell)*@
+
 <main role="main" class="pb-3">
         @this.RenderBody()
     </main>
 
         <partial name="_CookieConsentPartial" />
-
-        @*<div class="container">
-                <partial name="_CookieConsentPartial" />
-                <main role="main" class="pb-3">
-                    @this.RenderBody()
-                </main>
-            </div>*@
-
-        @*<footer class="border-bottom footer text-muted">
-                <div class="container">
-                    &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </div>
-            </footer>*@
 
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container">
@@ -146,17 +108,7 @@
                             </ul>
                         </div>
                     </div>
-                    @*<div class="col-md">
-                        <div class="ftco-footer-widget mb-4 ml-md-4">
-                            <h2 class="ftco-heading-2">Popular Links</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#">Finding Agency</a></li>
-                                <li><a href="#">Types of Modeling</a></li>
-                                <li><a href="#">Freelance</a></li>
-                                <li><a href="#">Search Models</a></li>
-                            </ul>
-                        </div>
-                    </div>*@
+                    
                     <div class="col-md">
                         <div class="ftco-footer-widget mb-4 ml-md-4">
                             <h2 class="ftco-heading-2">Quick Links</h2>
