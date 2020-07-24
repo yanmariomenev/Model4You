@@ -15,15 +15,10 @@
         [MaxLength(50)]
         public string LastName { get; set; }
 
-        //public ModelRole ModelRole { get; set; }
-
         public string ProfilePicture { get; set; }
 
         public ModelInformation ModelInformation { get; set; }
 
         public ICollection<UserImage> UserImages { get; set; }
-
-        //public ICollection<UserImage> UserImages { get; set; }
-
     }
 }

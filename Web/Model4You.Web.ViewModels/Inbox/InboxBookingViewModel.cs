@@ -6,6 +6,7 @@
     {
         public IEnumerable<InboxViewModel> InboxViewModels { get; set; }
 
+        // Pagination =>
         public int PagesCount { get; set; }
 
         public int CurrentPage { get; set; }

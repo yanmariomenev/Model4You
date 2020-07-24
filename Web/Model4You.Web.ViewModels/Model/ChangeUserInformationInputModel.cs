@@ -1,7 +1,5 @@
 ﻿namespace Model4You.Web.ViewModels.Model
 {
-    using System.ComponentModel.DataAnnotations;
-
     using Model4You.Data.Models;
     using Model4You.Services.Mapping;
 

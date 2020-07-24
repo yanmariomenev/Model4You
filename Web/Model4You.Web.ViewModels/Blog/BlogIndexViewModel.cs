@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Model4You.Web.ViewModels.Blog
+﻿namespace Model4You.Web.ViewModels.Blog
 {
+    using System.Collections.Generic;
+
     public class BlogIndexViewModel
     {
         public IEnumerable<BlogViewModel> BlogViewModels { get; set; }

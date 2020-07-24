@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using AutoMapper;
     using Model4You.Data.Models;
     using Model4You.Services.Mapping;
 

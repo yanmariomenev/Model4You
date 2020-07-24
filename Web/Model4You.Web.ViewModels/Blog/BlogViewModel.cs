@@ -2,7 +2,6 @@
 {
     using System;
 
-    using AutoMapper;
     using Model4You.Data.Models;
     using Model4You.Services.Mapping;
 
@@ -19,6 +18,5 @@
         public DateTime CreatedOn { get; set; }
 
         public string Url => $"/Blog/BlogArticle/{this.Id}";
-
     }
 }

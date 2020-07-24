@@ -9,7 +9,7 @@
     {
         public AlbumInputViewModel()
         {
-            UserImages = new List<IFormFile>();
+            this.UserImages = new List<IFormFile>();
         }
 
         [DataType(DataType.Upload)]

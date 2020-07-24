@@ -8,9 +8,6 @@
 
     public class BookingInputModel : IMapFrom<Booking>
     {
-        //[Required]
-        //public string UserId { get; set; }
-
         public DateTime BookingDate { get; set; }
 
         [Required]

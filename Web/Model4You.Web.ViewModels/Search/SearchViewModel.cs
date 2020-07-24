@@ -3,7 +3,6 @@
     using System.ComponentModel.DataAnnotations;
 
     using Model4You.Data.Models;
-    using Model4You.Data.Models.Enums;
     using Model4You.Services.Mapping;
 
     public class SearchViewModel : IMapFrom<ApplicationUser>
@@ -14,8 +13,6 @@
 
         [MaxLength(50)]
         public string LastName { get; set; }
-
-        //public ModelRole ModelRole { get; set; }
 
         public string ProfilePicture { get; set; }
 
