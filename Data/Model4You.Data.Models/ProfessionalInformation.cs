@@ -4,6 +4,7 @@
 
     public class ProfessionalInformation
     {
+        // This Model is for future extension.
         public int Id { get; set; }
 
         public string UserId { get; set; }

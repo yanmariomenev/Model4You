@@ -1,6 +1,5 @@
 ﻿namespace Model4You.Web.Controllers
 {
-    using System;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -41,7 +40,9 @@
                 input.FullName,
                 input.CompanyName,
                 input.Email,
-                input.PhoneNumber, input.Days, input.HireDescription);
+                input.PhoneNumber,
+                input.Days,
+                input.HireDescription);
 
             // TODO Test this because Sendgrid suspended the account...
             var bookedUserEmail = await this.bookingService.GetUserEmail(id);
@@ -60,9 +61,9 @@
                 input.FullName,
                 bookedUserEmail,
                 GlobalConstants.BookingRequest,
-                emailContentBuilder.ToString()
-                );
-            //await this.emailSender.SendEmailAsync(
+                emailContentBuilder.ToString());
+
+            // await this.emailSender.SendEmailAsync(
             //    input.e,
             //    model.Name,
             //    GlobalConstants.SystemEmail,

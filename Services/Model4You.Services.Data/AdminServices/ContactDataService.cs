@@ -34,6 +34,7 @@
         public async Task MoveToAnswered(string id)
         {
             var toInt = int.Parse(id);
+
             var quest = await this.contactRep.All().Where(x => x.Id == toInt)
                 .FirstOrDefaultAsync();
             this.contactRep.Delete(quest);

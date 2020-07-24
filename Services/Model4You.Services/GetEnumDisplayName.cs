@@ -7,7 +7,6 @@
 
     public static class GetEnumDisplayName
     {
-        // TODO move this service to model4you.services
         public static string GetDisplayName(this Enum enumValue)
         {
             return enumValue.GetType()

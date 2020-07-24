@@ -30,6 +30,8 @@
             var viewModel = new BlogIndexViewModel
             {
                BlogViewModels = await this.blogService.TakeAllBlogs<BlogViewModel>(page, perPage),
+
+               // Display 3 random blogs to the user.
                SideBlogViewModels = await this.blogService.TakeRandomBlogs<BlogViewModel>(TakeBlogs),
                CurrentPage = page,
                PagesCount = pagesCount,
@@ -64,6 +66,7 @@
                     new { id = input.CommentInputModel.BlogId });
             }
 
+            // If the state is valid create a comment for the current blog.
             await this.commentService.Create(
                 input.CommentInputModel.BlogContentId,
                 input.CommentInputModel.Name,

@@ -50,7 +50,7 @@
 
         public async Task CreateBlogContent(string title, string content)
         {
-            var getBlogId = await blogRepository.All()
+            var getBlogId = await this.blogRepository.All()
                 .Where(x => x.Title == title).Select(x => x.Id)
                 .FirstOrDefaultAsync();
 

@@ -141,7 +141,6 @@
             return InfoCreated;
         }
 
-
         public async Task<string> ChangeUserFirstName(ApplicationUser user, string firstName)
         {
             if (user == null)
@@ -227,7 +226,8 @@
                 return "Invalid user";
             }
 
-            var result = property switch
+            // Using discard for this but maybe will change it back to something that makes sense(var result) :).
+            _ = property switch
             {
                 "modelType" => user.ModelInformation.ModelType = value,
                 "nationality" => user.ModelInformation.Nationality = value,
@@ -235,6 +235,7 @@
                 "facebookUrl" => user.ModelInformation.FacebookUrl = value,
                 "city" => user.ModelInformation.City = value,
                 "country" => user.ModelInformation.Country = value,
+                _ => "Error",
             };
 
             await this.appRepository.SaveChangesAsync();

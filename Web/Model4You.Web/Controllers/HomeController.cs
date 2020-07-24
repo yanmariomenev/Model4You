@@ -14,8 +14,6 @@
     using Model4You.Web.ViewModels.Home.AboutView;
     using Model4You.Web.ViewModels.Home.ContactView;
     using Model4You.Web.ViewModels.ModelViews;
-    using Model4You.Web.ViewModels.Search;
-    using Model4You.Web.ViewModels.Settings;
 
     public class HomeController : BaseController
     {

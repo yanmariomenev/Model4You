@@ -8,10 +8,10 @@
     {
         public BlogContent()
         {
-            //this.Images = new HashSet<UserImage>();
             this.BlogComments = new HashSet<BlogComment>();
         }
 
+        // Future implementation ViewCount.
         public int BlogId { get; set; }
 
         public virtual Blog Blog { get; set; }
@@ -23,6 +23,5 @@
         public string ImageUrl { get; set; }
 
         public ICollection<BlogComment> BlogComments { get; set; }
-        //public ICollection<UserImage> Images { get; set; }
     }
 }

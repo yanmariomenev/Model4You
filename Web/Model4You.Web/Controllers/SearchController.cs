@@ -1,11 +1,8 @@
 ﻿namespace Model4You.Web.Controllers
 {
-    using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
-    using Model4You.Data.Models.Enums;
     using Model4You.Services.Data.SearchService;
     using Model4You.Web.ViewModels.Search;
 
@@ -33,6 +30,7 @@
                     input.Gender,
                     input.Age,
                     input.To);
+
             var status = string.Empty;
             if (search.Count == 0)
             {
@@ -52,6 +50,7 @@
                     To = input.To,
                 },
             };
+
             return this.View(viewModel);
         }
     }

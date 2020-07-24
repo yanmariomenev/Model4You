@@ -36,7 +36,6 @@
             this.imageService = imageService;
         }
 
-        // GET
         public async Task<IActionResult> Model(int page = 1, int perPage = ProfilesPerPage)
         {
             var pagesCount = await this.modelService.GetPagesCount(perPage);
@@ -59,10 +58,11 @@
             {
                 return this.NotFound();
             }
-            // Get the display name of the enum. TODO Try find a better way
+
+            // Get the display name of the enum. TODO Try find a better way.
             var displayName = viewModel.ModelInformation.Ethnicity.GetDisplayName();
 
-                // Using viewData so i don't use the service in the html file.
+            // Using viewData so i don't use the service in the html file.
             this.ViewData["Ethnicity"] = displayName;
             return this.View(viewModel);
         }
@@ -88,11 +88,13 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var imageCount = await this.imageService.GetImageCountOfCurrentUser(userId);
             var pictures = await this.modelService.TakeAllPictures<AlbumViewModel>(userId);
+
             var viewModel = new AlbumBindingViewModel
             {
                 AlbumViewModel = pictures,
                 ImageCount = imageCount,
             };
+
             return this.View(viewModel);
         }
 
@@ -106,6 +108,7 @@
             }
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var imageUrls = input.AlbumInputViewModel.UserImages
                 .Select(async x =>
                     await this.cloudinaryService.UploadPictureAsync(x, x.FileName))

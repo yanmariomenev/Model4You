@@ -25,14 +25,15 @@
             this.userRepo = userRepo;
         }
 
-        public async Task<ICollection<T>> SearchResult<T>
-            (string country, string city, string gender, int age, int to)
+        // There is a need of better search implementation but for now this works good enough.
+        public async Task<ICollection<T>> SearchResult<T>(
+            string country, string city, string gender, int age, int to)
         {
             Enum.TryParse(gender, out Gender result);
             var getUserIdForSearchQuery = this.userRepo
                 .All()
-                .Where
-                (x => x.ModelInformation.Country == country
+                .Where(
+                x => x.ModelInformation.Country == country
                       && x.ModelInformation.City == city
                       && x.ModelInformation.Age >= age
                       && x.ModelInformation.Age <= to

@@ -1,7 +1,4 @@
-﻿using Model4You.Common;
-using Model4You.Services.Messaging;
-
-namespace Model4You.Services.Data.BookingService
+﻿namespace Model4You.Services.Data.BookingService
 {
     using System;
     using System.Collections.Generic;
@@ -10,9 +7,11 @@ namespace Model4You.Services.Data.BookingService
 
     using AutoMapper;
     using Microsoft.EntityFrameworkCore;
+    using Model4You.Common;
     using Model4You.Data.Common.Repositories;
     using Model4You.Data.Models;
     using Model4You.Services.Mapping;
+    using Model4You.Services.Messaging;
 
     public class BookingService : IBookingService
     {
@@ -78,6 +77,7 @@ namespace Model4You.Services.Data.BookingService
 
         public async Task<int> GetPagesCount(int perPage, string userId)
         {
+            // Used for the pagination.
             var profiles =
                 await this.bookingRepository
                     .All()

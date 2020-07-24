@@ -1,7 +1,4 @@
-﻿using Model4You.Common;
-using Model4You.Services.Messaging;
-
-namespace Model4You.Web.Controllers
+﻿namespace Model4You.Web.Controllers
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
