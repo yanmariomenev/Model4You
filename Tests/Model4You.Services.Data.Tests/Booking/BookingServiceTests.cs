@@ -1,17 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Model4You.Data;
-using Model4You.Data.Common.Repositories;
-using Model4You.Data.Models;
-using Model4You.Data.Repositories;
-using Model4You.Services.Data.AdminServices;
-using Model4You.Web.ViewModels.Inbox;
-using Xunit;
-
-namespace Model4You.Services.Data.Tests.Booking
+﻿namespace Model4You.Services.Data.Tests.Booking
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using Model4You.Data;
+    using Model4You.Data.Common.Repositories;
+    using Model4You.Data.Models;
+    using Model4You.Data.Repositories;
+    using Model4You.Web.ViewModels.Inbox;
+    using Xunit;
+
     public class BookingServiceTests : BaseServiceTest
     {
         [Fact]
@@ -61,7 +61,6 @@ namespace Model4You.Services.Data.Tests.Booking
 
             var getUserEmail = await service.GetUserEmail(user1);
 
-
             Assert.Equal("pesho@abv.bg", getUserEmail);
         }
 
@@ -75,8 +74,8 @@ namespace Model4You.Services.Data.Tests.Booking
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
             var service = new BookingService.BookingService(bookingRepository, userRepository, null);
-            var user1 = await this.CreateUserWithNoInformationAsync
-                ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            var user1 = await this.CreateUserWithNoInformationAsync(
+                "pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var fakeUserId = "FakeUser6006";
             var booking = await service.CreateBooking(
                 fakeUserId,
@@ -108,8 +107,8 @@ namespace Model4You.Services.Data.Tests.Booking
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
             var service = new BookingService.BookingService(bookingRepository, userRepository, null);
-            var user1 = await this.CreateUserWithNoInformationAsync
-                ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            var user1 = await this.CreateUserWithNoInformationAsync(
+                "pesho@abv.bg", "Pesho", "Peshev", userRepository);
 
             for (int i = 0; i < 18; i++)
             {
@@ -140,7 +139,6 @@ namespace Model4You.Services.Data.Tests.Booking
             Assert.Equal(10, bookingsReturned);
             Assert.Equal(8, bookingsReturnedPageTwo);
             Assert.Equal(2, pagesCount);
-
         }
 
         [Fact]
@@ -153,14 +151,13 @@ namespace Model4You.Services.Data.Tests.Booking
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
             var service = new BookingService.BookingService(bookingRepository, userRepository, null);
-            var user1 = await this.CreateUserWithNoInformationAsync
-                ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            var user1 = await this.CreateUserWithNoInformationAsync(
+                "pesho@abv.bg", "Pesho", "Peshev", userRepository);
 
             var perPage = 10;
             var pagesCount = await service.GetPagesCount(perPage, user1);
             var takeAllBookings = await service
                 .TakeAllBookingsForCurrentUser<InboxViewModel>(user1, 1, perPage);
-            
             Assert.Empty(takeAllBookings);
         }
 
@@ -256,8 +253,8 @@ namespace Model4You.Services.Data.Tests.Booking
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
             var service = new BookingService.BookingService(bookingRepository, userRepository, null);
-            var user1 = await this.CreateUserWithNoInformationAsync
-                ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            var user1 = await this.CreateUserWithNoInformationAsync(
+                "pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var booking = await this.CreateBookingForTest(
                 user1,
                 DateTime.UtcNow,
@@ -285,6 +282,7 @@ namespace Model4You.Services.Data.Tests.Booking
                     userRepository,
                     bookingRepository);
             }
+
             var getBookingId = await bookingRepository.All()
                 .Where(x => x.UserId == user1 && x.HireDescription == "descriptionTest")
                 .Select(x => x.Id)
@@ -294,7 +292,7 @@ namespace Model4You.Services.Data.Tests.Booking
                 .All()
                 .Where(x => x.UserId == user1)
                 .CountAsync();
-            
+
             // We have 3 bookings calling Delete makes the bookings 2 in count;
             Assert.Equal(2, bookingCount);
         }
@@ -309,9 +307,9 @@ namespace Model4You.Services.Data.Tests.Booking
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
             var service = new BookingService.BookingService(bookingRepository, userRepository, null);
-            var user1 = await this.CreateUserWithNoInformationAsync
-                ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
-            
+            var user1 = await this.CreateUserWithNoInformationAsync(
+                "pesho@abv.bg", "Pesho", "Peshev", userRepository);
+
             for (int i = 0; i < 3; i++)
             {
                 await this.CreateBookingForTest(
@@ -327,6 +325,7 @@ namespace Model4You.Services.Data.Tests.Booking
                     userRepository,
                     bookingRepository);
             }
+
             for (int i = 0; i < 2; i++)
             {
                 await this.CreateBookingForTest(
@@ -359,8 +358,8 @@ namespace Model4You.Services.Data.Tests.Booking
             var bookingRepository = new EfDeletableEntityRepository<Model4You.Data.Models.Booking>(new ApplicationDbContext(options));
 
             var service = new BookingService.BookingService(bookingRepository, userRepository, null);
-            var user1 = await this.CreateUserWithNoInformationAsync
-                ("pesho@abv.bg", "Pesho", "Peshev", userRepository);
+            var user1 = await this.CreateUserWithNoInformationAsync(
+                "pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var booking = await this.CreateBookingForTest(
                 user1,
                 DateTime.UtcNow,
@@ -388,6 +387,7 @@ namespace Model4You.Services.Data.Tests.Booking
                     userRepository,
                     bookingRepository);
             }
+
             var getBookingId = await bookingRepository.AllWithDeleted()
                 .Where(x => x.UserId == user1 && x.HireDescription == "descriptionTest")
                 .Select(x => x.Id)
@@ -401,9 +401,8 @@ namespace Model4You.Services.Data.Tests.Booking
             Assert.Equal(3, bookingCount);
         }
 
-
-        private async Task<string> CreateUserWithNoInformationAsync
-            (string email, string name, string lastName, IDeletableEntityRepository<ApplicationUser> repo)
+        private async Task<string> CreateUserWithNoInformationAsync(
+            string email, string name, string lastName, IDeletableEntityRepository<ApplicationUser> repo)
         {
             var user = new ApplicationUser()
             {
@@ -416,6 +415,7 @@ namespace Model4You.Services.Data.Tests.Booking
             await repo.SaveChangesAsync();
             return user.Id;
         }
+
         private async Task<string> CreateBookingForTest(
             string userId,
             DateTime bookingDate,

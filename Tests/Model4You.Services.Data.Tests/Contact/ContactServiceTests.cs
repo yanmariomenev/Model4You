@@ -1,14 +1,15 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Model4You.Data;
-using Model4You.Data.Common.Repositories;
-using Model4You.Data.Models;
-using Model4You.Data.Repositories;
-using Xunit;
-
-namespace Model4You.Services.Data.Tests.Contact
+﻿namespace Model4You.Services.Data.Tests.Contact
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using Model4You.Data;
+    using Model4You.Data.Common.Repositories;
+    using Model4You.Data.Models;
+    using Model4You.Data.Repositories;
+    using Xunit;
+
     public class ContactServiceTests : BaseServiceTest
     {
         [Fact]
@@ -21,9 +22,6 @@ namespace Model4You.Services.Data.Tests.Contact
 
             var service = new ContactFormService.ContactFormService(repository);
 
-
-            //var form = await this.CreateContactForm("Pesho", "Pesho@abv.bg", "Test","Test", repository);
-            //var form2 = await this.CreateContactForm("Pesho2", "Pesho2@abv.bg", "Test2", "Test2", repository);
             await service.Create("Pesho2", "Pesho2@abv.bg", "Test2", "Test2");
             var count = await repository.All().CountAsync();
 

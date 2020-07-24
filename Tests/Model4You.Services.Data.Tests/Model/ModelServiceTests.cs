@@ -1,28 +1,21 @@
 ﻿using System;
+using Xunit;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Model4You.Data;
 using Model4You.Data.Common.Repositories;
 using Model4You.Data.Models;
 using Model4You.Data.Models.Enums;
 using Model4You.Data.Repositories;
-using Model4You.Services.Data.ModelService;
-using Model4You.Services.Mapping;
 using Model4You.Web.ViewModels.Model;
 using Model4You.Web.ViewModels.ModelViews;
 
 namespace Model4You.Services.Data.Tests.Model
 {
-    using Xunit;
-    using Moq;
-
     public class ModelServiceTests : BaseServiceTest
     {
-
         [Fact]
         public async Task GetModelCount_ShouldReturnCorrectCount()
         {
@@ -32,7 +25,6 @@ namespace Model4You.Services.Data.Tests.Model
             var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
 
             var service = new ModelService.ModelService(repository, null, null, null);
-
 
             var user1 = await this.CreateUserAsync("pesho@abv.bg", "Pesho", "Peshev", repository);
             var user2 = await this.CreateUserAsync("Vank@abv.bg", "Vank", "Vanko", repository);
@@ -53,7 +45,7 @@ namespace Model4You.Services.Data.Tests.Model
             var imageRepo = new EfDeletableEntityRepository<UserImage>(new ApplicationDbContext(options));
 
             var service = new ModelService.ModelService(repository, null, imageRepo, null);
-           
+
             var user1 = await this.CreateUserAsync($"pesho@abv.bg", "Pesho", "Peshev", repository);
             var listUrls = new List<string>
             {
@@ -61,10 +53,6 @@ namespace Model4You.Services.Data.Tests.Model
                 "TestUrl2",
             };
             var count = await service.UploadAlbum(listUrls, user1);
-
-            //var count = await imageRepo.All()
-            //    .Where(x => x.UserId == user1 && x.ImageUrl == "TestUrl" && x.ImageUrl == "TestUrl2")
-            //    .CountAsync();
 
             Assert.Equal(2, count);
         }
@@ -100,7 +88,6 @@ namespace Model4You.Services.Data.Tests.Model
             var service = new ModelService.ModelService(repository, null, imageRepository, null);
 
             var user1 = await this.CreateUserWithImage("pesho@abv.bg", "Pesho", "Peshev", repository);
-            //var userImages = await this.CreateUserImages(user1, imageRepository, repository);
 
             var takeImages = await service.TakeAllPictures<AlbumViewModel>(user1);
             var count = 0;
@@ -123,9 +110,8 @@ namespace Model4You.Services.Data.Tests.Model
             var imageRepository = new EfDeletableEntityRepository<UserImage>(new ApplicationDbContext(options));
             var service = new ModelService.ModelService(repository, null, imageRepository, null);
 
-            var user1 = await this.CreateUserWithNoInformationAsync
-                ("pesho@abv.bg", "Pesho", "Peshev", repository);
-            //var userImages = await this.CreateUserImages(user1, imageRepository, repository);
+            var user1 = await this.CreateUserWithNoInformationAsync(
+                "pesho@abv.bg", "Pesho", "Peshev", repository);
 
             var takeImages = await service.TakeAllPictures<AlbumViewModel>(user1);
             var count = 0;
@@ -174,7 +160,7 @@ namespace Model4You.Services.Data.Tests.Model
             var repository = new EfDeletableEntityRepository<ApplicationUser>(new ApplicationDbContext(options));
 
             var service = new ModelService.ModelService(repository, null, null, null);
-            
+
             var perPage = 6;
             var pagesCount = await service.GetPagesCount(perPage);
             var takeModels = await service.TakeAllModels<ModelProfileView>(1, perPage);
@@ -257,9 +243,9 @@ namespace Model4You.Services.Data.Tests.Model
 
             var service = new ModelService.ModelService(repository, null, null, null);
             var perPage = 6;
-           
+
             var pagesCount = await service.GetPagesCount(perPage);
-            
+
             Assert.Equal(0, pagesCount);
         }
 
@@ -284,7 +270,6 @@ namespace Model4You.Services.Data.Tests.Model
         [Fact]
         public async Task GetModelById_ShouldReturnModelWithTheSameId()
         {
-            //AutoMapperConfig.RegisterMappings(typeof(ProfileViewModel).GetTypeInfo().Assembly);
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
 
@@ -297,9 +282,9 @@ namespace Model4You.Services.Data.Tests.Model
             var user3 = await this.CreateUserAsync("Ri@abv.bg", "Ri", "Ro", repository);
             var getModel = await service.GetModelById<ProfileViewModel>(user1);
             var getModelTest2 = await service.GetModelById<ProfileViewModel>(user2);
+
             Assert.Equal(user1, getModel.Id);
             Assert.Equal(user2, getModelTest2.Id);
-
         }
 
         [Fact]
@@ -317,13 +302,13 @@ namespace Model4You.Services.Data.Tests.Model
             var user3 = await this.CreateUserAsync("Ri@abv.bg", "Ri", "Ro", repository);
 
             var getModel = await service.GetModelById<ProfileViewModel>("TESTID123");
+
             Assert.Null(getModel);
         }
 
         [Fact]
         public async Task InsertModelInformation_ShouldAddFillTablesWithDefaultInformation()
         {
-            //AutoMapperConfig.RegisterMappings(typeof(ProfileViewModel).GetTypeInfo().Assembly);
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
 
@@ -338,14 +323,14 @@ namespace Model4You.Services.Data.Tests.Model
             var check = await modelInfoRepository.All().Where(x => x.UserId == user1).FirstOrDefaultAsync();
 
             Assert.NotNull(check);
-
         }
 
         [Fact]
         public async Task InsertModelInformation_CallingTheMethodTwiceShouldReturnRightStatusMassages()
         {
-            string InfoUpdate = "User Information Updated";
-            string InfoCreated = "User Information was created";
+            string infoUpdate = "User Information Updated";
+            string infoCreated = "User Information was created";
+
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
 
@@ -355,11 +340,12 @@ namespace Model4You.Services.Data.Tests.Model
 
             var user1 = await this.CreateUserWithNoInformationAsync("pesho@abv.bg", "Pesho", "Peshev", userRepository);
             var user2 = await this.CreateUserWithNoInformationAsync("Vank@abv.bg", "Vank", "Vanko", userRepository);
+
             var response = await service.InsertModelInformation(user1);
             var response2 = await service.InsertModelInformation(user1);
-            Assert.Equal(InfoCreated, response);
-            Assert.Equal(InfoUpdate, response2);
 
+            Assert.Equal(infoCreated, response);
+            Assert.Equal(infoUpdate, response2);
         }
 
         [Fact]
@@ -400,6 +386,7 @@ namespace Model4You.Services.Data.Tests.Model
             var getUser = await repository.All().Where(x => x.Id == user1).FirstOrDefaultAsync();
             var nameChangeExample = "Sancho";
             var statusInvalid = "Invalid user";
+
             var changeUserFirstName = await service.ChangeUserFirstName(null, nameChangeExample);
             var userCurrentNameSecondCheck = getUser.FirstName;
 
@@ -876,8 +863,6 @@ namespace Model4You.Services.Data.Tests.Model
             var statusInvalid = "Invalid user";
 
             var changeUserAge = await service.ChangeUserStringValues(null, valueExample, valueInput);
-            //var userCurrentCountrySecondCheck = getUser.ModelInformation.Country;
-            //var userCurrentCitySecondCheck = getUser.ModelInformation.City;
 
             Assert.Equal(statusInvalid, changeUserAge);
         }
@@ -903,7 +888,7 @@ namespace Model4You.Services.Data.Tests.Model
                 },
                 UserImages = new List<UserImage>
                 {
-                    new UserImage{ImageUrl = "Test"},
+                    new UserImage { ImageUrl = "Test" },
                 },
             };
             await repo.AddAsync(user);

@@ -8,6 +8,7 @@
 
     public class SearchController : Controller
     {
+        private const string ModelNotFound = "Models NOT FOUND";
         private readonly ISearchService searchService;
 
         public SearchController(ISearchService searchService)
@@ -34,7 +35,7 @@
             var status = string.Empty;
             if (search.Count == 0)
             {
-                status = "Models NOT FOUND";
+                status = ModelNotFound;
             }
 
             var viewModel = new SearchResultViewModel

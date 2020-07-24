@@ -89,8 +89,8 @@
 
             for (int i = 0; i < 5; i++)
             {
-                await this.CreateBlogForTest
-                    ($"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
+                await this.CreateBlogForTest(
+                    $"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
             }
 
             var takeBlogs = await service.TakeThreeBlogs<BlogViewModel>();
@@ -112,8 +112,8 @@
 
             for (int i = 0; i < 2; i++)
             {
-                await this.CreateBlogForTest
-                    ($"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
+                await this.CreateBlogForTest(
+                    $"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
             }
 
             var takeBlogs = await service.TakeThreeBlogs<BlogViewModel>();
@@ -135,8 +135,8 @@
 
             for (int i = 0; i < 8; i++)
             {
-                await this.CreateBlogForTest
-                    ($"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
+                await this.CreateBlogForTest(
+                    $"testTitle{i}", $"TestUrl{i}", $"TestUserId{i}", repository);
             }
 
             var perPage = 6;
@@ -172,9 +172,9 @@
             var count = 7;
             var getRandomBlogsFirst = await service.TakeRandomBlogs<BlogViewModel>(count);
             var getRandomBlogsSecond = await service.TakeRandomBlogs<BlogViewModel>(count);
+
             // RandomShould return randomly picked blogs and it's always randomly sorted;
             // Guid is used for TakeRandomBlogs;
-
             Assert.NotEqual(getRandomBlogsFirst, getRandomBlogsSecond);
         }
 
@@ -227,7 +227,7 @@
 
             var perPage = 6;
             var pagesCount = await service.GetPagesCount(perPage);
-            
+
             // 8 blogs you can have 6 per page  returns 2 pages;
             Assert.Equal(2, pagesCount);
         }

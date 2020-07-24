@@ -1,15 +1,16 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Model4You.Data;
-using Model4You.Data.Common.Repositories;
-using Model4You.Data.Models;
-using Model4You.Data.Repositories;
-using Xunit;
-
-namespace Model4You.Services.Data.Tests.Comment
+﻿namespace Model4You.Services.Data.Tests.Comment
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using Model4You.Data;
+    using Model4You.Data.Common.Repositories;
+    using Model4You.Data.Models;
+    using Model4You.Data.Repositories;
+    using Xunit;
+
     public class ComentServiceTests : BaseServiceTest
     {
         [Fact]
@@ -28,11 +29,9 @@ namespace Model4You.Services.Data.Tests.Comment
                 ("testTitle", "TestUrl", "TestUserId", repository);
 
             var createBlogContentId =
-                await this.CreateBlogContentForTests
-                    ("Test", "TestContent", createdBlogId, blogContentRepository);
+                await this.CreateBlogContentForTests(
+                    "Test", "TestContent", createdBlogId, blogContentRepository);
 
-            //var commentCreated = await this.CreateCommentForTests
-            //    (createBlogContentId, "Sancho", "Sancho@abv.bg", "Test", commentRepository);
             await service.Create(createBlogContentId, "Sancho", "Sancho@abv.bg", "Test");
             var takeComment = await commentRepository
                 .All()

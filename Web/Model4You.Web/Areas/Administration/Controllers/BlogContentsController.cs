@@ -23,7 +23,7 @@ namespace Model4You.Web.Areas.Administration.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.BlogContents.Include(b => b.Blog);
-            return View(await applicationDbContext.ToListAsync());
+            return this.View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Administration/BlogContents/Details/5
@@ -31,7 +31,7 @@ namespace Model4You.Web.Areas.Administration.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
             var blogContent = await _context.BlogContents
@@ -39,10 +39,10 @@ namespace Model4You.Web.Areas.Administration.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (blogContent == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return View(blogContent);
+            return this.View(blogContent);
         }
 
         // GET: Administration/BlogContents/Create
