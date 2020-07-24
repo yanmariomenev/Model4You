@@ -5,7 +5,7 @@
 
     public interface ISearchService
     {
-        Task<ICollection<T>> SearchResult<T>
-            (string country, string city, string gender, int age, int to);
+        Task<ICollection<T>> SearchResult<T>(
+            string country, string city, string gender, int age, int to);
     }
 }

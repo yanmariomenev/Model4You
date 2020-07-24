@@ -16,6 +16,8 @@
     {
         private const string InfoUpdate = "User Information Updated";
         private const string InfoCreated = "User Information was created";
+        private const string SuccessfullyUpdated = "Success";
+        private const string InvalidUser = "Invalid user";
         private readonly IDeletableEntityRepository<ApplicationUser> appRepository;
         private readonly ICloudinaryService cloudinaryService;
         private readonly IDeletableEntityRepository<UserImage> imageRepository;
@@ -60,7 +62,7 @@
 
         public async Task<IEnumerable<T>> TakeAllPictures<T>(string userId)
         {
-            var pictures = appRepository.All()
+            var pictures = this.appRepository.All()
                 .Where(x => x.Id == userId && x.UserImages.Any());
 
             return await pictures.To<T>().ToListAsync();
@@ -145,70 +147,71 @@
         {
             if (user == null)
             {
-                return "Invalid user";
+                return InvalidUser;
             }
 
             user.FirstName = firstName;
             await this.appRepository.SaveChangesAsync();
-            return "Success";
+            return SuccessfullyUpdated;
         }
 
         public async Task<string> ChangeUserLastName(ApplicationUser user, string lastName)
         {
             if (user == null)
             {
-                return "Invalid user";
+                return InvalidUser;
             }
 
             user.LastName = lastName;
             await this.appRepository.SaveChangesAsync();
-            return "Success";
+            return SuccessfullyUpdated;
         }
 
         public async Task<string> ChangeUserAge(ApplicationUser user, int age)
         {
             if (user == null)
             {
-                return "Invalid user";
+                return InvalidUser;
             }
 
             user.ModelInformation.Age = age;
             await this.appRepository.SaveChangesAsync();
-            return "Success";
+            return SuccessfullyUpdated;
         }
 
         public async Task<string> ChangeUserGender(ApplicationUser user, Gender gender)
         {
             if (user == null)
             {
-                return "Invalid user";
+                return InvalidUser;
             }
 
             user.ModelInformation.Gender = gender;
             await this.appRepository.SaveChangesAsync();
-            return "Success";
+            return SuccessfullyUpdated;
         }
 
         public async Task<string> ChangeUserEthnicity(ApplicationUser user, Ethnicity ethnicity)
         {
             if (user == null)
             {
-                return "Invalid user";
+                return InvalidUser;
             }
 
             user.ModelInformation.Ethnicity = ethnicity;
             await this.appRepository.SaveChangesAsync();
-            return "Success";
+            return SuccessfullyUpdated;
         }
 
         public async Task<string> ChangeUserValues(ApplicationUser user, double value, string property)
         {
             if (user == null)
             {
-                return "Invalid user";
+                return InvalidUser;
             }
 
-            var result = property switch
+            // Implement Default case.
+            _ = property switch
             {
                 "hips" => user.ModelInformation.Hips = value,
                 "height" => user.ModelInformation.Height = value,
@@ -216,14 +219,14 @@
                 "bust" => user.ModelInformation.Bust = value,
             };
             await this.appRepository.SaveChangesAsync();
-            return "Success";
+            return SuccessfullyUpdated;
         }
 
         public async Task<string> ChangeUserStringValues(ApplicationUser user, string value, string property)
         {
             if (user == null)
             {
-                return "Invalid user";
+                return InvalidUser;
             }
 
             // Using discard for this but maybe will change it back to something that makes sense(var result) :).
@@ -239,7 +242,7 @@
             };
 
             await this.appRepository.SaveChangesAsync();
-            return "Success";
+            return SuccessfullyUpdated;
         }
     }
 }

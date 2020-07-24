@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Model4You.Common;
     using Model4You.Data.Common.Repositories;
@@ -15,6 +14,8 @@
 
     public class BookingService : IBookingService
     {
+        private const string BookingFailed = "Booking failed! Please try again.";
+        private const string BookingSuccess = "Booking was successful! Please wait for the model to contact you back";
         private readonly IDeletableEntityRepository<Booking> bookingRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
         private readonly IEmailSender emailSender;
@@ -45,7 +46,7 @@
 
             if (!userExist)
             {
-                return "Booking failed! Please try again.";
+                return BookingFailed;
             }
 
             var booking = new Booking
@@ -63,7 +64,7 @@
             await this.bookingRepository.AddAsync(booking);
             await this.bookingRepository.SaveChangesAsync();
 
-            return "Booking was successful! Please wait for the model to contact you back";
+            return BookingSuccess;
         }
 
         // This should not be here but apparently needed it when i was doing the booking.

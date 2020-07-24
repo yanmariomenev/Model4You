@@ -11,6 +11,9 @@
     {
         private const string DefaultProfilePicture = "https://res.cloudinary.com/dpp9tqhjn/image/upload/v1585748850/images/no-avatar-png-8_rbh1ni.png";
         private const string DeletedPicture = "Deleted";
+        private const string InvalidUser = "Invalid user";
+        private const string InvalidUserOrImage = "Failed! invalid user or image";
+        private const string ChangedProfilePicture = "Changed profile picture";
         private readonly IDeletableEntityRepository<UserImage> imagesRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
 
@@ -38,7 +41,7 @@
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
-                return "Invalid user";
+                return InvalidUser;
             }
 
             var imageToRemove = await this.userRepository
@@ -56,7 +59,7 @@
         {
             if (imageUrl == null && userId == null)
             {
-                return "Failed! invalid user or image";
+                return InvalidUserOrImage;
             }
 
             var profilePicture = await this.userRepository
@@ -68,7 +71,7 @@
             await this.userRepository.SaveChangesAsync();
             await this.DeleteImage(imageId);
 
-            return "Changed profile picture";
+            return ChangedProfilePicture;
         }
 
         public async Task<int> GetImageCountOfCurrentUser(string userId)

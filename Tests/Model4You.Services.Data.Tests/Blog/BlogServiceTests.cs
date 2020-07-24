@@ -1,17 +1,18 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Model4You.Data;
-using Model4You.Data.Common.Repositories;
-using Model4You.Data.Models;
-using Model4You.Data.Repositories;
-using Model4You.Services.Data.AdminServices;
-using Model4You.Web.ViewModels.Blog;
-using Xunit;
-
-namespace Model4You.Services.Data.Tests.Blog
+﻿namespace Model4You.Services.Data.Tests.Blog
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using Model4You.Data;
+    using Model4You.Data.Common.Repositories;
+    using Model4You.Data.Models;
+    using Model4You.Data.Repositories;
+    using Model4You.Services.Data.AdminServices;
+    using Model4You.Web.ViewModels.Blog;
+    using Xunit;
+
     public class BlogServiceTests : BaseServiceTest
     {
         [Fact]
@@ -144,12 +145,11 @@ namespace Model4You.Services.Data.Tests.Blog
             var takeAllBlogsPage2 = await service.TakeAllBlogs<BlogViewModel>(2, perPage);
             var blogsReturned = takeAllBlogs.Count();
             var blogsReturnedPage2 = takeAllBlogsPage2.Count();
-            
-            // First page should return 6 and second 2 for overall 8 blogs
+
+            // First page should return 6 and second 2 for overall 8 blogs.
             Assert.Equal(6, blogsReturned);
             Assert.Equal(2, blogsReturnedPage2);
             Assert.Equal(2, pagesCount);
-
         }
 
         [Fact]
@@ -202,6 +202,7 @@ namespace Model4You.Services.Data.Tests.Blog
                 firstBlogId,
                 blogContentRepository);
             var getBlogContent = service.GetBlogContent<BlogContentView>(firstBlogId);
+
             // Check if it returns the correct title and content;
             Assert.Equal("testTitle", getBlogContent.Result.Title);
             Assert.Equal("insert random content", getBlogContent.Result.Content);

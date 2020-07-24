@@ -18,6 +18,5 @@
         Task<IEnumerable<T>> TakeRandomBlogs<T>(int count);
 
         Task<T> GetBlogContent<T>(int id);
-
     }
 }

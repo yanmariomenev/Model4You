@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Identity;
     using Model4You.Data.Models;
     using Model4You.Data.Models.Enums;
 
@@ -24,7 +23,6 @@
         Task<T> GetModelById<T>(string modelId);
 
         Task<string> InsertModelInformation(string id);
-
 
         Task<string> ChangeUserFirstName(ApplicationUser user, string name);
 
