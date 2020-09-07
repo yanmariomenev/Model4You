@@ -1,7 +1,7 @@
 # Model4You
 Model4You aims to help professional or amature models to get more exposure and hiring opportunities.
 
-https://model4you.azurewebsites.net/ - the link might not work in the future.
+The project is no longer hosted.
 
 This my first project made for SoftUni ASP.NET Core project defense. 
 Huge thanks to @NikolayIT for the template, as well one of the best lecturer at SoftUni.
